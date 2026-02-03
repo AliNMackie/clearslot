@@ -108,82 +108,111 @@ const OperatorView = () => {
     }
 
     return (
-        <section className="container" style={{ paddingBottom: '4rem' }}>
-            <div className="animate-enter delay-200" style={{
-                background: '#FFFFFF',
-                borderRadius: 'var(--radius-card-xl)',
-                padding: '2rem',
-                boxShadow: '0 20px 40px -10px rgba(27, 42, 58, 0.05)'
-            }}>
-                <div className="flex items-center justify-between mb-8">
-                    <h2 className="font-serif text-navy" style={{ fontSize: '2rem' }}>Tomorrow's Schedule</h2>
-                    <div className="flex gap-2">
-                        <span className="text-navy" style={{ opacity: 0.5, fontSize: '0.9rem', fontWeight: 600 }}>TUE 4 FEB</span>
+        <section className="container mx-auto px-4 pb-16">
+            {/* Dashboard Container */}
+            <div className="bg-slate-50/50 backdrop-blur-sm rounded-[2.5rem] p-8 border border-white/40 shadow-xl">
+
+                {/* Dashboard Header */}
+                <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                    <div>
+                        <div className="text-xs font-bold tracking-widest text-slate-400 uppercase mb-2">Operational Overview</div>
+                        <h2 className="font-serif text-navy text-4xl leading-tight">
+                            Tomorrow's <span className="italic text-sky">Flight Deck</span>
+                        </h2>
+                    </div>
+                    <div className="flex items-center gap-3">
+                        {/* Date Pill */}
+                        <div className="bg-white px-5 py-2.5 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-3">
+                            <Clock size={18} className="text-sky" />
+                            <span className="text-navy font-bold tracking-tight">Tue, Feb 4</span>
+                        </div>
+                        {/* Weather Summary Mockup */}
+                        <div className="bg-navy px-5 py-2.5 rounded-2xl shadow-lg shadow-navy/20 flex items-center gap-3 text-white">
+                            <Info size={18} className="text-sky" />
+                            <span className="font-medium">QNH 1012 • Vis 10km+</span>
+                        </div>
                     </div>
                 </div>
 
-                <div className="flex flex-col gap-4">
+                {/* Cards Grid */}
+                <div className="space-y-4">
                     {bookings.map((booking, idx) => (
                         <div
                             key={booking.id}
-                            className="flex flex-col md:flex-row items-start md:items-center justify-between animate-enter"
-                            style={{
-                                animationDelay: `${(idx + 1) * 100}ms`,
-                                padding: '1.5rem',
-                                border: '1px solid rgba(27, 42, 58, 0.05)',
-                                borderRadius: 'var(--radius-card-lg)',
-                                backgroundColor: booking.status === 'red' ? 'rgba(235, 87, 87, 0.03)' : 'white',
-                                transition: 'all 0.2s ease'
-                            }}
+                            className="group relative bg-white rounded-2xl p-5 shadow-sm border border-slate-100 hover:shadow-lg hover:border-sky/20 transition-all duration-300 ease-out hover:-translate-y-0.5"
+                            style={{ animationDelay: `${(idx + 1) * 75}ms` }}
                         >
-                            {/* Left: Status & Time */}
-                            <div className="flex items-center gap-4 mb-4 md:mb-0" style={{ minWidth: '200px' }}>
-                                <StatusBadge booking={booking} />
-                                <div>
-                                    <div className="text-navy" style={{ opacity: 0.6, fontSize: '0.85rem' }}>
-                                        {booking.time}
-                                    </div>
-                                </div>
-                            </div>
+                            {/* Status Stripe */}
+                            <div className={`absolute left-0 top-4 bottom-4 w-1.5 rounded-r-full ${booking.status === 'green' ? 'bg-green-500' :
+                                    booking.status === 'amber' ? 'bg-amber-400' : 'bg-rose-500'
+                                }`} />
 
-                            {/* Middle: Details */}
-                            <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 md:mb-0">
-                                <div>
-                                    <div className="flex items-center gap-2 text-navy" style={{ fontWeight: 600 }}>
-                                        <User size={16} opacity={0.5} />
-                                        {booking.pilot}
-                                    </div>
-                                    <div className="text-navy" style={{ opacity: 0.6, fontSize: '0.85rem', paddingLeft: '24px' }}>
-                                        {booking.type} • {booking.instructor || 'Self-Fly'}
-                                    </div>
-                                </div>
-                                <div>
-                                    <div className="flex items-center gap-2 text-navy" style={{ fontWeight: 600 }}>
-                                        <Plane size={16} opacity={0.5} />
-                                        {booking.asset}
-                                    </div>
-                                    <div className="text-navy" style={{ opacity: 0.6, fontSize: '0.85rem', paddingLeft: '24px' }}>
-                                        {/* Show reason if provided or from backend */}
-                                        {(!legalityCache[booking.id] || legalityCache[booking.id]?.legal) ? booking.reason : (
-                                            <span className="text-red-500 font-medium">Legality Check Failed</span>
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
+                            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pl-4">
 
-                            {/* Right: Action */}
-                            <div>
-                                {(booking.status === 'amber' || booking.status === 'red' || (legalityCache[booking.id] && !legalityCache[booking.id].legal)) ? (
-                                    <button
-                                        onClick={() => handleSuggest(booking.id)}
-                                        className="btn btn-ghost"
-                                        style={{ fontSize: '0.85rem', padding: '0.5rem 1rem' }}
-                                    >
-                                        Suggest new times
-                                    </button>
-                                ) : (
-                                    <div style={{ width: '140px' }} />
-                                )}
+                                {/* Time & Status Column */}
+                                <div className="min-w-[180px]">
+                                    <div className="flex items-center gap-3 mb-2">
+                                        <div className={`w-2 h-2 rounded-full ${booking.status === 'green' ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]' :
+                                                booking.status === 'amber' ? 'bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.6)]' : 'bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.6)]'
+                                            }`} />
+                                        <span className="font-mono text-sm font-bold text-navy/70">{booking.time}</span>
+                                    </div>
+                                    <StatusBadge booking={booking} />
+                                </div>
+
+                                {/* Main Info: Pilot & Asset */}
+                                <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    {/* Pilot Info */}
+                                    <div className="flex items-start gap-4">
+                                        <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-navy/40 group-hover:bg-sky/10 group-hover:text-sky transition-colors">
+                                            <User size={20} />
+                                        </div>
+                                        <div>
+                                            <div className="font-bold text-navy text-lg leading-none mb-1.5">{booking.pilot}</div>
+                                            <div className="text-xs font-medium uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+                                                {booking.instructor ? (
+                                                    <span className="text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded">Training</span>
+                                                ) : 'Self-Fly'}
+                                                <span>•</span>
+                                                <span>{booking.type}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Asset Info */}
+                                    <div className="flex items-start gap-4">
+                                        <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-navy/40 group-hover:bg-sky/10 group-hover:text-sky transition-colors">
+                                            <Plane size={20} />
+                                        </div>
+                                        <div>
+                                            <div className="font-bold text-navy text-lg leading-none mb-1.5">{booking.asset}</div>
+                                            <div className="text-sm font-medium text-slate-500">
+                                                {/* Reasoning Text */}
+                                                {(!legalityCache[booking.id] || legalityCache[booking.id]?.legal) ? (
+                                                    booking.reason
+                                                ) : (
+                                                    <div className="flex items-center gap-1 text-rose-500">
+                                                        <AlertTriangle size={12} />
+                                                        <span>Legality Check Failed</span>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Action Area */}
+                                <div className="md:text-right">
+                                    {(booking.status === 'amber' || booking.status === 'red' || (legalityCache[booking.id] && !legalityCache[booking.id].legal)) && (
+                                        <button
+                                            onClick={() => handleSuggest(booking.id)}
+                                            className="px-4 py-2 rounded-xl bg-slate-50 text-navy font-semibold text-sm hover:bg-navy hover:text-white transition-all shadow-sm hover:shadow-md active:scale-95 flex items-center gap-2 group/btn"
+                                        >
+                                            <span>Find new time</span>
+                                            <ArrowRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
+                                        </button>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     ))}
@@ -192,18 +221,26 @@ const OperatorView = () => {
 
             {/* Map Section */}
             <div className="mt-8 animate-enter delay-300">
-                <div className="bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden border border-white/20 p-1">
-                    <div className="p-4 flex justify-between items-center">
-                        <h3 className="font-serif text-xl text-navy ml-2">Situational Awareness</h3>
-                        <div className="flex gap-2 text-sm bg-gray-100 p-1 rounded-xl">
-                            <button className="px-3 py-1 bg-white shadow-sm rounded-lg font-medium text-navy">Satellite</button>
-                            <button className="px-3 py-1 text-gray-500 hover:text-navy">Charts</button>
+                <div className="bg-white rounded-[2rem] shadow-xl overflow-hidden border border-slate-100">
+                    <div className="p-6 flex justify-between items-center border-b border-slate-50">
+                        <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-full bg-sky/10 flex items-center justify-center text-sky">
+                                <Anchor size={20} />
+                            </div>
+                            <div>
+                                <h3 className="font-bold text-navy text-lg leading-none">Strathaven Overlay</h3>
+                                <div className="text-xs text-slate-400 font-medium mt-1">SATELLITE • LIVE WEATHER</div>
+                            </div>
+                        </div>
+
+                        <div className="flex bg-slate-100 p-1 rounded-xl">
+                            <button className="px-4 py-1.5 bg-white shadow-sm rounded-lg text-xs font-bold text-navy">Sat</button>
+                            <button className="px-4 py-1.5 text-slate-400 hover:text-navy text-xs font-bold transition-colors">Map</button>
                         </div>
                     </div>
-                    {/* Lazy load Map to avoid blocking initial render if needed, though useJsApiLoader handles script loading well */}
-                    <div className="h-[400px] w-full bg-gray-50 rounded-2xl overflow-hidden relative">
-                        {/* We import MapContainer dynamically or use straight import if performance allows. Using direct import for MVP. */}
-                        <React.Suspense fallback={<div className="w-full h-full flex items-center justify-center text-gray-400">Loading Map...</div>}>
+
+                    <div className="h-[450px] w-full bg-slate-50 relative">
+                        <React.Suspense fallback={<div className="w-full h-full flex items-center justify-center text-slate-400 font-mono text-sm animate-pulse">Initializing Setup...</div>}>
                             <MapContainer activeOverlay="circuit" />
                         </React.Suspense>
                     </div>
