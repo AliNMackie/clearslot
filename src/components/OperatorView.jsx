@@ -1,18 +1,52 @@
 import React, { useState, useEffect } from 'react';
-import { Clock, User, Plane, Anchor, Info, ArrowRight } from 'lucide-react';
+import { Clock, User, Plane, Anchor, Info, ArrowRight, AlertTriangle, CheckCircle, XCircle, MoreHorizontal } from 'lucide-react';
 import { apiClient } from '../services/apiClient';
+
+// Dynamic import for code splitting the heavy Map library
+// Dynamic import for code splitting the heavy Map library
+const MapContainer = React.lazy(() => import('./MapContainer'));
 
 const OperatorView = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedBooking, setSelectedBooking] = useState(null);
     const [bookings, setBookings] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [suggestions, setSuggestions] = useState([]);
+    const [legalityCache, setLegalityCache] = useState({});
+
+    // Helper to generate a compliant Pilot Profile from a name string
+    const generateMockProfile = (pilotName) => {
+        const isStudent = pilotName.includes("Student");
+        return {
+            licence_type: isStudent ? "NPPL(A)" : "PPL(A)",
+            ratings: ["Microlight", "SEP"],
+            total_hours: isStudent ? 15 : 150, // Student fails 32h min
+            supervised_solo_hours: isStudent ? 2 : 20, // Student fails 10h min
+            microlight_differences_trained: true,
+            xc_done: !isStudent,
+            single_seat_constraint: false,
+            logbook: [
+                // Add valid recent experience for non-students
+                { date: new Date().toISOString(), hours_pic: isStudent ? 1 : 10, to_landings: 20, instruction: 1 }
+            ]
+        };
+    };
 
     useEffect(() => {
         const fetchBookings = async () => {
             try {
                 const data = await apiClient.getBookings();
                 setBookings(data);
+
+                // Check legality for each booking immediately
+                data.forEach(async (booking) => {
+                    const profile = generateMockProfile(booking.pilot);
+                    const result = await apiClient.checkLegality(profile, new Date().toISOString());
+                    setLegalityCache(prev => ({
+                        ...prev,
+                        [booking.id]: result
+                    }));
+                });
             } catch (err) {
                 console.error("Failed to load bookings", err);
             } finally {
@@ -25,19 +59,52 @@ const OperatorView = () => {
     const getStatusColor = (status) => {
         switch (status) {
             case 'green': return '#27AE60';
-            case 'amber': return '#F2994A'; // Or Sunlight Yellow #F2C94C
+            case 'amber': return '#F2994A';
             case 'red': return '#EB5757';
             default: return '#ccc';
         }
     };
 
-    const handleSuggest = (booking) => {
+    const handleSuggest = async (bookingId) => {
+        const data = await apiClient.getSuggestions(bookingId);
+        setSuggestions(data);
+        const booking = bookings.find(b => b.id === bookingId);
         setSelectedBooking(booking);
         setModalOpen(true);
     };
 
+    const StatusBadge = ({ booking }) => {
+        const legality = legalityCache[booking.id];
+        let displayStatus = booking.status;
+        let displayLabel = booking.statusLabel;
+
+        if (legality && !legality.legal) {
+            displayStatus = 'red';
+            displayLabel = legality.reason || 'Legal Issue';
+        }
+
+        const colors = {
+            green: 'bg-green-100 text-green-700',
+            amber: 'bg-yellow-100 text-yellow-700',
+            red: 'bg-red-100 text-red-700'
+        };
+
+        const icons = {
+            green: <CheckCircle size={14} />,
+            amber: <AlertTriangle size={14} />,
+            red: <XCircle size={14} />
+        };
+
+        return (
+            <span className={`px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1.5 w-fit ${colors[displayStatus] || colors.green}`}>
+                {icons[displayStatus]}
+                {displayLabel}
+            </span>
+        );
+    };
+
     if (loading) {
-        return <div className="container text-center py-12 opacity-50">Loading schedule...</div>;
+        return <div className="container text-center py-12 opacity-50">Loading schedule & checking legality...</div>;
     }
 
     return (
@@ -48,7 +115,6 @@ const OperatorView = () => {
                 padding: '2rem',
                 boxShadow: '0 20px 40px -10px rgba(27, 42, 58, 0.05)'
             }}>
-
                 <div className="flex items-center justify-between mb-8">
                     <h2 className="font-serif text-navy" style={{ fontSize: '2rem' }}>Tomorrow's Schedule</h2>
                     <div className="flex gap-2">
@@ -72,17 +138,8 @@ const OperatorView = () => {
                         >
                             {/* Left: Status & Time */}
                             <div className="flex items-center gap-4 mb-4 md:mb-0" style={{ minWidth: '200px' }}>
-                                <div style={{
-                                    width: '12px',
-                                    height: '12px',
-                                    borderRadius: '50%',
-                                    backgroundColor: getStatusColor(booking.status),
-                                    boxShadow: `0 0 0 4px ${getStatusColor(booking.status)}20`
-                                }} />
+                                <StatusBadge booking={booking} />
                                 <div>
-                                    <div className="font-sans text-navy" style={{ fontWeight: 700, fontSize: '1rem' }}>
-                                        {booking.statusLabel}
-                                    </div>
                                     <div className="text-navy" style={{ opacity: 0.6, fontSize: '0.85rem' }}>
                                         {booking.time}
                                     </div>
@@ -102,27 +159,30 @@ const OperatorView = () => {
                                 </div>
                                 <div>
                                     <div className="flex items-center gap-2 text-navy" style={{ fontWeight: 600 }}>
-                                        <Plane size={16} opacity={0.5} /> {/* Or generic icon */}
+                                        <Plane size={16} opacity={0.5} />
                                         {booking.asset}
                                     </div>
                                     <div className="text-navy" style={{ opacity: 0.6, fontSize: '0.85rem', paddingLeft: '24px' }}>
-                                        {booking.reason}
+                                        {/* Show reason if provided or from backend */}
+                                        {(!legalityCache[booking.id] || legalityCache[booking.id]?.legal) ? booking.reason : (
+                                            <span className="text-red-500 font-medium">Legality Check Failed</span>
+                                        )}
                                     </div>
                                 </div>
                             </div>
 
                             {/* Right: Action */}
                             <div>
-                                {(booking.status === 'amber' || booking.status === 'red') ? (
+                                {(booking.status === 'amber' || booking.status === 'red' || (legalityCache[booking.id] && !legalityCache[booking.id].legal)) ? (
                                     <button
-                                        onClick={() => handleSuggest(booking)}
+                                        onClick={() => handleSuggest(booking.id)}
                                         className="btn btn-ghost"
                                         style={{ fontSize: '0.85rem', padding: '0.5rem 1rem' }}
                                     >
                                         Suggest new times
                                     </button>
                                 ) : (
-                                    <div style={{ width: '140px' }} /> /* Spacer */
+                                    <div style={{ width: '140px' }} />
                                 )}
                             </div>
                         </div>
@@ -130,9 +190,30 @@ const OperatorView = () => {
                 </div>
             </div>
 
+            {/* Map Section */}
+            <div className="mt-8 animate-enter delay-300">
+                <div className="bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden border border-white/20 p-1">
+                    <div className="p-4 flex justify-between items-center">
+                        <h3 className="font-serif text-xl text-navy ml-2">Situational Awareness</h3>
+                        <div className="flex gap-2 text-sm bg-gray-100 p-1 rounded-xl">
+                            <button className="px-3 py-1 bg-white shadow-sm rounded-lg font-medium text-navy">Satellite</button>
+                            <button className="px-3 py-1 text-gray-500 hover:text-navy">Charts</button>
+                        </div>
+                    </div>
+                    {/* Lazy load Map to avoid blocking initial render if needed, though useJsApiLoader handles script loading well */}
+                    <div className="h-[400px] w-full bg-gray-50 rounded-2xl overflow-hidden relative">
+                        {/* We import MapContainer dynamically or use straight import if performance allows. Using direct import for MVP. */}
+                        <React.Suspense fallback={<div className="w-full h-full flex items-center justify-center text-gray-400">Loading Map...</div>}>
+                            <MapContainer activeOverlay="circuit" />
+                        </React.Suspense>
+                    </div>
+                </div>
+            </div>
+
             {modalOpen && (
                 <SuggestionsModal
                     booking={selectedBooking}
+                    suggestions={suggestions}
                     onClose={() => setModalOpen(false)}
                 />
             )}
@@ -140,21 +221,8 @@ const OperatorView = () => {
     );
 };
 
-const SuggestionsModal = ({ booking, onClose }) => {
-    const [suggestions, setSuggestions] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        if (booking) {
-            const fetchSuggestions = async () => {
-                setLoading(true);
-                const data = await apiClient.getSuggestions(booking.id);
-                setSuggestions(data);
-                setLoading(false);
-            };
-            fetchSuggestions();
-        }
-    }, [booking]);
+const SuggestionsModal = ({ booking, suggestions = [], onClose }) => {
+    // Note: We now receive 'suggestions' as a prop from the parent
 
     if (!booking) return null;
 
@@ -202,9 +270,7 @@ const SuggestionsModal = ({ booking, onClose }) => {
 
                 {/* Suggestions */}
                 <div className="flex flex-col gap-4 mb-8">
-                    {loading ? (
-                        <div className="p-8 text-center opacity-50">Checking clouds and wind...</div>
-                    ) : suggestions.length === 0 ? (
+                    {suggestions.length === 0 ? (
                         <div className="p-4 text-center">No better slots found in the next 3 days.</div>
                     ) : (
                         suggestions.map((slot, i) => (

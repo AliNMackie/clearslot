@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import OperatorView from './components/OperatorView';
+import CalendarView from './components/CalendarView';
 import BriefingView from './components/BriefingView';
 import MarketingSections from './components/MarketingSections';
 
@@ -18,6 +19,8 @@ function App() {
                         App Screen: Operator View
                     </div>
                     <OperatorView />
+                    <div className="py-8"></div> {/* Added a separator */}
+                    <CalendarView /> {/* Rendered CalendarView below OperatorView */}
 
                     <div className="container mb-8 mt-12 text-center text-navy opacity-30 text-xs uppercase tracking-widest font-bold">
                         App Screen: Pilot Briefing

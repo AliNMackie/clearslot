@@ -9,6 +9,7 @@ import { config } from '../config/env';
  * TODO: Replace mock returns with fetch(`${config.apiBaseUrl}/...`)
  */
 
+// MOCK DATA structure kept for reference/fallback
 const MOCK_BOOKINGS = [
     {
         id: 1,
@@ -20,57 +21,15 @@ const MOCK_BOOKINGS = [
         type: 'Instruction',
         instructor: 'Instr. A',
         reason: 'Wind calm, Vis 10km+'
-    },
-    {
-        id: 2,
-        status: 'amber',
-        statusLabel: 'Borderline',
-        time: '11:30 - 13:00',
-        pilot: 'Hirer: M. Doe',
-        asset: 'G-BLLN (Balloon)',
-        type: 'Self-Fly Hire',
-        reason: 'Gusts 15kt, Cloudbase 2000ft'
-    },
-    {
-        id: 3,
-        status: 'red',
-        statusLabel: 'No-go',
-        time: '14:00 - 15:30',
-        pilot: 'Student: K. Jones',
-        asset: 'G-CLER (C152)',
-        type: 'Instruction',
-        reason: 'Crosswind out of limits (18kt)'
-    },
-    {
-        id: 4,
-        status: 'green',
-        statusLabel: 'Clear',
-        time: '16:00 - 17:00',
-        pilot: 'Exper: P. White',
-        asset: 'G-WXYZ (PA28)',
-        type: 'Experience',
-        reason: 'Conditions improve'
-    },
-    {
-        id: 5,
-        status: 'red',
-        statusLabel: 'Local Only',
-        time: '17:30 - 19:00',
-        pilot: 'Member: R. Alpha',
-        asset: 'G-BLLN (Balloon)',
-        type: 'Club Fly',
-        reason: 'Thermals active, wait for sunset'
     }
 ];
 
 const MOCK_SUGGESTIONS = {
-    // Suggestions for Booking ID 2 (Balloon - Borderline)
     2: [
         { day: 'Wed', time: '06:00 - 08:30', reason: 'Perfect sunrise window (<4kt)', score: 'Excellent' },
         { day: 'Thu', time: '18:00 - 20:00', reason: 'Sunset clear, light winds', score: 'Good' },
         { day: 'Fri', time: '06:30 - 09:00', reason: 'Good visibility, low gusts', score: 'Good' }
     ],
-    // Suggestions for Booking ID 3 (C152 - No-go)
     3: [
         { day: 'Wed', time: '09:00 - 10:30', reason: 'Best wind window (<8kt)', score: 'Excellent' },
         { day: 'Wed', time: '14:00 - 15:30', reason: 'Cloud base higher (3000ft)', score: 'Good' }
@@ -99,9 +58,50 @@ export const apiClient = {
      * Get the schedule for "Tomorrow"
      */
     getBookings: async () => {
-        // TODO: Calls GET /api/v1/schedule/tomorrow
+        // Simulating Agentic Data Generation based on "Real" Weather
         return new Promise((resolve) => {
-            setTimeout(() => resolve(MOCK_BOOKINGS), 500); // Simulate network delay
+            setTimeout(() => {
+                const results = [];
+                const hours = [9, 11, 14, 16, 18];
+
+                hours.forEach((hour, i) => {
+                    // Mock Flyability Score Calculation
+                    // In production, these come from MAVIS API
+                    const windGusts = 10 + Math.floor(Math.random() * 20); // 10-30kt
+                    const cloudBase = 1200 + Math.floor(Math.random() * 3000); // 1200-4200ft
+
+                    // surface condition simulation
+                    const isWetGrass = Math.random() > 0.6;
+                    const runwayState = isWetGrass ? 'Soft/Wet' : 'Firm';
+
+                    let status = 'green';
+                    let reason = 'Good to fly';
+
+                    // Agent Logic: Determine Go/No-Go
+                    if (windGusts > 25 || cloudBase < 1500) {
+                        status = 'red';
+                        reason = `Weather limits: Gusts ${windGusts}kt, Cloud ${cloudBase}ft`;
+                    } else if (windGusts > 15 || cloudBase < 2400 || isWetGrass) {
+                        status = 'amber';
+                        reason = isWetGrass ? 'Runway Soft/Wet - Check Performance' : `Marginal: Gusts ${windGusts}kt`;
+                    }
+
+                    results.push({
+                        id: i + 1,
+                        time: `${hour}:00 - ${hour + 2}:00`,
+                        asset: Math.random() > 0.5 ? 'G-C42A (School)' : 'G-C42B (Club)',
+                        type: 'Training',
+                        instructor: Math.random() > 0.5 ? 'Capt. Reynolds' : 'Self-Fly',
+                        pilot: ['Student Pilot', 'Member Pilot', 'Visiting Pilot'][Math.floor(Math.random() * 3)],
+                        status: status,
+                        statusLabel: status === 'green' ? 'GO' : (status === 'amber' ? 'CHECK' : 'NO-GO'),
+                        reason: reason,
+                        runway: runwayState
+                    });
+                });
+
+                resolve(results);
+            }, 500);
         });
     },
 
@@ -123,6 +123,18 @@ export const apiClient = {
         return new Promise((resolve) => {
             setTimeout(() => resolve(MOCK_BRIEFING), 400);
         })
-    }
+    },
 
+    // --- Phase 4: Legality Rules Engine Stub ---
+    checkLegality: async (pilotProfile, date, aircraft = 'C42') => {
+        // Mock legality for now to allow purely offline demo if needed
+        return new Promise((resolve) => {
+            // 50/50 chance of random issue if backend offline
+            const randomIssue = Math.random() > 0.9;
+            resolve({
+                legal: !randomIssue,
+                reason: randomIssue ? "Recency: <3 landings in 90 days" : null
+            });
+        });
+    }
 };
