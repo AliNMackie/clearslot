@@ -42,7 +42,7 @@ const MapContainer = ({ activeOverlay }) => {
 
     const { isLoaded, loadError } = useJsApiLoader({
         id: 'google-map-script',
-        googleMapsApiKey: config.GOOGLE_MAPS_API_KEY || '',
+        googleMapsApiKey: config.googleMapsApiKey || '',
         enabled: hasApiKey // Prevent loader from running if no key
     });
 
