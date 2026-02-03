@@ -1,10 +1,10 @@
 import React from 'react';
-import { Check, Database, Map as MapIcon, CloudRain, Shield, Calendar, Bell, LineChart, ExternalLink } from 'lucide-react';
+import { Check, Database, Map as MapIcon, CloudRain, Shield, Calendar, Bell, LineChart } from 'lucide-react';
 
 const BentoGrid = () => {
     return (
         <section className="container" style={{ padding: '6rem 1.5rem' }}>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
 
                 {/* Left: Text Content */}
                 <div>
@@ -19,7 +19,7 @@ const BentoGrid = () => {
                             "Automated nudges before marginal bookings become cancellations.",
                             "Simple 'legal to fly?' indicator based on your rules."
                         ].map((text, i) => (
-                            <div key={i} className="flex items-start gap-6">
+                            <div key={i} className="flex items-start gap-4">
                                 <div style={{
                                     minWidth: '56px',
                                     height: '56px',
@@ -32,7 +32,7 @@ const BentoGrid = () => {
                                 }}>
                                     <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--color-sky-blue)' }} />
                                 </div>
-                                <p className="font-sans text-navy text-lg" style={{ paddingTop: '0.75rem', opacity: 0.9 }}>{text}</p>
+                                <p className="font-sans text-navy" style={{ fontSize: '1.2rem', paddingTop: '0.75rem', opacity: 0.9 }}>{text}</p>
                             </div>
                         ))}
                     </div>
@@ -58,38 +58,44 @@ const BentoGrid = () => {
                         overflow: 'hidden'
                     }}>
                         {/* Window Bar */}
-                        <div className="flex items-center gap-2 p-4 border-b border-gray-100">
-                            <div className="flex gap-1.5">
-                                <div className="w-3 h-3 rounded-full bg-red-400" />
-                                <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                                <div className="w-3 h-3 rounded-full bg-green-400" />
+                        <div className="flex items-center gap-2 p-4" style={{ borderBottom: '1px solid #eee', padding: '1rem' }}>
+                            <div className="flex gap-1" style={{ gap: '6px' }}>
+                                <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#ff5f56' }} />
+                                <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#ffbd2e' }} />
+                                <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#27c93f' }} />
                             </div>
-                            <div style={{ marginLeft: 'auto', marginRight: 'auto', backgroundColor: '#F3F4F6', height: '8px', width: '30%', borderRadius: '4px' }} />
+                            <div style={{ margin: '0 auto', background: '#f3f4f6', height: 8, width: '30%', borderRadius: 4 }} />
                         </div>
 
                         {/* Window Content */}
-                        <div className="p-6 flex-1 bg-gray-50 flex gap-4">
-                            <div className="flex-1 bg-blue-50 rounded-xl p-4">
-                                <div className="w-1/2 h-4 bg-blue-200 rounded mb-4" />
-                                <div className="w-full h-24 bg-white/80 rounded-lg mb-2" />
-                                <div className="w-full h-24 bg-white/80 rounded-lg" />
+                        <div style={{ padding: '1.5rem', flex: 1, background: '#f9fafb', display: 'flex', gap: '1rem' }}>
+                            <div style={{ flex: 1, background: '#eff6ff', borderRadius: 12, padding: '1rem' }}>
+                                <div style={{ width: '50%', height: 16, background: '#bfdbfe', borderRadius: 4, marginBottom: 16 }} />
+                                <div style={{ width: '100%', height: 80, background: 'rgba(255,255,255,0.8)', borderRadius: 8, marginBottom: 8 }} />
+                                <div style={{ width: '100%', height: 80, background: 'rgba(255,255,255,0.8)', borderRadius: 8 }} />
                             </div>
-                            <div className="w-1/3 bg-white rounded-xl p-4 hidden sm:block">
-                                <div className="w-full h-full bg-gray-100 rounded-lg" />
+                            <div style={{ width: '30%', background: 'white', borderRadius: 12, padding: '1rem' }} className="hidden sm:block">
+                                <div style={{ width: '100%', height: '100%', background: '#f3f4f6', borderRadius: 8 }} />
                             </div>
                         </div>
                     </div>
 
                     {/* Footer Strip */}
-                    <div className="glass mt-6 rounded-2xl p-4 flex items-center justify-between" style={{
+                    <div className="glass" style={{
+                        marginTop: '1.5rem',
+                        borderRadius: '16px',
+                        padding: '1rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
                         background: 'rgba(255,255,255,0.1)',
                         borderColor: 'rgba(255,255,255,0.1)'
                     }}>
                         <div className="flex gap-2">
-                            <div className="px-3 py-1 rounded-full bg-navy/50 text-white text-xs font-mono">Slot scored</div>
-                            <div className="px-3 py-1 rounded-full bg-navy/50 text-white text-xs font-mono">Briefing ready</div>
+                            <span style={{ background: 'rgba(27,42,58,0.5)', color: 'white', padding: '0.25rem 0.75rem', borderRadius: 99, fontSize: '0.75rem', fontFamily: 'monospace' }}>Slot scored</span>
+                            <span style={{ background: 'rgba(27,42,58,0.5)', color: 'white', padding: '0.25rem 0.75rem', borderRadius: 99, fontSize: '0.75rem', fontFamily: 'monospace' }}>Briefing ready</span>
                         </div>
-                        <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center text-white">
+                        <div style={{ width: 24, height: 24, borderRadius: '50%', background: '#22c55e', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' }}>
                             <Check size={14} />
                         </div>
                     </div>
@@ -105,31 +111,35 @@ const FeaturesGrid = () => {
         <section className="container" style={{ paddingBottom: '6rem' }}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Card 1 */}
-                <div className="col-span-1 md:col-span-2 bg-white rounded-[48px] p-12 relative overflow-hidden min-h-[300px] flex flex-col justify-center">
-                    <div className="relative z-10 max-w-lg">
-                        <h3 className="font-serif text-4xl mb-4 text-navy">Green / Amber / Red <br /> <span className="italic text-sky">at a glance.</span></h3>
-                        <p className="text-navy opacity-70 text-lg">Instant visual confirmation for every booking on your schedule.</p>
+                <div className="feature-card card-base md:col-span-2">
+                    <div className="relative z-10" style={{ maxWidth: '500px' }}>
+                        <h3 className="font-serif text-navy" style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>
+                            Green / Amber / Red <br /> <span className="italic text-sky">at a glance.</span>
+                        </h3>
+                        <p className="text-navy" style={{ opacity: 0.7, fontSize: '1.125rem' }}>
+                            Instant visual confirmation for every booking on your schedule.
+                        </p>
                     </div>
                 </div>
 
                 {/* Card 2 - Dark */}
-                <div className="bg-navy rounded-[40px] p-10 text-white flex flex-col justify-between min-h-[350px]">
-                    <Shield size={48} className="text-sky mb-6" />
-                    <div>
-                        <h3 className="font-serif text-3xl mb-3">Combines weather & recency.</h3>
-                        <p className="opacity-70">Licensing rules, weather constraints and aircraft limits in one place.</p>
-                    </div>
+                <div className="feature-card feature-card--dark">
+                    <Shield size={48} className="text-sky" style={{ marginBottom: '1.5rem' }} />
+                    <h3 className="font-serif" style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>Combines weather & recency.</h3>
+                    <p style={{ opacity: 0.7 }}>Licensing rules, weather constraints and aircraft limits in one place.</p>
                 </div>
 
                 {/* Card 3 */}
-                <div className="bg-white rounded-[40px] p-10 flex flex-col justify-between min-h-[350px]">
-                    <div className="w-12 h-12 rounded-full bg-sky-50 flex items-center justify-center text-sky mb-6 group hover:translate-x-1 transition-transform">
+                <div className="feature-card card-base">
+                    <div style={{
+                        width: 48, height: 48, borderRadius: '50%', background: '#eff6ff',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        marginBottom: '1.5rem', color: 'var(--color-sky-blue)'
+                    }}>
                         <Calendar size={24} />
                     </div>
-                    <div>
-                        <h3 className="font-serif text-3xl mb-3">Works with your calendar.</h3>
-                        <p className="text-navy opacity-70">Integrates with your existing booking tools seamlessly.</p>
-                    </div>
+                    <h3 className="font-serif text-navy" style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>Works with your calendar.</h3>
+                    <p className="text-navy" style={{ opacity: 0.7 }}>Integrates with your existing booking tools seamlessly.</p>
                 </div>
             </div>
         </section>
@@ -153,19 +163,24 @@ const DataSources = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {sources.map((item, i) => (
-                    <div key={i} className="bg-white rounded-3xl p-8 border border-gray-100 hover:shadow-lg transition-shadow">
+                    <div key={i} className="data-source-card">
                         <div className="flex items-center gap-4 mb-4">
-                            <div className="w-10 h-10 rounded-full bg-sky-50 text-sky flex items-center justify-center">
+                            <div style={{
+                                width: 40, height: 40, borderRadius: '50%', background: '#eff6ff',
+                                display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-sky-blue)'
+                            }}>
                                 {React.cloneElement(item.icon, { size: 20 })}
                             </div>
                             <h3 className="font-bold text-navy text-lg">{item.title}</h3>
                         </div>
-                        <div className="space-y-2">
-                            <div className="text-xs uppercase tracking-wide opacity-50 font-bold">Source</div>
-                            <div className="text-sm font-semibold text-navy">{item.source}</div>
-                            <div className="h-px bg-gray-100 my-2" />
-                            <div className="text-xs uppercase tracking-wide opacity-50 font-bold">Result</div>
-                            <div className="text-sm text-navy opacity-80">{item.result}</div>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                            <div className="uppercase tracking-tight" style={{ fontSize: '0.75rem', opacity: 0.5, fontWeight: 'bold' }}>Source</div>
+                            <div className="font-sans text-navy" style={{ fontSize: '0.9rem', fontWeight: 600 }}>{item.source}</div>
+
+                            <div style={{ height: 1, backgroundColor: '#f3f4f6', margin: '0.5rem 0' }} />
+
+                            <div className="uppercase tracking-tight" style={{ fontSize: '0.75rem', opacity: 0.5, fontWeight: 'bold' }}>Result</div>
+                            <div className="text-navy" style={{ fontSize: '0.9rem', opacity: 0.8 }}>{item.result}</div>
                         </div>
                     </div>
                 ))}
@@ -177,7 +192,14 @@ const DataSources = () => {
 const CTA = () => {
     return (
         <section className="container" style={{ paddingBottom: '6rem' }}>
-            <div className="bg-sky rounded-[64px] p-12 md:p-24 text-center relative overflow-hidden">
+            <div style={{
+                backgroundColor: 'var(--color-sky-blue)',
+                borderRadius: '64px',
+                padding: '6rem 2rem',
+                textAlign: 'center',
+                position: 'relative',
+                overflow: 'hidden'
+            }}>
                 <div style={{
                     position: 'absolute',
                     top: 0, left: 0, right: 0, bottom: 0,
@@ -194,12 +216,12 @@ const CTA = () => {
                     </h2>
 
                     <div className="flex justify-center mb-8">
-                        <button className="btn btn-white text-sky px-8 py-4 text-lg">
+                        <button className="btn btn-white" style={{ fontSize: '1.25rem', padding: '1rem 3rem', color: 'var(--color-sky-blue)' }}>
                             Pilot ClearSlot for a month
                         </button>
                     </div>
 
-                    <p className="text-xs font-bold tracking-widest opacity-60 uppercase">
+                    <p className="uppercase tracking-tight" style={{ fontSize: '0.75rem', fontWeight: 'bold', opacity: 0.6 }}>
                         For planning only — Built on real weather & data sources
                     </p>
                 </div>
