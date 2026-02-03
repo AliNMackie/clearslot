@@ -3,7 +3,7 @@
 
 export const config = {
     // Google Cloud Project ID (placeholder for now)
-    gcpProjectId: import.meta.env.VITE_GCP_PROJECT_ID || 'clearslot-dev',
+    gcpProjectId: import.meta.env.VITE_GCP_PROJECT_ID || 'clearslot-486319',
 
     // Future API Base URL for Cloud Run
     apiBaseUrl: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api/v1',
