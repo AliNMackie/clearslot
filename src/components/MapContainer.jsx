@@ -38,7 +38,7 @@ const CIRCUIT_PATH = [
 
 const MapContainer = ({ activeOverlay }) => {
     // 1. Check if Key exists in config
-    const hasApiKey = !!config.GOOGLE_MAPS_API_KEY;
+    const hasApiKey = !!config.googleMapsApiKey;
 
     const { isLoaded, loadError } = useJsApiLoader({
         id: 'google-map-script',
@@ -56,7 +56,7 @@ const MapContainer = ({ activeOverlay }) => {
         setMap(null);
     }, []);
 
-    // 2. Graceful Fallback if Key is missing (Common in early dev/demo)
+    // 2. Graceful Fallback if Key is missing
     if (!hasApiKey) {
         return (
             <div className="w-full h-[400px] bg-slate-100 rounded-3xl flex flex-col items-center justify-center border border-white/20 text-navy p-6 text-center">
@@ -65,8 +65,7 @@ const MapContainer = ({ activeOverlay }) => {
                 </div>
                 <h3 className="font-serif text-lg font-bold mb-1">Map Unavailable</h3>
                 <p className="text-sm opacity-60 max-w-xs">
-                    Google Maps API Key is missing.<br />
-                    Add <code>VITE_GOOGLE_MAPS_API_KEY</code> to your environment to enable satellite view.
+                    Google Maps API Key is missing.
                 </p>
             </div>
         );
