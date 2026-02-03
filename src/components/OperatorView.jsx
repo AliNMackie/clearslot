@@ -108,139 +108,198 @@ const OperatorView = () => {
     }
 
     return (
-        <section className="container mx-auto px-4 pb-16">
-            {/* Dashboard Container */}
-            <div className="bg-slate-50/50 backdrop-blur-sm rounded-[2.5rem] p-8 border border-white/40 shadow-xl">
+        <section className="container" style={{ paddingBottom: '4rem' }}>
+            {/* Dashboard Container - Rebuilt with Inline Styles for safety */}
+            <div style={{
+                background: 'rgba(255, 255, 255, 0.6)',
+                backdropFilter: 'blur(12px)',
+                borderRadius: '40px',
+                padding: '2.5rem',
+                border: '1px solid rgba(255,255,255,0.8)',
+                boxShadow: '0 20px 50px -10px rgba(27, 42, 58, 0.05)'
+            }}>
 
-                {/* Dashboard Header */}
-                <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                {/* Header Section */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '3rem', flexWrap: 'wrap', gap: '1rem' }}>
                     <div>
-                        <div className="text-xs font-bold tracking-widest text-slate-400 uppercase mb-2">Operational Overview</div>
-                        <h2 className="font-serif text-navy text-4xl leading-tight">
-                            Tomorrow's <span className="italic text-sky">Flight Deck</span>
+                        <div style={{ fontSize: '0.75rem', fontWeight: 800, letterSpacing: '0.15em', color: 'rgba(27,42,58,0.4)', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
+                            Operational Overview
+                        </div>
+                        <h2 className="font-serif text-navy" style={{ fontSize: '2.5rem', lineHeight: 1 }}>
+                            Tomorrow's <span style={{ fontStyle: 'italic', color: 'var(--color-sky-blue)' }}>Flight Deck</span>
                         </h2>
                     </div>
-                    <div className="flex items-center gap-3">
+
+                    <div style={{ display: 'flex', gap: '1rem' }}>
                         {/* Date Pill */}
-                        <div className="bg-white px-5 py-2.5 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-3">
-                            <Clock size={18} className="text-sky" />
-                            <span className="text-navy font-bold tracking-tight">Tue, Feb 4</span>
+                        <div style={{ background: 'white', padding: '0.6rem 1.25rem', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '0.75rem', boxShadow: '0 4px 12px rgba(0,0,0,0.03)' }}>
+                            <Clock size={18} color="var(--color-sky-blue)" />
+                            <span style={{ fontWeight: 700, color: 'var(--color-navy)' }}>Tue, Feb 4</span>
                         </div>
-                        {/* Weather Summary Mockup */}
-                        <div className="bg-navy px-5 py-2.5 rounded-2xl shadow-lg shadow-navy/20 flex items-center gap-3 text-white">
-                            <Info size={18} className="text-sky" />
-                            <span className="font-medium">QNH 1012 • Vis 10km+</span>
+                        {/* Weather Pill */}
+                        <div style={{ background: 'var(--color-navy)', color: 'white', padding: '0.6rem 1.25rem', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '0.75rem', boxShadow: '0 10px 20px -5px rgba(27,42,58,0.3)' }}>
+                            <Info size={18} color="var(--color-sky-blue)" />
+                            <span style={{ fontWeight: 500 }}>QNH 1012 • Vis 10km+</span>
                         </div>
                     </div>
                 </div>
 
-                {/* Cards Grid */}
-                <div className="space-y-4">
+                {/* Cards List */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                     {bookings.map((booking, idx) => (
                         <div
                             key={booking.id}
-                            className="group relative bg-white rounded-2xl p-5 shadow-sm border border-slate-100 hover:shadow-lg hover:border-sky/20 transition-all duration-300 ease-out hover:-translate-y-0.5"
-                            style={{ animationDelay: `${(idx + 1) * 75}ms` }}
+                            className="booking-card" // We can try to rely on some base styles, but mainly inline
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'row', // Force row layou
+                                alignItems: 'center',
+                                justifyContent: 'space-between',
+                                background: 'white',
+                                borderRadius: '24px',
+                                padding: '1.5rem',
+                                position: 'relative',
+                                overflow: 'hidden', // For the stripe
+                                boxShadow: '0 2px 5px rgba(0,0,0,0.02)',
+                                border: '1px solid rgba(27, 42, 58, 0.03)',
+                                transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+                                flexWrap: 'wrap', // Allow wrap on tiny screens
+                                gap: '1.5rem'
+                            }}
+                            onMouseEnter={(e) => {
+                                e.currentTarget.style.transform = 'translateY(-2px)';
+                                e.currentTarget.style.boxShadow = '0 12px 24px -5px rgba(0,0,0,0.06)';
+                            }}
+                            onMouseLeave={(e) => {
+                                e.currentTarget.style.transform = 'translateY(0)';
+                                e.currentTarget.style.boxShadow = '0 2px 5px rgba(0,0,0,0.02)';
+                            }}
                         >
                             {/* Status Stripe */}
-                            <div className={`absolute left-0 top-4 bottom-4 w-1.5 rounded-r-full ${booking.status === 'green' ? 'bg-green-500' :
-                                    booking.status === 'amber' ? 'bg-amber-400' : 'bg-rose-500'
-                                }`} />
+                            <div style={{
+                                position: 'absolute',
+                                left: 0,
+                                top: '12px',
+                                bottom: '12px',
+                                width: '6px',
+                                borderTopRightRadius: '99px',
+                                borderBottomRightRadius: '99px',
+                                background: getStatusColor(booking.status)
+                            }} />
 
-                            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pl-4">
-
-                                {/* Time & Status Column */}
-                                <div className="min-w-[180px]">
-                                    <div className="flex items-center gap-3 mb-2">
-                                        <div className={`w-2 h-2 rounded-full ${booking.status === 'green' ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]' :
-                                                booking.status === 'amber' ? 'bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.6)]' : 'bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.6)]'
-                                            }`} />
-                                        <span className="font-mono text-sm font-bold text-navy/70">{booking.time}</span>
-                                    </div>
-                                    <StatusBadge booking={booking} />
+                            {/* Left: Time & Badge */}
+                            <div style={{ minWidth: '160px', paddingLeft: '1rem' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
+                                    <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: getStatusColor(booking.status) }} />
+                                    <span style={{ fontFamily: 'monospace', fontWeight: 700, fontSize: '0.9rem', color: 'var(--color-navy)', opacity: 0.8 }}>{booking.time}</span>
                                 </div>
+                                <StatusBadge booking={booking} />
+                            </div>
 
-                                {/* Main Info: Pilot & Asset */}
-                                <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    {/* Pilot Info */}
-                                    <div className="flex items-start gap-4">
-                                        <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-navy/40 group-hover:bg-sky/10 group-hover:text-sky transition-colors">
-                                            <User size={20} />
-                                        </div>
-                                        <div>
-                                            <div className="font-bold text-navy text-lg leading-none mb-1.5">{booking.pilot}</div>
-                                            <div className="text-xs font-medium uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-                                                {booking.instructor ? (
-                                                    <span className="text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded">Training</span>
-                                                ) : 'Self-Fly'}
-                                                <span>•</span>
-                                                <span>{booking.type}</span>
-                                            </div>
-                                        </div>
+                            {/* Middle: Info */}
+                            <div style={{ flex: 1, display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
+                                {/* Pilot */}
+                                <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', minWidth: '200px' }}>
+                                    <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'var(--color-cloud)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(27,42,58,0.4)' }}>
+                                        <User size={20} />
                                     </div>
-
-                                    {/* Asset Info */}
-                                    <div className="flex items-start gap-4">
-                                        <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-navy/40 group-hover:bg-sky/10 group-hover:text-sky transition-colors">
-                                            <Plane size={20} />
-                                        </div>
-                                        <div>
-                                            <div className="font-bold text-navy text-lg leading-none mb-1.5">{booking.asset}</div>
-                                            <div className="text-sm font-medium text-slate-500">
-                                                {/* Reasoning Text */}
-                                                {(!legalityCache[booking.id] || legalityCache[booking.id]?.legal) ? (
-                                                    booking.reason
-                                                ) : (
-                                                    <div className="flex items-center gap-1 text-rose-500">
-                                                        <AlertTriangle size={12} />
-                                                        <span>Legality Check Failed</span>
-                                                    </div>
-                                                )}
-                                            </div>
+                                    <div>
+                                        <div style={{ fontWeight: 700, fontSize: '1.1rem', color: 'var(--color-navy)', lineHeight: 1.2 }}>{booking.pilot}</div>
+                                        <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'rgba(27,42,58,0.5)', marginTop: '0.25rem', fontWeight: 600 }}>
+                                            {booking.instructor ? (
+                                                <span style={{ color: '#D97706', background: '#FEF3C7', padding: '2px 6px', borderRadius: '4px', marginRight: '6px' }}>TRAINING</span>
+                                            ) : 'SELF-FLY'}
+                                            • {booking.type}
                                         </div>
                                     </div>
                                 </div>
 
-                                {/* Action Area */}
-                                <div className="md:text-right">
-                                    {(booking.status === 'amber' || booking.status === 'red' || (legalityCache[booking.id] && !legalityCache[booking.id].legal)) && (
-                                        <button
-                                            onClick={() => handleSuggest(booking.id)}
-                                            className="px-4 py-2 rounded-xl bg-slate-50 text-navy font-semibold text-sm hover:bg-navy hover:text-white transition-all shadow-sm hover:shadow-md active:scale-95 flex items-center gap-2 group/btn"
-                                        >
-                                            <span>Find new time</span>
-                                            <ArrowRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
-                                        </button>
-                                    )}
+                                {/* Asset */}
+                                <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', minWidth: '220px' }}>
+                                    <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'var(--color-cloud)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(27,42,58,0.4)' }}>
+                                        <Plane size={20} />
+                                    </div>
+                                    <div>
+                                        <div style={{ fontWeight: 700, fontSize: '1.1rem', color: 'var(--color-navy)', lineHeight: 1.2 }}>{booking.asset}</div>
+                                        <div style={{ fontSize: '0.85rem', color: 'rgba(27,42,58,0.6)', marginTop: '0.25rem' }}>
+                                            {(!legalityCache[booking.id] || legalityCache[booking.id]?.legal) ? (
+                                                booking.reason
+                                            ) : (
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#E11D48', fontWeight: 500 }}>
+                                                    <AlertTriangle size={14} />
+                                                    <span>CHECK FAILED</span>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+
+                            {/* Right: Action */}
+                            <div style={{ minWidth: '140px', display: 'flex', justifyContent: 'flex-end' }}>
+                                {(booking.status === 'amber' || booking.status === 'red' || (legalityCache[booking.id] && !legalityCache[booking.id].legal)) && (
+                                    <button
+                                        onClick={() => handleSuggest(booking.id)}
+                                        style={{
+                                            padding: '0.6rem 1.2rem',
+                                            borderRadius: '12px',
+                                            background: 'var(--color-cloud)',
+                                            color: 'var(--color-navy)',
+                                            fontWeight: 600,
+                                            fontSize: '0.85rem',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: '0.5rem',
+                                            transition: 'all 0.2s ease'
+                                        }}
+                                        onMouseEnter={(e) => {
+                                            e.currentTarget.style.background = 'var(--color-navy)';
+                                            e.currentTarget.style.color = 'white';
+                                        }}
+                                        onMouseLeave={(e) => {
+                                            e.currentTarget.style.background = 'var(--color-cloud)';
+                                            e.currentTarget.style.color = 'var(--color-navy)';
+                                        }}
+                                    >
+                                        <span>Find new time</span>
+                                        <ArrowRight size={14} />
+                                    </button>
+                                )}
+                            </div>
+
                         </div>
                     ))}
                 </div>
             </div>
 
             {/* Map Section */}
-            <div className="mt-8 animate-enter delay-300">
-                <div className="bg-white rounded-[2rem] shadow-xl overflow-hidden border border-slate-100">
-                    <div className="p-6 flex justify-between items-center border-b border-slate-50">
-                        <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-full bg-sky/10 flex items-center justify-center text-sky">
+            <div className="mt-8">
+                <div style={{
+                    background: 'white',
+                    borderRadius: '32px',
+                    boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.1)',
+                    overflow: 'hidden',
+                    border: '1px solid rgba(27,42,58,0.05)'
+                }}>
+                    <div style={{ padding: '1.5rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #f0f0f0' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                            <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(47, 128, 237, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-sky-blue)' }}>
                                 <Anchor size={20} />
                             </div>
                             <div>
-                                <h3 className="font-bold text-navy text-lg leading-none">Strathaven Overlay</h3>
-                                <div className="text-xs text-slate-400 font-medium mt-1">SATELLITE • LIVE WEATHER</div>
+                                <h3 className="font-serif text-navy" style={{ fontSize: '1.25rem', margin: 0 }}>Strathaven Overlay</h3>
+                                <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'rgba(27,42,58,0.4)', marginTop: '0.25rem' }}>SATELLITE • LIVE WEATHER</div>
                             </div>
                         </div>
 
-                        <div className="flex bg-slate-100 p-1 rounded-xl">
-                            <button className="px-4 py-1.5 bg-white shadow-sm rounded-lg text-xs font-bold text-navy">Sat</button>
-                            <button className="px-4 py-1.5 text-slate-400 hover:text-navy text-xs font-bold transition-colors">Map</button>
+                        <div style={{ background: '#F3F4F6', padding: '4px', borderRadius: '12px', display: 'flex' }}>
+                            <button style={{ padding: '6px 16px', background: 'white', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-navy)' }}>Sat</button>
+                            <button style={{ padding: '6px 16px', fontSize: '0.75rem', fontWeight: 700, color: 'rgba(27,42,58,0.5)' }}>Map</button>
                         </div>
                     </div>
 
-                    <div className="h-[450px] w-full bg-slate-50 relative">
-                        <React.Suspense fallback={<div className="w-full h-full flex items-center justify-center text-slate-400 font-mono text-sm animate-pulse">Initializing Setup...</div>}>
+                    <div style={{ height: '450px', width: '100%', background: '#F9FAFB', position: 'relative' }}>
+                        <React.Suspense fallback={<div className="w-full h-full flex items-center justify-center text-slate-400 font-mono text-sm">Initializing Setup...</div>}>
                             <MapContainer activeOverlay="circuit" />
                         </React.Suspense>
                     </div>
