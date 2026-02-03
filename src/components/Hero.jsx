@@ -10,18 +10,43 @@ const Hero = () => {
             position: 'relative',
             overflow: 'hidden'
         }}>
-            {/* Background Ambience */}
+            {/* Video Background Layer */}
             <div style={{
                 position: 'absolute',
-                top: '-10%',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                width: '80%',
-                height: '600px',
-                background: 'radial-gradient(circle, rgba(47, 128, 237, 0.15) 0%, rgba(245, 250, 255, 0) 70%)',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
                 zIndex: -1,
-                filter: 'blur(60px)'
-            }} />
+                overflow: 'hidden'
+            }}>
+                {/* Overlay to ensure text readability - adjusting opacity to 0.85 for strong legibility */}
+                <div style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    background: 'rgba(245, 250, 255, 0.75)',
+                    backdropFilter: 'blur(2px)', // Adds a slight blur for depth
+                    zIndex: 1
+                }} />
+
+                <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        objectPosition: 'center',
+                    }}
+                >
+                    <source src="/hero-bg.mp4" type="video/mp4" />
+                </video>
+            </div>
 
             <div className="container flex flex-col items-center" style={{ textAlign: 'center' }}>
 
