@@ -36,49 +36,71 @@ function App() {
             <footer style={{
                 backgroundColor: 'var(--color-navy)',
                 color: 'white',
-                padding: '5rem 0 2rem',
+                padding: '4rem 0 2rem',
                 marginTop: '0'
             }}>
-                <div className="container">
-                    <div className="grid grid-cols-1 md:grid-cols-5 gap-12 mb-16">
-                        <div className="col-span-1 md:col-span-1">
+                <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 2rem' }}>
+                    {/* Top Section */}
+                    <div style={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        gap: '3rem',
+                        justifyContent: 'space-between',
+                        marginBottom: '4rem'
+                    }}>
+                        {/* Brand Column */}
+                        <div style={{ flex: '2 1 300px' }}>
                             <div className="flex items-center gap-2 mb-4">
                                 <div className="w-8 h-8 bg-sky text-white flex items-center justify-center font-serif italic text-lg transform rotate-3">C</div>
                                 <span className="font-serif italic text-xl">ClearSlot.space</span>
                             </div>
-                            <p className="text-sm opacity-60">Planning tools for small aircraft and balloon operators.</p>
+                            <p className="text-sm opacity-60 max-w-xs">
+                                Planning tools for small aircraft and balloon operators.
+                                <br />Built for the Strathaven community.
+                            </p>
                         </div>
 
-                        <div className="col-span-1">
-                            <h4 className="font-bold mb-4">Product</h4>
-                            <ul className="space-y-2 text-sm opacity-70">
-                                <li><a href="#">Features</a></li>
-                                <li><a href="#">Pricing</a></li>
-                                <li><a href="#">Data Sources</a></li>
-                            </ul>
-                        </div>
-                        <div className="col-span-1">
-                            <h4 className="font-bold mb-4">Resources</h4>
-                            <ul className="space-y-2 text-sm opacity-70">
-                                <li><a href="#">Blog</a></li>
-                                <li><a href="#">Support</a></li>
-                                <li><a href="#">Status</a></li>
-                            </ul>
-                        </div>
-                        <div className="col-span-1">
-                            <h4 className="font-bold mb-4">Company</h4>
-                            <ul className="space-y-2 text-sm opacity-70">
-                                <li><a href="#">About</a></li>
-                                <li><a href="#">Contact</a></li>
-                            </ul>
+                        {/* Links Columns Container */}
+                        <div style={{ flex: '3 1 400px', display: 'flex', gap: '3rem', flexWrap: 'wrap' }}>
+                            <div style={{ minWidth: '120px' }}>
+                                <h4 className="font-bold mb-4 text-white">Product</h4>
+                                <ul className="space-y-2 text-sm opacity-70" style={{ listStyle: 'none', padding: 0 }}>
+                                    <li className="mb-2"><a href="#" className="hover:text-sky transition-colors">Features</a></li>
+                                    <li className="mb-2"><a href="#" className="hover:text-sky transition-colors">Pricing</a></li>
+                                    <li className="mb-2"><a href="#" className="hover:text-sky transition-colors">Data Sources</a></li>
+                                </ul>
+                            </div>
+                            <div style={{ minWidth: '120px' }}>
+                                <h4 className="font-bold mb-4 text-white">Resources</h4>
+                                <ul className="space-y-2 text-sm opacity-70" style={{ listStyle: 'none', padding: 0 }}>
+                                    <li className="mb-2"><a href="#" className="hover:text-sky transition-colors">Blog</a></li>
+                                    <li className="mb-2"><a href="#" className="hover:text-sky transition-colors">Support</a></li>
+                                    <li className="mb-2"><a href="#" className="hover:text-sky transition-colors">Status</a></li>
+                                </ul>
+                            </div>
+                            <div style={{ minWidth: '120px' }}>
+                                <h4 className="font-bold mb-4 text-white">Company</h4>
+                                <ul className="space-y-2 text-sm opacity-70" style={{ listStyle: 'none', padding: 0 }}>
+                                    <li className="mb-2"><a href="#" className="hover:text-sky transition-colors">About</a></li>
+                                    <li className="mb-2"><a href="#" className="hover:text-sky transition-colors">Contact</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
 
-                    <div className="border-t border-white/5 pt-8 flex justify-between text-xs opacity-40">
+                    {/* Bottom Section */}
+                    <div style={{
+                        borderTop: '1px solid rgba(255,255,255,0.1)',
+                        paddingTop: '2rem',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        fontSize: '0.75rem',
+                        opacity: 0.4
+                    }}>
                         <p>&copy; 2026 ClearSlot.space</p>
-                        <div className="flex gap-4">
-                            <a href="#">Privacy</a>
-                            <a href="#">Terms</a>
+                        <div style={{ display: 'flex', gap: '1.5rem' }}>
+                            <a href="#" className="hover:text-white">Privacy</a>
+                            <a href="#" className="hover:text-white">Terms</a>
                         </div>
                     </div>
                 </div>
