@@ -1,5 +1,6 @@
 import React from 'react';
 import { Check, Database, Map as MapIcon, CloudRain, Shield, Calendar, Bell, LineChart } from 'lucide-react';
+import dashboardImg from '../assets/dashboard-illustration.png';
 
 const BentoGrid = () => {
     return (
@@ -40,66 +41,21 @@ const BentoGrid = () => {
 
                 {/* Right: UI Simulator */}
                 <div className="animate-enter delay-200" style={{
-                    backgroundColor: 'var(--color-navy)',
-                    borderRadius: '40px',
-                    padding: '2rem',
-                    position: 'relative',
-                    minHeight: '500px',
                     display: 'flex',
-                    flexDirection: 'column'
+                    alignItems: 'center',
+                    justifyContent: 'center'
                 }}>
-                    {/* Mock Window */}
-                    <div style={{
-                        backgroundColor: 'white',
-                        borderRadius: '24px',
-                        flex: 1,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        overflow: 'hidden'
-                    }}>
-                        {/* Window Bar */}
-                        <div className="flex items-center gap-2 p-4" style={{ borderBottom: '1px solid #eee', padding: '1rem' }}>
-                            <div className="flex gap-1" style={{ gap: '6px' }}>
-                                <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#ff5f56' }} />
-                                <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#ffbd2e' }} />
-                                <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#27c93f' }} />
-                            </div>
-                            <div style={{ margin: '0 auto', background: '#f3f4f6', height: 8, width: '30%', borderRadius: 4 }} />
-                        </div>
-
-                        {/* Window Content */}
-                        <div style={{ padding: '1.5rem', flex: 1, background: '#f9fafb', display: 'flex', gap: '1rem' }}>
-                            <div style={{ flex: 1, background: '#eff6ff', borderRadius: 12, padding: '1rem' }}>
-                                <div style={{ width: '50%', height: 16, background: '#bfdbfe', borderRadius: 4, marginBottom: 16 }} />
-                                <div style={{ width: '100%', height: 80, background: 'rgba(255,255,255,0.8)', borderRadius: 8, marginBottom: 8 }} />
-                                <div style={{ width: '100%', height: 80, background: 'rgba(255,255,255,0.8)', borderRadius: 8 }} />
-                            </div>
-                            <div style={{ width: '30%', background: 'white', borderRadius: 12, padding: '1rem' }} className="hidden sm:block">
-                                <div style={{ width: '100%', height: '100%', background: '#f3f4f6', borderRadius: 8 }} />
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Footer Strip */}
-                    <div className="glass" style={{
-                        marginTop: '1.5rem',
-                        borderRadius: '16px',
-                        padding: '1rem',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        background: 'rgba(255,255,255,0.1)',
-                        borderColor: 'rgba(255,255,255,0.1)'
-                    }}>
-                        <div className="flex gap-2">
-                            <span style={{ background: 'rgba(27,42,58,0.5)', color: 'white', padding: '0.25rem 0.75rem', borderRadius: 99, fontSize: '0.75rem', fontFamily: 'monospace' }}>Slot scored</span>
-                            <span style={{ background: 'rgba(27,42,58,0.5)', color: 'white', padding: '0.25rem 0.75rem', borderRadius: 99, fontSize: '0.75rem', fontFamily: 'monospace' }}>Briefing ready</span>
-                        </div>
-                        <div style={{ width: 24, height: 24, borderRadius: '50%', background: '#22c55e', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' }}>
-                            <Check size={14} />
-                        </div>
-                    </div>
-
+                    <img
+                        src={dashboardImg}
+                        alt="ClearSlot Dashboard Interface"
+                        style={{
+                            width: '100%',
+                            height: 'auto',
+                            maxHeight: '600px',
+                            objectFit: 'contain',
+                            filter: 'drop-shadow(0 20px 40px rgba(27, 42, 58, 0.15))'
+                        }}
+                    />
                 </div>
             </div>
         </section>
