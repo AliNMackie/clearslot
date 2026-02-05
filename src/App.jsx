@@ -46,16 +46,51 @@ const LandingPage = () => (
     </>
 );
 
+class ErrorBoundary extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { hasError: false, error: null, errorInfo: null };
+    }
+
+    static getDerivedStateFromError(error) {
+        return { hasError: true };
+    }
+
+    componentDidCatch(error, errorInfo) {
+        this.setState({ error, errorInfo });
+        console.error("Uncaught error:", error, errorInfo);
+    }
+
+    render() {
+        if (this.state.hasError) {
+            return (
+                <div style={{ padding: '2rem', fontFamily: 'sans-serif', color: '#1B2A3A' }}>
+                    <h1>Something went wrong.</h1>
+                    <details style={{ whiteSpace: 'pre-wrap', background: '#f8f8f8', padding: '1rem', borderRadius: '8px' }}>
+                        {this.state.error && this.state.error.toString()}
+                        <br />
+                        {this.state.errorInfo && this.state.errorInfo.componentStack}
+                    </details>
+                </div>
+            );
+        }
+
+        return this.props.children;
+    }
+}
+
 function App() {
     return (
-        <Router>
-            <Routes>
-                <Route path="/" element={<LandingPage />} />
-                <Route path="/clubs/:clubSlug" element={<PublicClubPage />} />
-                <Route path="/clubs/:clubSlug/app" element={<MemberPortal />} />
-                <Route path="/clubs/:clubSlug/admin" element={<AdminPortal />} />
-            </Routes>
-        </Router>
+        <ErrorBoundary>
+            <Router>
+                <Routes>
+                    <Route path="/" element={<LandingPage />} />
+                    <Route path="/clubs/:clubSlug" element={<PublicClubPage />} />
+                    <Route path="/clubs/:clubSlug/app" element={<MemberPortal />} />
+                    <Route path="/clubs/:clubSlug/admin" element={<AdminPortal />} />
+                </Routes>
+            </Router>
+        </ErrorBoundary>
     );
 }
 
