@@ -148,18 +148,90 @@ const DataSources = () => {
 const ClubScoringExplainer = () => {
     return (
         <section className="container" style={{ paddingBottom: '6rem' }}>
-            <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100">
-                <h3 className="font-serif text-2xl text-navy mb-4">How ClearSlot scores each club</h3>
-                <p className="text-navy text-lg opacity-80 max-w-3xl">
-                    ClearSlot rates each club's digital maturity on a scale of 0-100.
-                    We analyze how much of your operation is automated—from online bookings to real-time safety checks—versus relying on manual spreadsheets.
-                    Clubs are categorized as <strong>'Modernised'</strong>, <strong>'In Transition'</strong>, or <strong>'Legacy-Heavy'</strong>,
-                    giving members transparency on the operational efficiency of their flying base.
-                </p>
-                <div className="flex gap-4 mt-6">
-                    <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-bold">Modernised (80-100)</span>
-                    <span className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm font-bold">In Transition (50-79)</span>
-                    <span className="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-bold">Legacy-Heavy (0-49)</span>
+            <div style={{
+                background: 'linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 100%)',
+                borderRadius: '32px',
+                padding: '3rem',
+                border: '1px solid rgba(255,255,255,0.8)',
+                boxShadow: '0 20px 40px -10px rgba(27, 42, 58, 0.05)',
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                gap: '4rem',
+                alignItems: 'center'
+            }}>
+                <div className="col-span-1 hidden md:block relative h-full min-h-[300px]">
+                    {/* Abstract Visual Representation of Scoring */}
+                    <div style={{
+                        position: 'absolute', inset: 0,
+                        background: 'white', borderRadius: '24px',
+                        boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
+                        display: 'flex', flexDirection: 'column', padding: '2rem',
+                        justifyContent: 'center'
+                    }}>
+                        <div className="flex justify-between items-end mb-4">
+                            <span className="font-serif text-2xl text-navy">Digital Maturity</span>
+                            <span className="font-mono text-4xl font-bold text-sky">85<span className="text-lg opacity-50">/100</span></span>
+                        </div>
+
+                        {/* Fake Progress Bars */}
+                        <div className="space-y-4">
+                            <div>
+                                <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-navy opacity-60 mb-1">Online Booking</div>
+                                <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                                    <div className="h-full bg-green-500 w-[95%]"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-navy opacity-60 mb-1">Safety Checks</div>
+                                <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                                    <div className="h-full bg-sky-500 w-[80%]"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-navy opacity-60 mb-1">Ops Visibility</div>
+                                <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                                    <div className="h-full bg-navy w-[60%]"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="mt-8 pt-6 border-t border-gray-100">
+                            <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-bold">Modernised Operation</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="col-span-1 md:col-span-1">
+                    <h3 className="font-serif text-navy mb-6" style={{ fontSize: '2.5rem', lineHeight: 1.1 }}>
+                        How we score <br /><span className="italic text-sky">each club.</span>
+                    </h3>
+                    <p className="text-navy text-lg opacity-70 mb-8 leading-relaxed">
+                        Not all clubs are created equal. We analyze how much of an operation is automated—from online bookings to real-time safety checks—versus relying on manual spreadsheets.
+                    </p>
+
+                    <div className="space-y-4">
+                        <div className="flex items-center gap-4 p-3 rounded-xl hover:bg-white transition duration-300 cursor-default">
+                            <div className="w-3 h-3 rounded-full bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.4)]"></div>
+                            <div>
+                                <div className="font-bold text-navy">Modernised (80-100)</div>
+                                <div className="text-sm opacity-60">Fully digital, real-time safety, high efficiency.</div>
+                            </div>
+                        </div>
+                        <div className="flex items-center gap-4 p-3 rounded-xl hover:bg-white transition duration-300 cursor-default">
+                            <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div>
+                                <div className="font-bold text-navy">In Transition (50-79)</div>
+                                <div className="text-sm opacity-60">Digital booking but manual safety/ops dispatch.</div>
+                            </div>
+                        </div>
+                        <div className="flex items-center gap-4 p-3 rounded-xl hover:bg-white transition duration-300 cursor-default">
+                            <div className="w-3 h-3 rounded-full bg-gray-400"></div>
+                            <div>
+                                <div className="font-bold text-navy">Legacy-Heavy (0-49)</div>
+                                <div className="text-sm opacity-60">Paper diaries, phone bookings, manual calculations.</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -169,23 +241,43 @@ const ClubScoringExplainer = () => {
 const CTA = () => {
     return (
         <section className="container" style={{ paddingBottom: '8rem' }}>
-            <div className="bg-navy rounded-3xl p-8 md:p-16 text-center text-white relative overflow-hidden">
+            <div className="relative overflow-hidden rounded-[40px]" style={{
+                background: 'var(--color-navy)',
+                padding: '5rem 2rem',
+                textAlign: 'center',
+                color: 'white'
+            }}>
+                {/* Background Decor */}
                 <div style={{
-                    position: 'absolute',
-                    top: 0, left: 0, right: 0, bottom: 0,
-                    background: 'radial-gradient(circle at 50% 0%, rgba(47, 128, 237, 0.2), transparent 70%)'
+                    position: 'absolute', top: -100, left: 0, right: 0, height: '400px',
+                    background: 'radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.15) 0%, transparent 60%)',
+                    pointerEvents: 'none'
+                }} />
+                <div style={{
+                    position: 'absolute', bottom: -50, right: -50, width: '200px', height: '200px',
+                    background: 'radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%)',
+                    pointerEvents: 'none'
                 }} />
 
-                <div className="relative z-10 max-w-2xl mx-auto">
-                    <h2 className="font-serif text-4xl md:text-5xl mb-6">Plan the flying, not the inbox.</h2>
-                    <p className="opacity-70 text-lg mb-8">
+                <div className="relative z-10 max-w-3xl mx-auto">
+                    <h2 className="font-serif mb-6" style={{ fontSize: '3.5rem', lineHeight: 1 }}>
+                        Plan the flying, <span className="italic text-sky">not the inbox.</span>
+                    </h2>
+                    <p className="text-xl opacity-80 mb-10 font-light">
                         Join the pilot waitlist or register your club as a beta partner today.
                     </p>
 
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <button className="btn bg-white text-navy hover:bg-gray-100 px-8 py-4 text-sm tracking-widest uppercase font-bold rounded-lg shadow-lg hover:transform hover:-translate-y-1 transition">
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                        <button className="bg-white text-navy px-10 py-4 rounded-full font-bold text-sm tracking-widest uppercase hover:scale-105 transition transform shadow-[0_10px_30px_rgba(255,255,255,0.2)]">
                             Get Early Access
                         </button>
+                        <button className="px-10 py-4 rounded-full font-bold text-sm tracking-widest uppercase border border-white/20 hover:bg-white/5 transition text-white">
+                            View Demo
+                        </button>
+                    </div>
+
+                    <div className="mt-12 text-sm opacity-40 font-mono">
+                        CURRENTLY ACCEPTING UK CLUBS FOR Q2 2026
                     </div>
                 </div>
             </div>
