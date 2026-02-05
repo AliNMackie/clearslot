@@ -166,6 +166,33 @@ const ClubScoringExplainer = () => {
     );
 };
 
+const CTA = () => {
+    return (
+        <section className="container" style={{ paddingBottom: '8rem' }}>
+            <div className="bg-navy rounded-3xl p-8 md:p-16 text-center text-white relative overflow-hidden">
+                <div style={{
+                    position: 'absolute',
+                    top: 0, left: 0, right: 0, bottom: 0,
+                    background: 'radial-gradient(circle at 50% 0%, rgba(47, 128, 237, 0.2), transparent 70%)'
+                }} />
+
+                <div className="relative z-10 max-w-2xl mx-auto">
+                    <h2 className="font-serif text-4xl md:text-5xl mb-6">Plan the flying, not the inbox.</h2>
+                    <p className="opacity-70 text-lg mb-8">
+                        Join the pilot waitlist or register your club as a beta partner today.
+                    </p>
+
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button className="btn bg-white text-navy hover:bg-gray-100 px-8 py-4 text-sm tracking-widest uppercase font-bold rounded-lg shadow-lg hover:transform hover:-translate-y-1 transition">
+                            Get Early Access
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+};
+
 const MarketingSections = () => {
     return (
         <>
