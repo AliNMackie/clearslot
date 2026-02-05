@@ -164,74 +164,76 @@ const ClubScoringExplainer = () => {
                     <div style={{
                         background: 'white',
                         borderRadius: '24px',
-                        boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
-                        padding: '2.5rem',
+                        boxShadow: '0 20px 40px rgba(0,0,0,0.08)',
+                        padding: '3rem',
                         height: '100%',
                         display: 'flex',
                         flexDirection: 'column',
-                        justifyContent: 'center'
+                        justifyContent: 'center',
+                        border: '1px solid rgba(0,0,0,0.03)'
                     }}>
-                        <div className="flex justify-between items-end mb-6">
-                            <span className="font-serif text-2xl text-navy">Digital Maturity</span>
-                            <span className="font-mono text-4xl font-bold text-sky">85<span className="text-lg opacity-50">/100</span></span>
+                        <div className="flex justify-between items-end mb-8">
+                            <span className="font-serif text-2xl text-navy font-bold">Digital Maturity</span>
+                            <span className="font-mono text-5xl font-bold text-sky" style={{ letterSpacing: '-0.05em' }}>85<span className="text-xl opacity-40 ml-1 text-navy">/100</span></span>
                         </div>
 
                         {/* Fake Progress Bars */}
                         <div className="space-y-6">
                             <div>
-                                <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-navy opacity-60 mb-2">Online Booking</div>
-                                <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-                                    <div className="h-full bg-green-500 w-[95%]"></div>
+                                <div className="flex justify-between text-sm font-bold uppercase tracking-widest text-navy mb-2">Online Booking</div>
+                                <div className="h-3 bg-slate-100 rounded-full overflow-hidden">
+                                    <div className="h-full bg-green-500 w-[95%] shadow-[0_0_10px_rgba(34,197,94,0.5)]"></div>
                                 </div>
                             </div>
                             <div>
-                                <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-navy opacity-60 mb-2">Safety Checks</div>
-                                <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-                                    <div className="h-full bg-sky-500 w-[80%]"></div>
+                                <div className="flex justify-between text-sm font-bold uppercase tracking-widest text-navy mb-2">Safety Checks</div>
+                                <div className="h-3 bg-slate-100 rounded-full overflow-hidden">
+                                    <div className="h-full bg-sky-500 w-[80%] shadow-[0_0_10px_rgba(14,165,233,0.5)]"></div>
                                 </div>
                             </div>
                             <div>
-                                <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-navy opacity-60 mb-2">Ops Visibility</div>
-                                <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                                <div className="flex justify-between text-sm font-bold uppercase tracking-widest text-navy mb-2">Ops Visibility</div>
+                                <div className="h-3 bg-slate-100 rounded-full overflow-hidden">
                                     <div className="h-full bg-navy w-[60%]"></div>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="mt-8 pt-6 border-t border-gray-100">
-                            <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-bold">Modernised Operation</span>
+                        <div className="mt-10 pt-8 border-t border-slate-100 flex items-center justify-between">
+                            <div className="text-xs font-bold uppercase tracking-widest text-slate-400">Current Status</div>
+                            <span className="px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-bold border border-green-200">Modernised Operation</span>
                         </div>
                     </div>
                 </div>
 
                 <div className="col-span-1 md:col-span-1">
-                    <h3 className="font-serif text-navy mb-6" style={{ fontSize: '2.5rem', lineHeight: 1.1 }}>
+                    <h3 className="font-serif text-navy mb-6" style={{ fontSize: '3rem', lineHeight: 1 }}>
                         How we score <br /><span className="italic text-sky">each club.</span>
                     </h3>
-                    <p className="text-navy text-lg opacity-70 mb-8 leading-relaxed">
-                        Not all clubs are created equal. We analyze how much of an operation is automated—from online bookings to real-time safety checks—versus relying on manual spreadsheets.
+                    <p className="text-navy text-lg opacity-70 mb-10 leading-relaxed font-light">
+                        Not all clubs are created equal. We analyze the automation level of your operation—from bookings to safety checks:
                     </p>
 
                     <div className="space-y-4">
-                        <div className="flex items-center gap-4 p-3 rounded-xl hover:bg-white transition duration-300 cursor-default">
-                            <div className="w-3 h-3 rounded-full bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.4)]"></div>
+                        <div className="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-100 shadow-sm transition hover:shadow-md cursor-default">
+                            <div className="w-4 h-4 mt-1 rounded-full bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.4)] shrink-0"></div>
                             <div>
-                                <div className="font-bold text-navy">Modernised (80-100)</div>
-                                <div className="text-sm opacity-60">Fully digital, real-time safety, high efficiency.</div>
+                                <div className="font-bold text-navy text-lg mb-1">Modernised (80-100)</div>
+                                <div className="text-slate-500 leading-snug">Fully digital, real-time safety checks, high efficiency.</div>
                             </div>
                         </div>
-                        <div className="flex items-center gap-4 p-3 rounded-xl hover:bg-white transition duration-300 cursor-default">
-                            <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                        <div className="flex items-start gap-4 p-4 rounded-2xl bg-white/50 border border-transparent hover:bg-white hover:border-slate-100 hover:shadow-sm transition cursor-default">
+                            <div className="w-4 h-4 mt-1 rounded-full bg-yellow-400 shrink-0"></div>
                             <div>
-                                <div className="font-bold text-navy">In Transition (50-79)</div>
-                                <div className="text-sm opacity-60">Digital booking but manual safety/ops dispatch.</div>
+                                <div className="font-bold text-navy text-lg mb-1">In Transition (50-79)</div>
+                                <div className="text-slate-500 leading-snug">Digital booking, but manual safety/dispatch.</div>
                             </div>
                         </div>
-                        <div className="flex items-center gap-4 p-3 rounded-xl hover:bg-white transition duration-300 cursor-default">
-                            <div className="w-3 h-3 rounded-full bg-gray-400"></div>
+                        <div className="flex items-start gap-4 p-4 rounded-2xl bg-white/50 border border-transparent hover:bg-white hover:border-slate-100 hover:shadow-sm transition cursor-default">
+                            <div className="w-4 h-4 mt-1 rounded-full bg-slate-300 shrink-0"></div>
                             <div>
-                                <div className="font-bold text-navy">Legacy-Heavy (0-49)</div>
-                                <div className="text-sm opacity-60">Paper diaries, phone bookings, manual calculations.</div>
+                                <div className="font-bold text-navy text-lg mb-1">Legacy-Heavy (0-49)</div>
+                                <div className="text-slate-500 leading-snug">Paper diaries, phone bookings, manual calcs.</div>
                             </div>
                         </div>
                     </div>
