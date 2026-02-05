@@ -159,36 +159,39 @@ const ClubScoringExplainer = () => {
                 gap: '4rem',
                 alignItems: 'center'
             }}>
-                <div className="col-span-1 hidden md:block relative h-full min-h-[300px]">
+                <div className="col-span-1 hidden md:block">
                     {/* Abstract Visual Representation of Scoring */}
                     <div style={{
-                        position: 'absolute', inset: 0,
-                        background: 'white', borderRadius: '24px',
+                        background: 'white',
+                        borderRadius: '24px',
                         boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
-                        display: 'flex', flexDirection: 'column', padding: '2rem',
+                        padding: '2.5rem',
+                        height: '100%',
+                        display: 'flex',
+                        flexDirection: 'column',
                         justifyContent: 'center'
                     }}>
-                        <div className="flex justify-between items-end mb-4">
+                        <div className="flex justify-between items-end mb-6">
                             <span className="font-serif text-2xl text-navy">Digital Maturity</span>
                             <span className="font-mono text-4xl font-bold text-sky">85<span className="text-lg opacity-50">/100</span></span>
                         </div>
 
                         {/* Fake Progress Bars */}
-                        <div className="space-y-4">
+                        <div className="space-y-6">
                             <div>
-                                <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-navy opacity-60 mb-1">Online Booking</div>
+                                <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-navy opacity-60 mb-2">Online Booking</div>
                                 <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
                                     <div className="h-full bg-green-500 w-[95%]"></div>
                                 </div>
                             </div>
                             <div>
-                                <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-navy opacity-60 mb-1">Safety Checks</div>
+                                <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-navy opacity-60 mb-2">Safety Checks</div>
                                 <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
                                     <div className="h-full bg-sky-500 w-[80%]"></div>
                                 </div>
                             </div>
                             <div>
-                                <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-navy opacity-60 mb-1">Ops Visibility</div>
+                                <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-navy opacity-60 mb-2">Ops Visibility</div>
                                 <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
                                     <div className="h-full bg-navy w-[60%]"></div>
                                 </div>
