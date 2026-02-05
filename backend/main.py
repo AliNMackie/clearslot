@@ -5,11 +5,23 @@ import os
 from pydantic import BaseModel
 from typing import List, Optional
 from legality import is_slot_legal
+from flyability import (
+    compute_flyability,
+    WeatherForecast,
+    PilotProfile,
+    AircraftProfile,
+    SurfaceCondition,
+    FlyabilityResponse
+)
+from bookings import router as bookings_router
+from analytics.scoring import compute_club_operational_score, ClubMetrics
 
 app = FastAPI(
     title="ClearSlot Backend",
     description="Proxy service for AviationWeather.gov data, designed for Cloud Run."
 )
+
+app.include_router(bookings_router)
 
 class LogbookEntry(BaseModel):
     date: str
@@ -174,6 +186,31 @@ async def check_legality(request: LegalityRequest):
     pilot_dict = request.pilot.dict()
     result = is_slot_legal(pilot_dict, request.aircraft, request.date)
     return result
+
+class FlyabilityRequest(BaseModel):
+    forecast: WeatherForecast
+    pilot: PilotProfile
+    aircraft: AircraftProfile
+    runway_surface: SurfaceCondition
+
+@app.post("/api/v1/flyability/check")
+async def check_flyability_endpoint(request: FlyabilityRequest):
+    """
+    Check if conditions are safe for a flight.
+    """
+    return compute_flyability(
+        forecast=request.forecast,
+        pilot=request.pilot,
+        aircraft=request.aircraft,
+        runway_surface=request.runway_surface
+    )
+
+@app.post("/api/v1/club/score")
+async def calculate_club_score(metrics: ClubMetrics):
+    """
+    Calculate the operational score for a club.
+    """
+    return compute_club_operational_score(metrics)
 
 if __name__ == "__main__":
     import uvicorn

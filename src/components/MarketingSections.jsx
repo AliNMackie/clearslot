@@ -145,41 +145,21 @@ const DataSources = () => {
     );
 };
 
-const CTA = () => {
+const ClubScoringExplainer = () => {
     return (
         <section className="container" style={{ paddingBottom: '6rem' }}>
-            <div style={{
-                backgroundColor: 'var(--color-sky-blue)',
-                borderRadius: '64px',
-                padding: '6rem 2rem',
-                textAlign: 'center',
-                position: 'relative',
-                overflow: 'hidden'
-            }}>
-                <div style={{
-                    position: 'absolute',
-                    top: 0, left: 0, right: 0, bottom: 0,
-                    backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.2) 2px, transparent 2px)',
-                    backgroundSize: '40px 40px',
-                    opacity: 0.3,
-                    pointerEvents: 'none'
-                }} />
-
-                <div className="relative z-10 text-white">
-                    <h2 className="font-serif mb-8" style={{ fontSize: 'clamp(3rem, 7vw, 6rem)', lineHeight: 1 }}>
-                        Plan the flying, <br />
-                        <span className="italic">not the inbox.</span>
-                    </h2>
-
-                    <div className="flex justify-center mb-8">
-                        <button className="btn btn-white" style={{ fontSize: '1.25rem', padding: '1rem 3rem', color: 'var(--color-sky-blue)' }}>
-                            Pilot ClearSlot for a month
-                        </button>
-                    </div>
-
-                    <p className="uppercase tracking-tight" style={{ fontSize: '0.75rem', fontWeight: 'bold', opacity: 0.6 }}>
-                        For planning only — Built on real weather & data sources
-                    </p>
+            <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100">
+                <h3 className="font-serif text-2xl text-navy mb-4">How ClearSlot scores each club</h3>
+                <p className="text-navy text-lg opacity-80 max-w-3xl">
+                    ClearSlot rates each club's digital maturity on a scale of 0-100.
+                    We analyze how much of your operation is automated—from online bookings to real-time safety checks—versus relying on manual spreadsheets.
+                    Clubs are categorized as <strong>'Modernised'</strong>, <strong>'In Transition'</strong>, or <strong>'Legacy-Heavy'</strong>,
+                    giving members transparency on the operational efficiency of their flying base.
+                </p>
+                <div className="flex gap-4 mt-6">
+                    <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-bold">Modernised (80-100)</span>
+                    <span className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm font-bold">In Transition (50-79)</span>
+                    <span className="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-bold">Legacy-Heavy (0-49)</span>
                 </div>
             </div>
         </section>
@@ -192,6 +172,7 @@ const MarketingSections = () => {
             <BentoGrid />
             <FeaturesGrid />
             <DataSources />
+            <ClubScoringExplainer />
             <CTA />
         </>
     );
