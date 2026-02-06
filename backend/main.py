@@ -1,5 +1,5 @@
 # ClearSlot Backend Service
-# CI/CD Trigger v9 (Fixed Log Permissions)
+# CI/CD Trigger v10 (Nuclear Artifact Permissions)
 
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
