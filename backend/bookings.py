@@ -20,7 +20,7 @@ class BookingResponse(BookingRequest):
     id: str
     status: str # 'confirmed', 'cancelled'
 
-from integrations.calendar_sync import sync_booking_to_calendar, delete_booking_from_calendar
+from backend.integrations.calendar_sync import sync_booking_to_calendar, delete_booking_from_calendar
 
 # --- In-Memory Mock Database ---
 mock_bookings_db = []

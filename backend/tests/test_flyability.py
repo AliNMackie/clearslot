@@ -1,6 +1,6 @@
 import pytest
-from flyability import (
-    compute_flyability,
+from backend.flyability import compute_flyability
+from backend.schemas import (
     WeatherForecast,
     PilotProfile,
     AircraftProfile,

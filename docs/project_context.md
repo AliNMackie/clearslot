@@ -4,6 +4,7 @@
 
 *   **Platform:** Decision-support "flight day planner" and Club Portal for UK microlight/GA clubs.
 *   **Stack:** React (Netlify) + Python/FastAPI (Cloud Run) + Firestore/Mock DB.
+*   **GCP Project ID:** `clearslot-486319`
 *   **Core Concept:** **Decision Support, NOT Auto-Dispatch.** The system calculates "Flyability" (GO/CHECK/NO_GO) but the human pilot/instructor *always* makes the final call.
 
 ## Club Portal v1 Direction

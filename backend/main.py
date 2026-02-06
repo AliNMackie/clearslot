@@ -4,17 +4,17 @@ import httpx
 import os
 from pydantic import BaseModel
 from typing import List, Optional
-from legality import is_slot_legal
-from flyability import (
-    compute_flyability,
+from backend.legality import is_slot_legal
+from backend.flyability import compute_flyability
+from backend.schemas import (
     WeatherForecast,
     PilotProfile,
     AircraftProfile,
     SurfaceCondition,
     FlyabilityResponse
 )
-from bookings import router as bookings_router
-from analytics.scoring import compute_club_operational_score, ClubMetrics
+from backend.bookings import router as bookings_router
+from backend.analytics.scoring import compute_club_operational_score, ClubMetrics
 
 app = FastAPI(
     title="ClearSlot Backend",
@@ -29,7 +29,7 @@ class LogbookEntry(BaseModel):
     to_landings: int
     instruction: float
 
-class PilotProfile(BaseModel):
+class LegalityPilotProfile(BaseModel):
     licence_type: str
     ratings: List[str]
     total_hours: float
@@ -40,7 +40,7 @@ class PilotProfile(BaseModel):
     logbook: List[LogbookEntry]
 
 class LegalityRequest(BaseModel):
-    pilot: PilotProfile
+    pilot: LegalityPilotProfile
     aircraft: str = "C42"
     date: Optional[str] = None
 
@@ -187,19 +187,32 @@ async def check_legality(request: LegalityRequest):
     result = is_slot_legal(pilot_dict, request.aircraft, request.date)
     return result
 
-class FlyabilityRequest(BaseModel):
-    forecast: WeatherForecast
+from datetime import datetime
+from backend.integrations.weather import get_forecast
+
+class FlyabilityContextRequest(BaseModel):
+    site_id: str
+    time: Optional[datetime] = None
     pilot: PilotProfile
     aircraft: AircraftProfile
-    runway_surface: SurfaceCondition
+    runway_surface: SurfaceCondition = SurfaceCondition.DRY
 
 @app.post("/api/v1/flyability/check")
-async def check_flyability_endpoint(request: FlyabilityRequest):
+async def check_flyability_endpoint(request: FlyabilityContextRequest):
     """
     Check if conditions are safe for a flight.
+    Backend fetches weather for the given site_id (using Mock mode for now).
     """
+    # Default to now if no time provided
+    t0 = request.time or datetime.now()
+    
+    # 1. Fetch Weather (Mock)
+    # TODO: Pass mock=False in production or based on config
+    forecast = get_forecast(request.site_id, t0, t0, mock=True)
+    
+    # 2. Compute Match
     return compute_flyability(
-        forecast=request.forecast,
+        forecast=forecast,
         pilot=request.pilot,
         aircraft=request.aircraft,
         runway_surface=request.runway_surface
