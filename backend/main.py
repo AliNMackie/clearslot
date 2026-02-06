@@ -1,5 +1,5 @@
 # ClearSlot Backend Service
-# CI/CD Trigger v2
+# CI/CD Trigger v3 (Fixed Secret)
 
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
