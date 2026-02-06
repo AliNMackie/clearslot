@@ -1,5 +1,5 @@
 # ClearSlot Backend Service
-# CI/CD Trigger v5
+# CI/CD Trigger v6 (Added serviceUsageConsumer)
 
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
