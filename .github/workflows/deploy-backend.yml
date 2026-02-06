@@ -15,21 +15,20 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: 'read'
-      id-token: 'write'
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Verify Backend Structure (Critical Step based on our Dockerfile needs)
       - name: Verify Backend Structure
         run: |
           if [ ! -f "backend/requirements.txt" ]; then
             echo "::error::backend/requirements.txt not found!"
             exit 1
           fi
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
 
       - name: Decode GCP Key
         run: echo "${{ secrets.GCP_SA_KEY_B64 }}" | base64 -d > gcp-key.json
@@ -40,15 +39,16 @@ jobs:
           gcloud config set project ${{ env.PROJECT_ID }}
 
       - name: Deploy to Cloud Run
-        uses: google-github-actions/deploy-cloudrun@v2
-        with:
-          service: ${{ env.SERVICE_NAME }}
-          region: ${{ env.REGION }}
-          source: ./backend
-          env_vars: |
-            PYTHONPATH=/app
-            GCP_PROJECT_ID=${{ env.PROJECT_ID }}
-          flags: '--allow-unauthenticated'
+        run: |
+          gcloud run deploy ${{ env.SERVICE_NAME }} \
+            --source ./backend \
+            --region ${{ env.REGION }} \
+            --allow-unauthenticated \
+            --set-env-vars PYTHONPATH=/app,GCP_PROJECT_ID=${{ env.PROJECT_ID }} \
+            --quiet
 
-      - name: Show Output
-        run: echo ${{ steps.deploy.outputs.url }}
+      - name: Show Service URL
+        run: |
+          gcloud run services describe ${{ env.SERVICE_NAME }} \
+            --region ${{ env.REGION }} \
+            --format='value(status.url)'
