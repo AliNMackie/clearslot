@@ -1,7 +1,11 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel
 from typing import List, Optional
 from datetime import datetime
+
+from backend.auth import verify_token
+from backend.db import get_db
+from backend.integrations.calendar_sync import sync_booking_to_calendar, delete_booking_from_calendar
 
 router = APIRouter(prefix="/api/bookings", tags=["bookings"])
 
@@ -13,57 +17,125 @@ class BookingRequest(BaseModel):
     instructor_id: Optional[str] = None
     start_time: datetime
     end_time: datetime
-    pilot_id: str
     notes: Optional[str] = None
+    # pilot_id is derived from auth token — not sent by client
 
-class BookingResponse(BookingRequest):
+class BookingResponse(BaseModel):
     id: str
-    status: str # 'confirmed', 'cancelled'
-
-from backend.integrations.calendar_sync import sync_booking_to_calendar, delete_booking_from_calendar
-
-# --- In-Memory Mock Database ---
-mock_bookings_db = []
+    club_slug: str
+    aircraft_reg: str
+    pilot_uid: str
+    instructor_id: Optional[str] = None
+    start_time: datetime
+    end_time: datetime
+    notes: Optional[str] = None
+    status: str  # 'confirmed', 'cancelled'
 
 # --- Endpoints ---
 
 @router.get("/{club_slug}", response_model=List[BookingResponse])
 async def list_bookings(club_slug: str):
     """
-    List all bookings for a specific club.
+    List all confirmed bookings for a specific club.
+    Public endpoint — no auth required (so the calendar grid can load).
     """
-    return [b for b in mock_bookings_db if b.club_slug == club_slug]
+    db = get_db()
+    docs = (
+        db.collection("bookings")
+        .where("club_slug", "==", club_slug)
+        .where("status", "==", "confirmed")
+        .order_by("start_time")
+        .stream()
+    )
+    results = []
+    for doc in docs:
+        data = doc.to_dict()
+        # Firestore timestamps → Python datetime
+        if hasattr(data.get("start_time"), "isoformat"):
+            pass  # already datetime-compatible
+        results.append(BookingResponse(id=doc.id, **data))
+    return results
+
 
 @router.post("/", response_model=BookingResponse)
-async def create_booking(booking: BookingRequest):
+async def create_booking(booking: BookingRequest, user: dict = Depends(verify_token)):
     """
-    Create a new booking.
+    Create a new booking. Requires authentication.
+    Checks for overlapping bookings on the same aircraft.
     Triggers Google Calendar Sync (Stub).
     """
-    # 1. Validation (Overlaps, Flyability check would happen here or in frontend)
-    
-    # 2. Persist
-    new_booking = BookingResponse(
-        **booking.dict(),
-        id=f"bk_{len(mock_bookings_db) + 1}",
-        status="confirmed"
+    db = get_db()
+
+    # 1. Overlap check — same aircraft, overlapping time, confirmed
+    existing = (
+        db.collection("bookings")
+        .where("aircraft_reg", "==", booking.aircraft_reg)
+        .where("status", "==", "confirmed")
+        .where("start_time", "<", booking.end_time)
+        .stream()
     )
-    mock_bookings_db.append(new_booking)
-    
-    # 3. Sync to Google Calendar
-    await sync_booking_to_calendar(new_booking.dict(), "primary")
-    
-    return new_booking
+    for doc in existing:
+        data = doc.to_dict()
+        existing_end = data.get("end_time")
+        if existing_end and existing_end > booking.start_time:
+            raise HTTPException(
+                status_code=409,
+                detail=f"Aircraft {booking.aircraft_reg} is already booked for an overlapping time slot."
+            )
+
+    # 2. Persist to Firestore
+    booking_data = {
+        **booking.model_dump(),
+        "pilot_uid": user["uid"],
+        "status": "confirmed",
+        "created_at": datetime.utcnow(),
+    }
+    _, doc_ref = db.collection("bookings").add(booking_data)
+
+    # 3. Build response (exclude internal fields)
+    response_data = BookingResponse(id=doc_ref.id, **{
+        k: v for k, v in booking_data.items() if k != "created_at"
+    })
+
+    # 4. Sync to Google Calendar (stub — fire-and-forget, never block booking)
+    try:
+        from backend.logger import log_event
+        log_event("booking_created", {"booking_id": doc_ref.id, "club": booking.club_slug, "aircraft": booking.aircraft_reg, "pilot": user["uid"]})
+        await sync_booking_to_calendar(response_data.model_dump(), "primary")
+    except Exception as e:
+        print(f"⚠️ Calendar sync failed (non-blocking): {e}")
+
+    return response_data
+
 
 @router.put("/{booking_id}/cancel")
-async def cancel_booking(booking_id: str):
+async def cancel_booking(booking_id: str, user: dict = Depends(verify_token)):
     """
-    Cancel an existing booking.
+    Cancel an existing booking. Requires authentication.
+    Only the booking owner or a club admin can cancel.
     """
-    for b in mock_bookings_db:
-        if b.id == booking_id:
-            b.status = "cancelled"
-            await delete_booking_from_calendar(b.id, "primary")
-            return {"status": "success", "message": "Booking cancelled"}
+    db = get_db()
+    doc_ref = db.collection("bookings").document(booking_id)
+    doc = doc_ref.get()
+
+    if not doc.exists:
+        raise HTTPException(status_code=404, detail="Booking not found")
+
+    booking_data = doc.to_dict()
+
+    # Only the pilot who made the booking can cancel it
+    # (TODO: also allow club admins once roles are implemented in T09)
+    if booking_data.get("pilot_uid") != user["uid"]:
+        raise HTTPException(status_code=403, detail="You can only cancel your own bookings")
+
+    doc_ref.update({"status": "cancelled"})
     
-    raise HTTPException(status_code=404, detail="Booking not found")
+    from backend.logger import log_event
+    log_event("booking_cancelled", {"booking_id": booking_id, "pilot": user["uid"]})
+
+    try:
+        await delete_booking_from_calendar(booking_id, "primary")
+    except Exception as e:
+        print(f"⚠️ Calendar delete failed (non-blocking): {e}")
+
+    return {"status": "success", "message": "Booking cancelled"}

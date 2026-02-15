@@ -1,0 +1,375 @@
+[1A[2K[2m[WebServer] [22mError: The following dependencies are imported but could not be resolved:
+[2m[WebServer] [22m
+[2m[WebServer] [22m  [36mfirebase/auth[39m [37m[2m(imported by C:/Users/Alastair Mackie/.gemini/antigravity/scratch/clearslot-space/src/config/firebase.js)[22m[39m
+[2m[WebServer] [22m  [36mfirebase/app[39m [37m[2m(imported by C:/Users/Alastair Mackie/.gemini/antigravity/scratch/clearslot-space/src/config/firebase.js)[22m[39m
+[2m[WebServer] [22m
+[2m[WebServer] [22mAre they installed?
+[2m[WebServer] [22m    at file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:50669:15
+[2m[WebServer] [22m    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+[2m[WebServer] [22m    at async file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:50174:26
+
+
+Running 6 tests using 6 workers
+
+[1A[2K[1/6] [chromium] › e2e\admin.spec.js:7:10 › Admin Workflows › admin can post news
+[1A[2K[2m[WebServer] [22m[2m22:37:43[22m [31m[1m[vite][22m[39m Pre-transform error: Failed to resolve import "firebase/app" from "src/config/firebase.js". Does the file exist?
+
+[1A[2K[2m[WebServer] [22m[2m22:37:43[22m [31m[1m[vite][22m[39m Pre-transform error: Failed to resolve import "firebase/auth" from "src/components/AuthProvider.jsx". Does the file exist?
+
+[1A[2K[2m[WebServer] [22m[2m22:37:43[22m [31m[1m[vite][22m[39m Pre-transform error: Failed to resolve import "firebase/auth" from "src/pages/LoginPage.jsx". Does the file exist?
+
+[1A[2K[2m[WebServer] [22m[2m22:37:43[22m [31m[1m[vite][22m[39m Pre-transform error: Failed to resolve import "firebase/app" from "src/config/firebase.js". Does the file exist?
+
+[1A[2K[2m[WebServer] [22m[2m22:37:43[22m [31m[1m[vite][22m[39m Pre-transform error: Failed to resolve import "firebase/app" from "src/config/firebase.js". Does the file exist?
+
+[1A[2K[2/6] [chromium] › e2e\public.spec.js:27:5 › Public Club Page › handles unknown club gracefully
+[1A[2K[3/6] [chromium] › e2e\auth.spec.js:12:5 › Authentication Flow › login page loads correctly
+[1A[2K[4/6] [chromium] › e2e\auth.spec.js:4:5 › Authentication Flow › redirects unauthenticated user from protected route
+[1A[2K[5/6] [chromium] › e2e\admin.spec.js:33:5 › Admin Workflows › unauthorized user cannot access admin portal
+[1A[2K[2m[WebServer] [22m[2m22:37:44[22m [31m[1m[vite][22m[39m Pre-transform error: Failed to resolve import "firebase/auth" from "src/components/AuthProvider.jsx". Does the file exist?
+
+[1A[2K[6/6] [chromium] › e2e\public.spec.js:4:5 › Public Club Page › loads club branding and public elements
+[1A[2K[2m[WebServer] [22m[2m22:37:44[22m [31m[1m[vite][22m[39m Pre-transform error: Failed to resolve import "firebase/app" from "src/config/firebase.js". Does the file exist?
+
+[1A[2K[2m[WebServer] [22m[2m22:37:44[22m [31m[1m[vite][22m[39m [31mInternal server error: Failed to resolve import "firebase/auth" from "src/components/AuthProvider.jsx". Does the file exist?[39m
+[2m[WebServer] [22m  Plugin: [35mvite:import-analysis[39m
+[2m[WebServer] [22m  File: [36mC:/Users/Alastair Mackie/.gemini/antigravity/scratch/clearslot-space/src/components/AuthProvider.jsx[39m:2:44
+[2m[WebServer] [22m[33m  17 |  var _s = $RefreshSig$(), _s2 = $RefreshSig$();
+[2m[WebServer] [22m  18 |  import React, { createContext, useContext, useState, useEffect } from "react";
+[2m[WebServer] [22m  19 |  import { onAuthStateChanged, signOut } from "firebase/auth";
+[2m[WebServer] [22m     |                                               ^
+[2m[WebServer] [22m  20 |  import { auth } from "../config/firebase";
+[2m[WebServer] [22m  21 |  import { config } from "../config/env";[39m
+[2m[WebServer] [22m      at TransformPluginContext._formatError (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49258:41)
+[2m[WebServer] [22m      at TransformPluginContext.error (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49253:16)
+[2m[WebServer] [22m      at normalizeUrl (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:23)
+[2m[WebServer] [22m      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+[2m[WebServer] [22m      at async file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64439:39
+[2m[WebServer] [22m      at async Promise.all (index 4)
+[2m[WebServer] [22m      at async TransformPluginContext.transform (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64366:7)
+[2m[WebServer] [22m      at async PluginContainer.transform (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49099:18)
+[2m[WebServer] [22m      at async loadAndTransform (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51978:27)
+
+[1A[2K[2m[WebServer] [22m[2m22:37:44[22m [31m[1m[vite][22m[39m [31mInternal server error: Failed to resolve import "firebase/auth" from "src/components/AuthProvider.jsx". Does the file exist?[39m
+[2m[WebServer] [22m  Plugin: [35mvite:import-analysis[39m
+[2m[WebServer] [22m  File: [36mC:/Users/Alastair Mackie/.gemini/antigravity/scratch/clearslot-space/src/components/AuthProvider.jsx[39m:2:44
+[2m[WebServer] [22m[33m  17 |  var _s = $RefreshSig$(), _s2 = $RefreshSig$();
+[2m[WebServer] [22m  18 |  import React, { createContext, useContext, useState, useEffect } from "react";
+[2m[WebServer] [22m  19 |  import { onAuthStateChanged, signOut } from "firebase/auth";
+[2m[WebServer] [22m     |                                               ^
+[2m[WebServer] [22m  20 |  import { auth } from "../config/firebase";
+[2m[WebServer] [22m  21 |  import { config } from "../config/env";[39m
+[2m[WebServer] [22m      at TransformPluginContext._formatError (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49258:41)
+[2m[WebServer] [22m      at TransformPluginContext.error (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49253:16)
+[2m[WebServer] [22m      at normalizeUrl (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:23)
+[2m[WebServer] [22m      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+[2m[WebServer] [22m      at async file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64439:39
+[2m[WebServer] [22m      at async Promise.all (index 4)
+[2m[WebServer] [22m      at async TransformPluginContext.transform (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64366:7)
+[2m[WebServer] [22m      at async PluginContainer.transform (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49099:18)
+[2m[WebServer] [22m      at async loadAndTransform (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51978:27)
+
+[1A[2K[2m[WebServer] [22m[2m22:37:44[22m [31m[1m[vite][22m[39m [31mInternal server error: Failed to resolve import "firebase/auth" from "src/pages/LoginPage.jsx". Does the file exist?[39m
+[2m[WebServer] [22m  Plugin: [35mvite:import-analysis[39m
+[2m[WebServer] [22m  File: [36mC:/Users/Alastair Mackie/.gemini/antigravity/scratch/clearslot-space/src/pages/LoginPage.jsx[39m:2:75
+[2m[WebServer] [22m[33m  17 |  var _s = $RefreshSig$();
+[2m[WebServer] [22m  18 |  import React, { useState } from "react";
+[2m[WebServer] [22m  19 |  import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+[2m[WebServer] [22m     |                                                                              ^
+[2m[WebServer] [22m  20 |  import { auth } from "../config/firebase";
+[2m[WebServer] [22m  21 |  import { useNavigate, useSearchParams } from "react-router-dom";[39m
+[2m[WebServer] [22m      at TransformPluginContext._formatError (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49258:41)
+[2m[WebServer] [22m      at TransformPluginContext.error (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49253:16)
+[2m[WebServer] [22m      at normalizeUrl (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:23)
+[2m[WebServer] [22m      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+[2m[WebServer] [22m      at async file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64439:39
+[2m[WebServer] [22m      at async Promise.all (index 4)
+[2m[WebServer] [22m      at async TransformPluginContext.transform (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64366:7)
+[2m[WebServer] [22m      at async PluginContainer.transform (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49099:18)
+[2m[WebServer] [22m      at async loadAndTransform (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51978:27)
+
+[1A[2K[2m[WebServer] [22m[2m22:37:44[22m [31m[1m[vite][22m[39m [31mInternal server error: Failed to resolve import "firebase/auth" from "src/pages/LoginPage.jsx". Does the file exist?[39m
+[2m[WebServer] [22m  Plugin: [35mvite:import-analysis[39m
+[2m[WebServer] [22m  File: [36mC:/Users/Alastair Mackie/.gemini/antigravity/scratch/clearslot-space/src/pages/LoginPage.jsx[39m:2:75
+[2m[WebServer] [22m[33m  17 |  var _s = $RefreshSig$();
+[2m[WebServer] [22m  18 |  import React, { useState } from "react";
+[2m[WebServer] [22m  19 |  import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+[2m[WebServer] [22m     |                                                                              ^
+[2m[WebServer] [22m  20 |  import { auth } from "../config/firebase";
+[2m[WebServer] [22m  21 |  import { useNavigate, useSearchParams } from "react-router-dom";[39m
+[2m[WebServer] [22m      at TransformPluginContext._formatError (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49258:41)
+[2m[WebServer] [22m      at TransformPluginContext.error (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49253:16)
+[2m[WebServer] [22m      at normalizeUrl (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:23)
+[2m[WebServer] [22m      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+[2m[WebServer] [22m      at async file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64439:39
+[2m[WebServer] [22m      at async Promise.all (index 4)
+[2m[WebServer] [22m      at async TransformPluginContext.transform (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64366:7)
+[2m[WebServer] [22m      at async PluginContainer.transform (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49099:18)
+[2m[WebServer] [22m      at async loadAndTransform (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51978:27)
+
+[1A[2K[2m[WebServer] [22m[2m22:37:44[22m [31m[1m[vite][22m[39m Pre-transform error: Failed to resolve import "firebase/app" from "src/config/firebase.js". Does the file exist?
+
+[1A[2K[2m[WebServer] [22m[2m22:37:44[22m [31m[1m[vite][22m[39m Pre-transform error: Failed to resolve import "firebase/app" from "src/config/firebase.js". Does the file exist?
+
+[1A[2K[2m[WebServer] [22m[2m22:37:45[22m [31m[1m[vite][22m[39m [31mInternal server error: Failed to resolve import "firebase/auth" from "src/components/AuthProvider.jsx". Does the file exist?[39m
+[2m[WebServer] [22m  Plugin: [35mvite:import-analysis[39m
+[2m[WebServer] [22m  File: [36mC:/Users/Alastair Mackie/.gemini/antigravity/scratch/clearslot-space/src/components/AuthProvider.jsx[39m:2:44
+[2m[WebServer] [22m[33m  17 |  var _s = $RefreshSig$(), _s2 = $RefreshSig$();
+[2m[WebServer] [22m  18 |  import React, { createContext, useContext, useState, useEffect } from "react";
+[2m[WebServer] [22m  19 |  import { onAuthStateChanged, signOut } from "firebase/auth";
+[2m[WebServer] [22m     |                                               ^
+[2m[WebServer] [22m  20 |  import { auth } from "../config/firebase";
+[2m[WebServer] [22m  21 |  import { config } from "../config/env";[39m
+[2m[WebServer] [22m      at TransformPluginContext._formatError (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49258:41)
+[2m[WebServer] [22m      at TransformPluginContext.error (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49253:16)
+[2m[WebServer] [22m      at normalizeUrl (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:23)
+[2m[WebServer] [22m      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+[2m[WebServer] [22m      at async file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64439:39
+[2m[WebServer] [22m      at async Promise.all (index 4)
+[2m[WebServer] [22m      at async TransformPluginContext.transform (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64366:7)
+[2m[WebServer] [22m      at async PluginContainer.transform (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49099:18)
+[2m[WebServer] [22m      at async loadAndTransform (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51978:27)
+[2m[WebServer] [22m      at async viteTransformMiddleware (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:62106:24)
+
+[1A[2K[2m[WebServer] [22m[2m22:37:45[22m [31m[1m[vite][22m[39m Pre-transform error: Failed to resolve import "firebase/app" from "src/config/firebase.js". Does the file exist?
+
+[1A[2K[2m[WebServer] [22m[2m22:37:45[22m [31m[1m[vite][22m[39m [31mInternal server error: Failed to resolve import "firebase/auth" from "src/pages/LoginPage.jsx". Does the file exist?[39m
+[2m[WebServer] [22m  Plugin: [35mvite:import-analysis[39m
+[2m[WebServer] [22m  File: [36mC:/Users/Alastair Mackie/.gemini/antigravity/scratch/clearslot-space/src/pages/LoginPage.jsx[39m:2:75
+[2m[WebServer] [22m[33m  17 |  var _s = $RefreshSig$();
+[2m[WebServer] [22m  18 |  import React, { useState } from "react";
+[2m[WebServer] [22m  19 |  import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+[2m[WebServer] [22m     |                                                                              ^
+[2m[WebServer] [22m  20 |  import { auth } from "../config/firebase";
+[2m[WebServer] [22m  21 |  import { useNavigate, useSearchParams } from "react-router-dom";[39m
+[2m[WebServer] [22m      at TransformPluginContext._formatError (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49258:41)
+[2m[WebServer] [22m      at TransformPluginContext.error (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49253:16)
+[2m[WebServer] [22m      at normalizeUrl (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:23)
+[2m[WebServer] [22m      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+[2m[WebServer] [22m      at async file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64439:39
+[2m[WebServer] [22m      at async Promise.all (index 4)
+[2m[WebServer] [22m      at async TransformPluginContext.transform (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64366:7)
+[2m[WebServer] [22m      at async PluginContainer.transform (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49099:18)
+[2m[WebServer] [22m      at async loadAndTransform (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51978:27)
+[2m[WebServer] [22m      at async viteTransformMiddleware (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:62106:24)
+
+[1A[2K[2m[WebServer] [22m[2m22:37:45[22m [31m[1m[vite][22m[39m Pre-transform error: Failed to resolve import "firebase/app" from "src/config/firebase.js". Does the file exist?
+
+[1A[2K[2m[WebServer] [22m[2m22:37:45[22m [31m[1m[vite][22m[39m [31mInternal server error: Failed to resolve import "firebase/auth" from "src/components/AuthProvider.jsx". Does the file exist?[39m
+[2m[WebServer] [22m  Plugin: [35mvite:import-analysis[39m
+[2m[WebServer] [22m  File: [36mC:/Users/Alastair Mackie/.gemini/antigravity/scratch/clearslot-space/src/components/AuthProvider.jsx[39m:2:44
+[2m[WebServer] [22m[33m  17 |  var _s = $RefreshSig$(), _s2 = $RefreshSig$();
+[2m[WebServer] [22m  18 |  import React, { createContext, useContext, useState, useEffect } from "react";
+[2m[WebServer] [22m  19 |  import { onAuthStateChanged, signOut } from "firebase/auth";
+[2m[WebServer] [22m     |                                               ^
+[2m[WebServer] [22m  20 |  import { auth } from "../config/firebase";
+[2m[WebServer] [22m  21 |  import { config } from "../config/env";[39m
+[2m[WebServer] [22m      at TransformPluginContext._formatError (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49258:41)
+[2m[WebServer] [22m      at TransformPluginContext.error (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49253:16)
+[2m[WebServer] [22m      at normalizeUrl (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:23)
+[2m[WebServer] [22m      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+[2m[WebServer] [22m      at async file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64439:39
+[2m[WebServer] [22m      at async Promise.all (index 4)
+[2m[WebServer] [22m      at async TransformPluginContext.transform (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64366:7)
+[2m[WebServer] [22m      at async PluginContainer.transform (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49099:18)
+[2m[WebServer] [22m      at async loadAndTransform (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51978:27)
+[2m[WebServer] [22m      at async viteTransformMiddleware (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:62106:24)
+
+[1A[2K[2m[WebServer] [22m[2m22:37:45[22m [31m[1m[vite][22m[39m [31mInternal server error: Failed to resolve import "firebase/auth" from "src/pages/LoginPage.jsx". Does the file exist?[39m
+[2m[WebServer] [22m  Plugin: [35mvite:import-analysis[39m
+[2m[WebServer] [22m  File: [36mC:/Users/Alastair Mackie/.gemini/antigravity/scratch/clearslot-space/src/pages/LoginPage.jsx[39m:2:75
+[2m[WebServer] [22m[33m  17 |  var _s = $RefreshSig$();
+[2m[WebServer] [22m  18 |  import React, { useState } from "react";
+[2m[WebServer] [22m  19 |  import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+[2m[WebServer] [22m     |                                                                              ^
+[2m[WebServer] [22m  20 |  import { auth } from "../config/firebase";
+[2m[WebServer] [22m  21 |  import { useNavigate, useSearchParams } from "react-router-dom";[39m
+[2m[WebServer] [22m      at TransformPluginContext._formatError (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49258:41)
+[2m[WebServer] [22m      at TransformPluginContext.error (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49253:16)
+[2m[WebServer] [22m      at normalizeUrl (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:23)
+[2m[WebServer] [22m      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+[2m[WebServer] [22m      at async file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64439:39
+[2m[WebServer] [22m      at async Promise.all (index 4)
+[2m[WebServer] [22m      at async TransformPluginContext.transform (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64366:7)
+[2m[WebServer] [22m      at async PluginContainer.transform (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49099:18)
+[2m[WebServer] [22m      at async loadAndTransform (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51978:27)
+[2m[WebServer] [22m      at async viteTransformMiddleware (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:62106:24)
+
+[1A[2K[2m[WebServer] [22m[2m22:37:45[22m [31m[1m[vite][22m[39m Pre-transform error: Failed to resolve import "firebase/app" from "src/config/firebase.js". Does the file exist?
+
+[1A[2K[2m[WebServer] [22m[2m22:37:45[22m [31m[1m[vite][22m[39m Pre-transform error: Failed to resolve import "firebase/app" from "src/config/firebase.js". Does the file exist?
+
+[1A[2K[2m[WebServer] [22m[2m22:37:46[22m [31m[1m[vite][22m[39m [31mInternal server error: Failed to resolve import "firebase/auth" from "src/components/AuthProvider.jsx". Does the file exist?[39m
+[2m[WebServer] [22m  Plugin: [35mvite:import-analysis[39m
+[2m[WebServer] [22m  File: [36mC:/Users/Alastair Mackie/.gemini/antigravity/scratch/clearslot-space/src/components/AuthProvider.jsx[39m:2:44
+[2m[WebServer] [22m[33m  17 |  var _s = $RefreshSig$(), _s2 = $RefreshSig$();
+[2m[WebServer] [22m  18 |  import React, { createContext, useContext, useState, useEffect } from "react";
+[2m[WebServer] [22m  19 |  import { onAuthStateChanged, signOut } from "firebase/auth";
+[2m[WebServer] [22m     |                                               ^
+[2m[WebServer] [22m  20 |  import { auth } from "../config/firebase";
+[2m[WebServer] [22m  21 |  import { config } from "../config/env";[39m
+[2m[WebServer] [22m      at TransformPluginContext._formatError (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49258:41)
+[2m[WebServer] [22m      at TransformPluginContext.error (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49253:16)
+[2m[WebServer] [22m      at normalizeUrl (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:23)
+[2m[WebServer] [22m      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+[2m[WebServer] [22m      at async file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64439:39
+[2m[WebServer] [22m      at async Promise.all (index 4)
+[2m[WebServer] [22m      at async TransformPluginContext.transform (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64366:7)
+[2m[WebServer] [22m      at async PluginContainer.transform (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49099:18)
+[2m[WebServer] [22m      at async loadAndTransform (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51978:27)
+[2m[WebServer] [22m      at async viteTransformMiddleware (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:62106:24)
+
+[1A[2K[2m[WebServer] [22m[2m22:37:46[22m [31m[1m[vite][22m[39m [31mInternal server error: Failed to resolve import "firebase/auth" from "src/pages/LoginPage.jsx". Does the file exist?[39m
+[2m[WebServer] [22m  Plugin: [35mvite:import-analysis[39m
+[2m[WebServer] [22m  File: [36mC:/Users/Alastair Mackie/.gemini/antigravity/scratch/clearslot-space/src/pages/LoginPage.jsx[39m:2:75
+[2m[WebServer] [22m[33m  17 |  var _s = $RefreshSig$();
+[2m[WebServer] [22m  18 |  import React, { useState } from "react";
+[2m[WebServer] [22m  19 |  import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+[2m[WebServer] [22m     |                                                                              ^
+[2m[WebServer] [22m  20 |  import { auth } from "../config/firebase";
+[2m[WebServer] [22m  21 |  import { useNavigate, useSearchParams } from "react-router-dom";[39m
+[2m[WebServer] [22m      at TransformPluginContext._formatError (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49258:41)
+[2m[WebServer] [22m      at TransformPluginContext.error (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49253:16)
+[2m[WebServer] [22m      at normalizeUrl (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:23)
+[2m[WebServer] [22m      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+[2m[WebServer] [22m      at async file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64439:39
+[2m[WebServer] [22m      at async Promise.all (index 4)
+[2m[WebServer] [22m      at async TransformPluginContext.transform (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64366:7)
+[2m[WebServer] [22m      at async PluginContainer.transform (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49099:18)
+[2m[WebServer] [22m      at async loadAndTransform (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51978:27)
+[2m[WebServer] [22m      at async viteTransformMiddleware (file:///C:/Users/Alastair%20Mackie/.gemini/antigravity/scratch/clearslot-space/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:62106:24)
+
+[1A[2K[2m[WebServer] [22m[2m22:37:46[22m [31m[1m[vite][22m[39m Pre-transform error: Failed to resolve import "firebase/app" from "src/config/firebase.js". Does the file exist?
+[2m[WebServer] [22m[2m22:37:46[22m [31m[1m[vite][22m[39m Pre-transform error: Failed to resolve import "firebase/app" from "src/config/firebase.js". Does the file exist?
+
+[1A[2K  1) [chromium] › e2e\auth.spec.js:4:5 › Authentication Flow › redirects unauthenticated user from protected route 
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected pattern: [32m/\/login/[39m
+    Received string:  [31m"http://localhost:5173/clubs/strathaven/app"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 5000ms[22m
+    [2m    9 × unexpected value "http://localhost:5173/clubs/strathaven/app"[22m
+
+
+       6 |
+       7 |         // Should be redirected to /login?redirect=...
+    >  8 |         await expect(page).toHaveURL(/\/login/);
+         |                            ^
+       9 |         await expect(page.getByRole('heading', { name: 'Member Login' })).toBeVisible(); // Adjust selector based on LoginPage implementation
+      10 |     });
+      11 |
+        at C:\Users\Alastair Mackie\.gemini\antigravity\scratch\clearslot-space\e2e\auth.spec.js:8:28
+
+
+[1A[2K  2) [chromium] › e2e\admin.spec.js:33:5 › Admin Workflows › unauthorized user cannot access admin portal 
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected pattern: [32m/\/login/[39m
+    Received string:  [31m"http://localhost:5173/clubs/strathaven/admin"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 5000ms[22m
+    [2m    8 × unexpected value "http://localhost:5173/clubs/strathaven/admin"[22m
+
+
+      35 |         await page.goto('/clubs/strathaven/admin');
+      36 |         // Should redirect to login
+    > 37 |         await expect(page).toHaveURL(/\/login/);
+         |                            ^
+      38 |     });
+      39 | });
+      40 |
+        at C:\Users\Alastair Mackie\.gemini\antigravity\scratch\clearslot-space\e2e\admin.spec.js:37:28
+
+    Error Context: test-results\admin-Admin-Workflows-unau-398b2--cannot-access-admin-portal-chromium\error-context.md
+
+
+[1A[2K  3) [chromium] › e2e\auth.spec.js:12:5 › Authentication Flow › login page loads correctly ─────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByPlaceholder('Email')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByPlaceholder('Email')[22m
+
+
+      12 |     test('login page loads correctly', async ({ page }) => {
+      13 |         await page.goto('/login');
+    > 14 |         await expect(page.getByPlaceholder('Email', { exact: false })).toBeVisible();
+         |                                                                        ^
+      15 |         await expect(page.getByPlaceholder('Password', { exact: false })).toBeVisible();
+      16 |         await expect(page.getByRole('button', { name: 'Sign In' })).toBeVisible();
+      17 |     });
+        at C:\Users\Alastair Mackie\.gemini\antigravity\scratch\clearslot-space\e2e\auth.spec.js:14:72
+
+
+[1A[2K  4) [chromium] › e2e\public.spec.js:4:5 › Public Club Page › loads club branding and public elements 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('h1')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('h1')[22m
+
+
+       7 |
+       8 |         // Check title/branding
+    >  9 |         await expect(page.locator('h1')).toBeVisible();
+         |                                          ^
+      10 |         await expect(page.getByText('Strathaven Airfield')).toBeVisible(); // Assumes seed data or default fallback
+      11 |
+      12 |         // Check Weather Widget presence (using text "Flyability" or similar)
+        at C:\Users\Alastair Mackie\.gemini\antigravity\scratch\clearslot-space\e2e\public.spec.js:9:42
+
+
+[1A[2K  5) [chromium] › e2e\public.spec.js:27:5 › Public Club Page › handles unknown club gracefully ─────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator:  locator('body')
+    Expected: visible
+    Received: hidden
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('body')[22m
+    [2m    8 × locator resolved to <body>…</body>[22m
+    [2m      - unexpected value "hidden"[22m
+
+
+      30 |         // Let's just check it doesn't crash.
+      31 |         await page.goto('/clubs/unknown-club-123');
+    > 32 |         await expect(page.locator('body')).toBeVisible();
+         |                                            ^
+      33 |     });
+      34 | });
+      35 |
+        at C:\Users\Alastair Mackie\.gemini\antigravity\scratch\clearslot-space\e2e\public.spec.js:32:44
+
+
+[1A[2K  5 failed
+    [chromium] › e2e\admin.spec.js:33:5 › Admin Workflows › unauthorized user cannot access admin portal 
+    [chromium] › e2e\auth.spec.js:4:5 › Authentication Flow › redirects unauthenticated user from protected route 
+    [chromium] › e2e\auth.spec.js:12:5 › Authentication Flow › login page loads correctly ──────────
+    [chromium] › e2e\public.spec.js:4:5 › Public Club Page › loads club branding and public elements 
+    [chromium] › e2e\public.spec.js:27:5 › Public Club Page › handles unknown club gracefully ──────
+  1 skipped
+
+[36m  Serving HTML report at http://localhost:9323. Press Ctrl+C to quit.[39m

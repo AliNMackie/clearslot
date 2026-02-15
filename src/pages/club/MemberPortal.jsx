@@ -1,10 +1,30 @@
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import CalendarWeekView from '../../calendar/CalendarWeekView';
+import { useAuth } from '../../components/AuthProvider';
+
+import { apiClient } from '../../services/apiClient';
 
 const MemberPortal = () => {
     const { clubSlug } = useParams();
-    const [siteId, setSiteId] = useState("SAFE_SITE");
+    const [refreshKey, setRefreshKey] = useState(0);
+
+    const handleSlotClick = async (slot) => {
+        if (!window.confirm(`Book flight for ${new Date(slot.start).toLocaleString()}?`)) return;
+
+        try {
+            await apiClient.createBooking({
+                club_slug: clubSlug,
+                aircraft_reg: "G-CILY", // hardcoded default
+                start_time: slot.start,
+                end_time: slot.end
+            });
+            alert("Booking Confirmed! Check your email.");
+            setRefreshKey(prev => prev + 1);
+        } catch (error) {
+            alert(`Booking Failed: ${error.message}`);
+        }
+    };
 
     return (
         <div className="min-h-screen bg-gray-50">
@@ -12,7 +32,11 @@ const MemberPortal = () => {
             <div className="bg-white shadow p-4 flex justify-between items-center">
                 <h1 className="text-xl font-bold text-gray-800">Booking Portal</h1>
                 <div className="space-x-4">
-                    <Link to={`/clubs/${clubSlug}/admin`} className="text-sm font-medium text-gray-600 hover:text-gray-900">Admin</Link>
+                    {isAdmin(clubSlug) && (
+                        <Link to={`/clubs/${clubSlug}/admin`} className="text-sm font-medium text-blue-600 hover:text-blue-800">
+                            Admin Portal
+                        </Link>
+                    )}
                     <button className="text-sm font-medium text-red-600">Logout</button>
                 </div>
             </div>
@@ -45,7 +69,7 @@ const MemberPortal = () => {
 
                 {/* The RAG Calendar */}
                 <div className="bg-white rounded-xl shadow-sm overflow-hidden p-6 border">
-                    <CalendarWeekView siteId={siteId} />
+                    <CalendarWeekView siteId={siteId} onSlotClick={handleSlotClick} refreshKey={refreshKey} />
                 </div>
             </main>
         </div>

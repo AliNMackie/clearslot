@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import OperatorView from './components/OperatorView';
@@ -7,10 +7,41 @@ import CalendarView from './calendar/CalendarView';
 import BriefingView from './components/BriefingView';
 import MarketingSections from './components/MarketingSections';
 
-// New Club Pages
+// Auth
+import { AuthProvider, useAuth } from './components/AuthProvider';
+import ClubProvider from './components/ClubProvider';
+import LoginPage from './pages/LoginPage';
+
+// Club Pages
 import PublicClubPage from './pages/club/PublicClubPage';
 import MemberPortal from './pages/club/MemberPortal';
 import AdminPortal from './pages/club/AdminPortal';
+
+/**
+ * Wraps a route that requires authentication.
+ * If the user is not logged in, redirects to /login with a ?redirect param.
+ */
+const ProtectedRoute = ({ children }) => {
+    const { user, loading } = useAuth();
+    const location = useLocation();
+
+    if (loading) {
+        return (
+            <div style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                height: '100vh', fontFamily: 'var(--font-sans)', color: 'var(--color-navy)',
+            }}>
+                <span style={{ fontSize: '1.2rem', opacity: 0.6 }}>Loading...</span>
+            </div>
+        );
+    }
+
+    if (!user) {
+        return <Navigate to={`/login?redirect=${encodeURIComponent(location.pathname)}`} replace />;
+    }
+
+    return children;
+};
 
 const LandingPage = () => (
     <>
@@ -82,14 +113,31 @@ class ErrorBoundary extends React.Component {
 function App() {
     return (
         <ErrorBoundary>
-            <Router>
-                <Routes>
-                    <Route path="/" element={<LandingPage />} />
-                    <Route path="/clubs/:clubSlug" element={<PublicClubPage />} />
-                    <Route path="/clubs/:clubSlug/app" element={<MemberPortal />} />
-                    <Route path="/clubs/:clubSlug/admin" element={<AdminPortal />} />
-                </Routes>
-            </Router>
+            <AuthProvider>
+                <Router>
+                    <Routes>
+                        <Route path="/" element={<LandingPage />} />
+                        <Route path="/login" element={<LoginPage />} />
+
+                        {/* Club Routes with Branding Context */}
+                        <Route path="/clubs/:clubSlug" element={
+                            <ClubProvider><PublicClubPage /></ClubProvider>
+                        } />
+
+                        {/* Protected club portals — require login */}
+                        <Route path="/clubs/:clubSlug/app" element={
+                            <ProtectedRoute>
+                                <ClubProvider><MemberPortal /></ClubProvider>
+                            </ProtectedRoute>
+                        } />
+                        <Route path="/clubs/:clubSlug/admin" element={
+                            <ProtectedRoute>
+                                <ClubProvider><AdminPortal /></ClubProvider>
+                            </ProtectedRoute>
+                        } />
+                    </Routes>
+                </Router>
+            </AuthProvider>
         </ErrorBoundary>
     );
 }

@@ -1,0 +1,55 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+    
+    function getRole() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role;
+    }
+    
+    function isAdmin() {
+      return isAuthenticated() && (getRole() == 'admin' || getRole() == 'instructor');
+    }
+
+    // User Profiles: Users can read/write their own profile
+    match /users/{userId} {
+      allow read, write: if isOwner(userId);
+    }
+
+    // Clubs: Public read, Admin write (but mostly backend manages club creation)
+    match /clubs/{clubId} {
+      allow read: if true;
+      allow write: if false; // Only backend or super-admin manually
+      
+      // News Subcollection
+      match /news/{newsId} {
+        allow read: if true;
+        allow write: if false; // Using backend API for writes mostly, or if we use client SDK: isAdmin()
+      }
+      
+      // Fleet Subcollection
+      match /fleet/{fleetId} {
+        allow read: if true;
+        allow write: if false; // Backend API managed
+      }
+    }
+    
+    // Bookings: strictly backend access currently (via Admin SDK)
+    match /bookings/{bookingId} {
+        allow read, write: if false;
+    }
+    
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

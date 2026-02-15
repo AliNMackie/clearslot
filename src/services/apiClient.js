@@ -1,28 +1,69 @@
 import { config } from '../config/env';
+import { auth } from '../config/firebase';
 
 /**
  * Service Layer: API Client
- * 
- * Currently serves mock data for local development and Netlify demo.
- * In the future, this will be swapped to fetch data from the GCP Cloud Run endpoints.
- * 
- * TODO: Replace mock returns with fetch(`${config.apiBaseUrl}/...`)
+ *
+ * Connects to the real backend API (Cloud Run or localhost).
+ * Attaches Firebase auth token to requests when the user is logged in.
+ *
+ * Endpoints that don't have a backend route yet keep mock data (getSuggestions, getBriefing).
  */
 
-// MOCK DATA structure kept for reference/fallback
-const MOCK_BOOKINGS = [
-    {
-        id: 1,
-        status: 'green',
-        statusLabel: 'Clear',
-        time: '09:00 - 11:00',
-        pilot: 'Student: J. Smith',
-        asset: 'G-CLER (C152)',
-        type: 'Instruction',
-        instructor: 'Instr. A',
-        reason: 'Wind calm, Vis 10km+'
+// --- Fetch helper with auth ---
+
+async function fetchWithAuth(path, options = {}) {
+    const url = `${config.apiBaseUrl}${path}`;
+    const headers = { 'Content-Type': 'application/json', ...options.headers };
+
+    // Attach Firebase token if user is logged in
+    const user = auth ? auth.currentUser : null;
+    if (user) {
+        try {
+            const token = await user.getIdToken();
+            headers['Authorization'] = `Bearer ${token}`;
+        } catch (e) {
+            console.warn('Could not get auth token:', e);
+        }
     }
-];
+
+    const response = await fetch(url, { ...options, headers });
+
+    if (!response.ok) {
+        const body = await response.text().catch(() => '');
+        throw new Error(`API ${response.status}: ${body || response.statusText}`);
+    }
+
+    return response.json();
+}
+
+// Booking routes live at /api/bookings (outside /api/v1), so derive the correct base URL.
+// config.apiBaseUrl = "http://localhost:8080/api/v1" → bookingsBaseUrl = "http://localhost:8080/api/bookings"
+const bookingsBaseUrl = config.apiBaseUrl.replace('/api/v1', '/api/bookings');
+
+async function fetchBookings(path, options = {}) {
+    const url = `${bookingsBaseUrl}${path}`;
+    const headers = { 'Content-Type': 'application/json', ...options.headers };
+
+    const user = auth ? auth.currentUser : null;
+    if (user) {
+        try {
+            const token = await user.getIdToken();
+            headers['Authorization'] = `Bearer ${token}`;
+        } catch (e) {
+            console.warn('Could not get auth token:', e);
+        }
+    }
+
+    const response = await fetch(url, { ...options, headers });
+    if (!response.ok) {
+        const body = await response.text().catch(() => '');
+        throw new Error(`API ${response.status}: ${body || response.statusText}`);
+    }
+    return response.json();
+}
+
+// --- Mock data kept for endpoints not yet on backend ---
 
 const MOCK_SUGGESTIONS = {
     2: [
@@ -30,16 +71,12 @@ const MOCK_SUGGESTIONS = {
         { day: 'Thu', time: '18:00 - 20:00', reason: 'Sunset clear, light winds', score: 'Good' },
         { day: 'Fri', time: '06:30 - 09:00', reason: 'Good visibility, low gusts', score: 'Good' }
     ],
-    3: [
-        { day: 'Wed', time: '09:00 - 10:30', reason: 'Best wind window (<8kt)', score: 'Excellent' },
-        { day: 'Wed', time: '14:00 - 15:30', reason: 'Cloud base higher (3000ft)', score: 'Good' }
-    ]
 };
 
 const MOCK_BRIEFING = {
     currentSlot: {
         time: '16:00',
-        status: 'marginal', // 'clear', 'marginal', 'no-go'
+        status: 'marginal',
         reason: 'gusting winds'
     },
     recommendedWindow: {
@@ -53,88 +90,140 @@ const MOCK_BRIEFING = {
     }
 };
 
+// --- API Client ---
+
 export const apiClient = {
     /**
-     * Get the schedule for "Tomorrow"
+     * Get bookings for a club from Firestore (via backend)
      */
-    getBookings: async () => {
-        // Simulating Agentic Data Generation based on "Real" Weather
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                const results = [];
-                const hours = [9, 11, 14, 16, 18];
+    getBookings: async (clubSlug = 'strathaven') => {
+        return fetchBookings(`/${clubSlug}`);
+    },
 
-                hours.forEach((hour, i) => {
-                    // Mock Flyability Score Calculation
-                    // In production, these come from MAVIS API
-                    const windGusts = 10 + Math.floor(Math.random() * 20); // 10-30kt
-                    const cloudBase = 1200 + Math.floor(Math.random() * 3000); // 1200-4200ft
-
-                    // surface condition simulation
-                    const isWetGrass = Math.random() > 0.6;
-                    const runwayState = isWetGrass ? 'Soft/Wet' : 'Firm';
-
-                    let status = 'green';
-                    let reason = 'Good to fly';
-
-                    // Agent Logic: Determine Go/No-Go
-                    if (windGusts > 25 || cloudBase < 1500) {
-                        status = 'red';
-                        reason = `Weather limits: Gusts ${windGusts}kt, Cloud ${cloudBase}ft`;
-                    } else if (windGusts > 15 || cloudBase < 2400 || isWetGrass) {
-                        status = 'amber';
-                        reason = isWetGrass ? 'Runway Soft/Wet - Check Performance' : `Marginal: Gusts ${windGusts}kt`;
-                    }
-
-                    results.push({
-                        id: i + 1,
-                        time: `${hour}:00 - ${hour + 2}:00`,
-                        asset: Math.random() > 0.5 ? 'G-C42A (School)' : 'G-C42B (Club)',
-                        type: 'Training',
-                        instructor: Math.random() > 0.5 ? 'Capt. Reynolds' : 'Self-Fly',
-                        pilot: ['Student Pilot', 'Member Pilot', 'Visiting Pilot'][Math.floor(Math.random() * 3)],
-                        status: status,
-                        statusLabel: status === 'green' ? 'GO' : (status === 'amber' ? 'CHECK' : 'NO-GO'),
-                        reason: reason,
-                        runway: runwayState
-                    });
-                });
-
-                resolve(results);
-            }, 500);
+    /**
+     * Create a new booking
+     */
+    createBooking: async (booking) => {
+        return fetchBookings('/', {
+            method: 'POST',
+            body: JSON.stringify(booking),
         });
     },
 
     /**
-     * Get alternate slot suggestions for a booking
+     * Cancel a booking
+     */
+    cancelBooking: async (bookingId) => {
+        return fetchBookings(`/${bookingId}/cancel`, {
+            method: 'PUT',
+        });
+    },
+
+    /**
+     * Check flyability for a site
+     */
+    checkFlyability: async (siteId, pilot, aircraft, surface = 'dry') => {
+        return fetchWithAuth('/flyability/check', {
+            method: 'POST',
+            body: JSON.stringify({
+                site_id: siteId,
+                pilot: pilot,
+                aircraft: aircraft,
+                runway_surface: surface,
+            }),
+        });
+    },
+
+    /**
+     * Check pilot legality against the backend
+     */
+    checkLegality: async (pilotProfile, date, aircraft = 'C42') => {
+        return fetchWithAuth('/legality/check', {
+            method: 'POST',
+            body: JSON.stringify({
+                pilot: pilotProfile,
+                aircraft: aircraft,
+                date: date,
+            }),
+        });
+    },
+
+    /**
+     * Get club branding from Firestore
+     */
+    getClub: async (slug) => {
+        return fetchWithAuth(`/clubs/${slug}`);
+    },
+
+    /**
+     * Get club fleet list
+     */
+    getClubFleet: async (slug) => {
+        return fetchWithAuth(`/clubs/${slug}/fleet`);
+    },
+
+    /**
+     * Get club news
+     */
+    getClubNews: async (slug) => {
+        return fetchWithAuth(`/clubs/${slug}/news`);
+    },
+
+    /**
+     * Get alternate slot suggestions (still mock — no backend endpoint yet)
      */
     getSuggestions: async (bookingId) => {
-        // TODO: Calls GET /api/v1/suggestions/{bookingId}
         return new Promise((resolve) => {
-            setTimeout(() => resolve(MOCK_SUGGESTIONS[bookingId] || []), 600);
+            setTimeout(() => resolve(MOCK_SUGGESTIONS[bookingId] || []), 300);
         });
     },
 
     /**
-     * Get briefing for the current user/passenger
+     * Get briefing for the current user (still mock — no backend endpoint yet)
      */
     getBriefing: async () => {
-        // TODO: Calls GET /api/v1/briefing/me
         return new Promise((resolve) => {
-            setTimeout(() => resolve(MOCK_BRIEFING), 400);
-        })
+            setTimeout(() => resolve(MOCK_BRIEFING), 300);
+        });
     },
 
-    // --- Phase 4: Legality Rules Engine Stub ---
-    checkLegality: async (pilotProfile, date, aircraft = 'C42') => {
-        // Mock legality for now to allow purely offline demo if needed
-        return new Promise((resolve) => {
-            // 50/50 chance of random issue if backend offline
-            const randomIssue = Math.random() > 0.9;
-            resolve({
-                legal: !randomIssue,
-                reason: randomIssue ? "Recency: <3 landings in 90 days" : null
-            });
+    // --- T10: Admin CRUD ---
+
+    createNews: async (slug, item) => fetchWithAuth(`/clubs/${slug}/news`, {
+        method: 'POST', body: JSON.stringify(item),
+    }),
+
+    updateNews: async (slug, newsId, item) => fetchWithAuth(`/clubs/${slug}/news/${newsId}`, {
+        method: 'PUT', body: JSON.stringify(item),
+    }),
+
+    deleteNews: async (slug, newsId) => fetchWithAuth(`/clubs/${slug}/news/${newsId}`, {
+        method: 'DELETE',
+    }),
+
+    createFleet: async (slug, item) => fetchWithAuth(`/clubs/${slug}/fleet`, {
+        method: 'POST', body: JSON.stringify(item),
+    }),
+
+    updateFleet: async (slug, fleetId, item) => fetchWithAuth(`/clubs/${slug}/fleet/${fleetId}`, {
+        method: 'PUT', body: JSON.stringify(item),
+    }),
+
+    deleteFleet: async (slug, fleetId) => fetchWithAuth(`/clubs/${slug}/fleet/${fleetId}`, {
+        method: 'DELETE',
+    }),
+
+    // --- T11: Per-slot flyability ---
+
+    getFlyabilitySlots: async (siteId, start, end, pilot, aircraft, durationMinutes = 60) => {
+        return fetchWithAuth('/flyability/slots', {
+            method: 'POST',
+            body: JSON.stringify({
+                site_id: siteId,
+                start, end,
+                slot_duration_minutes: durationMinutes,
+                pilot, aircraft,
+            }),
         });
-    }
+    },
 };

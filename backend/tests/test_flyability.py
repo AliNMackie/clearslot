@@ -43,7 +43,7 @@ def test_flyability_go(standard_pilot, aircraft, good_forecast):
 
 def test_flyability_no_go_wind(standard_pilot, aircraft, good_forecast):
     """Test NO_GO due to high wind."""
-    bad_wind = good_forecast.copy(update={"wind_speed_kt": 35})
+    bad_wind = good_forecast.model_copy(update={"wind_speed_kt": 35})
     
     result = compute_flyability(bad_wind, standard_pilot, aircraft, SurfaceCondition.DRY)
     
@@ -53,7 +53,7 @@ def test_flyability_no_go_wind(standard_pilot, aircraft, good_forecast):
 
 def test_flyability_check_cloud(standard_pilot, aircraft, good_forecast):
     """Test CHECK status for marginal cloud base."""
-    marginal_cloud = good_forecast.copy(update={"cloud_base_ft": 1300}) # Between 1000 and 1500 limit
+    marginal_cloud = good_forecast.model_copy(update={"cloud_base_ft": 1300})  # Between 1000 and 1500 limit
     
     result = compute_flyability(marginal_cloud, standard_pilot, aircraft, SurfaceCondition.DRY)
     

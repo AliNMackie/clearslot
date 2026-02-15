@@ -37,10 +37,31 @@ def is_ppl_microlight_transition(pilot):
 def single_seat_only(pilot):
     return pilot.get('single_seat_constraint', False)
 
-def is_slot_legal(pilot, aircraft='C42', slot_date_str=None):
+def is_slot_legal(pilot, aircraft='C42', slot_date_str=None, aircraft_details=None):
     # Default to now if no date provided
     slot_date = datetime.now() if not slot_date_str else datetime.fromisoformat(slot_date_str)
     
+    # 0. Medical Expiry Check (T12)
+    medical_exp = pilot.get('medical_expiry')
+    if medical_exp:
+        med_date = datetime.fromisoformat(medical_exp) if isinstance(medical_exp, str) else medical_exp
+        if slot_date > med_date:
+            return {
+                'legal': False,
+                'reason': f'Medical certificate expired on {med_date.date().isoformat()}',
+            }
+
+    # 0b. Aircraft Permit Expiry Check (T12)
+    if aircraft_details:
+        permit_exp = aircraft_details.get('permit_expiry')
+        if permit_exp:
+            perm_date = datetime.fromisoformat(permit_exp) if isinstance(permit_exp, str) else permit_exp
+            if slot_date > perm_date:
+                return {
+                    'legal': False,
+                    'reason': f'Aircraft permit expired on {perm_date.date().isoformat()}',
+                }
+
     # 1. Licence Validation
     if not has_valid_licence(pilot):
         return {'legal': False, 'reason': 'Invalid licence mins'}
@@ -59,8 +80,6 @@ def is_slot_legal(pilot, aircraft='C42', slot_date_str=None):
     to_l = sum(e.get('to_landings', 0) for e in entries)
     
     # Standard 12-in-24 check (simplified for MVP as requested)
-    # Rules: 12h total, >=1h instruction, >=12 T/Os, >=6h PIC
-    # Note: Using >6h PIC as per BMAA "6 hours PIC" requirement for revalidation
     legal_recency = (total_h >= 12 and 
                      instr_h >= 1 and instr_h <= 6 and 
                      to_l >= 12 and 
@@ -77,3 +96,4 @@ def is_slot_legal(pilot, aircraft='C42', slot_date_str=None):
         'reason': 'Recency requirements not met' if not legal_recency else 'Legal',
         'needs': ['More PIC hours'] if total_h < 6 else []
     }
+

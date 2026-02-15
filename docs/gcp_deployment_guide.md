@@ -1,25 +1,17 @@
-# GCP Deployment Guide (Backend)
+# Deployment Guide (Week 3 Update)
 
-This guide will take you through deploying the `backend/` folder to Google Cloud Run.
+This guide covers deploying the Backend to Google Cloud Run and the Frontend to Netlify.
 
-## Prerequisites
-1.  You have the Google Cloud SDK (`gcloud`) installed.
-2.  You are logged in: `gcloud auth login`
-3.  The correct project is selected: `gcloud config set project clearslot-486319`
+## Backend Deployment (GCP)
 
-## Step-by-Step Deployment
-
-### 1. Enable Required Services (One-time setup)
-Run these commands to verify the necessary APIs are active:
+### 1. Enable Services
+Ensure required APIs are active:
 ```powershell
 gcloud services enable cloudbuild.googleapis.com run.googleapis.com
 ```
 
-### 2. Deploy to Cloud Run
-We will use the "source deploy" feature, which uploads your code and builds the container properly in the cloud.
-
-**Run this command from the project root:**
-
+### 2. Deploy Cloud Run Service
+Run from project root:
 ```powershell
 gcloud run deploy clearslot-backend `
   --source ./backend `
@@ -28,14 +20,45 @@ gcloud run deploy clearslot-backend `
   --set-env-vars PYTHONPATH=/app `
   --project clearslot-486319
 ```
+*Note the URL provided at the end (e.g., `https://clearslot-backend-xyz.a.run.app`).*
 
-*   `--source ./backend`: Tells GCP to upload only the backend folder.
-*   `--region europe-west2`: Deploys to London (closest to your UK user base).
-*   `--allow-unauthenticated`: Makes the API public (required for your Netlify frontend to reach it).
+### 3. Deploy Firestore Rules
+Upload the security rules to secure your database:
+```powershell
+firebase deploy --only firestore:rules
+```
+*Requires Firebase CLI installed and logged in.*
 
-### 3. Get the URL
-Once the command finishes, it will print a URL like:
-`https://clearslot-backend-xyz.a.run.app`
+---
 
-### 4. Update Frontend Config
-Copy that URL and update your Netlify Environment Variable `VITE_API_BASE_URL` as described in the `deployment_checklist.md`.
+## Frontend Deployment (Netlify)
+
+### 1. Prerequisites
+Ensure all dependencies are installed. The `firebase` SDK is now included in `package.json`.
+```powershell
+npm install
+```
+
+### 2. Environment Variables
+Configure these in your Netlify Site Settings "Environment variables":
+
+| Variable | Value | Description |
+| :--- | :--- | :--- |
+| `VITE_API_BASE_URL` | `https://clearslot-backend-xyz.a.run.app/api/v1` | Backend URL from Step 2 |
+| `VITE_FIREBASE_API_KEY` | *(Your Firebase Web API Key)* | From Firebase Console |
+| `VITE_FIREBASE_AUTH_DOMAIN` | `clearslot-486319.firebaseapp.com` | From Firebase Console |
+| `VITE_FIREBASE_PROJECT_ID` | `clearslot-486319` | From Firebase Console |
+
+### 3. Build & Deploy
+We have included a `netlify.toml` file that handles SPA routing redirects.
+Connect your repository to Netlify and it will auto-detect the build settings:
+- **Build command:** `vite build`
+- **Publish directory:** `dist`
+
+## Verification
+After deployment:
+1.  Visit your Netlify URL.
+2.  Navigate to `/clubs/strathaven` (should load branding).
+3.  Test Login (should redirect to valid Firebase Auth flow).
+4.  Admin Portal (requires `admin` role in Firestore user document).
+

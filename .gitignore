@@ -6,6 +6,7 @@ dist
 
 # Secrets
 gcp-key.json
+secret_b64.txt
 *.pem
 
 # Python

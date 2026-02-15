@@ -25,8 +25,13 @@ def test_get_mock_forecast_ifr():
     assert forecast.cloud_base_ft < 1000
     assert forecast.visibility_m == 4000.0
 
-def test_real_forecast_raises_error():
-    """Test that non-mock call raises NotImplementedError for now."""
+def test_real_forecast_fallback_on_bad_icao():
+    """When real weather fetch fails (bad ICAO), should return safe defaults, not crash."""
     t0 = datetime.now()
-    with pytest.raises(NotImplementedError):
-        get_forecast("REAL_SITE", t0, t0, mock=False)
+    # "XXXX" is not a valid ICAO — AviationWeather.gov will error or return empty
+    forecast = get_forecast("XXXX", t0, t0, mock=False)
+    assert isinstance(forecast, WeatherForecast)
+    # Should return cautious defaults (the _get_default_forecast values)
+    assert forecast.wind_speed_kt >= 0
+    assert forecast.cloud_base_ft > 0
+    assert forecast.visibility_m > 0
