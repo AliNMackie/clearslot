@@ -77,6 +77,7 @@ origins = [
     "http://localhost:4173",    # Vite preview
     "https://clearslot.space",  # Production domain
     "https://clearslot-space.netlify.app",  # Netlify deploy previews
+    "https://clearslot.netlify.app", # Netlify production alias
 ]
 
 app.add_middleware(
@@ -299,16 +300,8 @@ async def calculate_club_score(metrics: ClubMetrics):
 
 # --- User Profile (T09) ---
 
-@app.get("/api/v1/users/me")
-async def get_current_user_profile(user: dict = Depends(verify_token)):
-    """Return the authenticated user's profile (role, club_slugs)."""
-    profile = get_user_profile(user["uid"])
-    return {
-        "uid": user["uid"],
-        "email": user.get("email"),
-        "role": profile.get("role", "pilot"),
-        "club_slugs": profile.get("club_slugs", []),
-    }
+from backend.users import router as users_router
+app.include_router(users_router)
 
 # --- Club Branding (T08) ---
 

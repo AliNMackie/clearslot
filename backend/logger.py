@@ -13,11 +13,15 @@ def get_logger(name: str):
     return logging.getLogger(f"clearslot.{name}")
 
 def log_event(event_name: str, data: dict, level: str = "INFO"):
-    logger = logging.getLogger("clearslot.events")
-    # In production, structured logging (JSON) is preferred.
-    if level.upper() == "ERROR":
-        logger.error(f"EVENT: {event_name} DATA: {data}")
-    elif level.upper() == "WARNING":
-        logger.warning(f"EVENT: {event_name} DATA: {data}")
-    else:
-        logger.info(f"EVENT: {event_name} DATA: {data}")
+    logger = logging.getLogger("clearslot")
+    # Structured logging for Cloud Run
+    import json
+    
+    payload = {
+        "severity": level.upper(),
+        "message": f"{event_name}: {data}",
+        "event": event_name,
+        "data": data,
+        "component": "backend"
+    }
+    print(json.dumps(payload))

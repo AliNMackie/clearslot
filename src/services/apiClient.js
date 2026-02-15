@@ -37,9 +37,8 @@ async function fetchWithAuth(path, options = {}) {
     return response.json();
 }
 
-// Booking routes live at /api/bookings (outside /api/v1), so derive the correct base URL.
-// config.apiBaseUrl = "http://localhost:8080/api/v1" → bookingsBaseUrl = "http://localhost:8080/api/bookings"
-const bookingsBaseUrl = config.apiBaseUrl.replace('/api/v1', '/api/bookings');
+// Booking routes now live at /api/v1/bookings (consistent with other endpoints)
+const bookingsBaseUrl = `${config.apiBaseUrl}/bookings`;
 
 async function fetchBookings(path, options = {}) {
     const url = `${bookingsBaseUrl}${path}`;
@@ -57,8 +56,17 @@ async function fetchBookings(path, options = {}) {
 
     const response = await fetch(url, { ...options, headers });
     if (!response.ok) {
-        const body = await response.text().catch(() => '');
-        throw new Error(`API ${response.status}: ${body || response.statusText}`);
+        const text = await response.text().catch(() => '');
+        let errorMessage = text || response.statusText;
+        try {
+            const json = JSON.parse(text);
+            if (json.detail) {
+                errorMessage = json.detail; // Clean message from backend
+            }
+        } catch (e) {
+            // Not JSON, use raw text
+        }
+        throw new Error(errorMessage);
     }
     return response.json();
 }
@@ -131,6 +139,23 @@ export const apiClient = {
                 aircraft: aircraft,
                 runway_surface: surface,
             }),
+        });
+    },
+
+    /**
+     * Get user profile (me)
+     */
+    getUserProfile: async () => {
+        return fetchWithAuth('/users/me');
+    },
+
+    /**
+     * Update user profile (weight, expiry)
+     */
+    updateUserProfile: async (data) => {
+        return fetchWithAuth('/users/me/profile', {
+            method: 'PUT',
+            body: JSON.stringify(data),
         });
     },
 

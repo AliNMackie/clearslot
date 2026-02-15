@@ -33,4 +33,7 @@ class FlyabilityResponse(BaseModel):
     status: Literal["GO", "CHECK", "NO_GO"]
     score: int # 0-100
     reasons: List[str]
-    advisory_note: str = "Decision Support Only using MAVIS-data. PIC retains final authority."
+class UserProfileUpdate(BaseModel):
+    weight_kg: Optional[int] = None
+    medical_expiry: Optional[str] = None  # ISO Format YYYY-MM-DD
+    license_expiry: Optional[str] = None  # ISO Format YYYY-MM-DD

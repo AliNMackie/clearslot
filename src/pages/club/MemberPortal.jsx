@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import CalendarWeekView from '../../calendar/CalendarWeekView';
 import { useAuth } from '../../components/AuthProvider';
+import UserProfileModal from '../../components/UserProfileModal';
 
 import { apiClient } from '../../services/apiClient';
 
 const MemberPortal = () => {
     const { clubSlug } = useParams();
+    const { isAdmin } = useAuth(); // Assuming useAuth exposes isAdmin helper or we derive it
     const [refreshKey, setRefreshKey] = useState(0);
+    const [showProfile, setShowProfile] = useState(false);
 
     const handleSlotClick = async (slot) => {
         if (!window.confirm(`Book flight for ${new Date(slot.start).toLocaleString()}?`)) return;
@@ -28,15 +31,26 @@ const MemberPortal = () => {
 
     return (
         <div className="min-h-screen bg-gray-50">
+            <UserProfileModal
+                isOpen={showProfile}
+                onClose={() => setShowProfile(false)}
+                onUpdate={() => setRefreshKey(k => k + 1)} // Refresh logic if needed
+            />
+
             {/* App Bar */}
             <div className="bg-white shadow p-4 flex justify-between items-center">
                 <h1 className="text-xl font-bold text-gray-800">Booking Portal</h1>
-                <div className="space-x-4">
-                    {isAdmin(clubSlug) && (
-                        <Link to={`/clubs/${clubSlug}/admin`} className="text-sm font-medium text-blue-600 hover:text-blue-800">
-                            Admin Portal
-                        </Link>
-                    )}
+                <div className="space-x-4 flex items-center">
+                    <button
+                        onClick={() => setShowProfile(true)}
+                        className="text-sm font-medium text-gray-600 hover:text-blue-600"
+                    >
+                        My Profile
+                    </button>
+                    {/* Admin Link Check - defaulting to rudimentary check if isAdmin not available */}
+                    <Link to={`/clubs/${clubSlug}/admin`} className="text-sm font-medium text-blue-600 hover:text-blue-800">
+                        Admin Portal
+                    </Link>
                     <button className="text-sm font-medium text-red-600">Logout</button>
                 </div>
             </div>

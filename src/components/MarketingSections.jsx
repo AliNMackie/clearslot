@@ -1,6 +1,6 @@
 import React from 'react';
 import { Check, Database, Map as MapIcon, CloudRain, Shield, Calendar, Bell, LineChart } from 'lucide-react';
-import dashboardImg from '../assets/dashboard-illustration.png';
+import dashboardImg from '../assets/dashboard-illustration.webp';
 
 const BentoGrid = () => {
     return (

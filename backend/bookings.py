@@ -1,13 +1,13 @@
 from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel
 from typing import List, Optional
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from backend.auth import verify_token
 from backend.db import get_db
 from backend.integrations.calendar_sync import sync_booking_to_calendar, delete_booking_from_calendar
 
-router = APIRouter(prefix="/api/bookings", tags=["bookings"])
+router = APIRouter(prefix="/api/v1/bookings", tags=["bookings"])
 
 # --- Data Models ---
 
@@ -65,6 +65,69 @@ async def create_booking(booking: BookingRequest, user: dict = Depends(verify_to
     Triggers Google Calendar Sync (Stub).
     """
     db = get_db()
+    
+    # --- Validation ---
+    if booking.end_time <= booking.start_time:
+         raise HTTPException(status_code=400, detail="End time must be after start time")
+         
+    if booking.start_time < datetime.utcnow() - timedelta(minutes=15):
+         # Allow 15 min grace period for "just missed it" or clock skew
+         raise HTTPException(status_code=400, detail="Cannot book slots in the past")
+
+    # --- T19: Advanced Booking Constraints ---
+    MAX_ACTIVE_BOOKINGS = 3
+    CLUB_RECENCY_DAYS = 60
+    
+    # 0. Get User Profile (to check for instructor role exemption)
+    from backend.auth import get_user_profile
+    profile = get_user_profile(user["uid"])
+    user_role = profile.get("role", "pilot")
+    
+    # Constraint A: Max Active Bookings
+    # Count confirmed bookings in the future for this user
+    future_bookings = (
+        db.collection("bookings")
+        .where("pilot_uid", "==", user["uid"])
+        .where("status", "==", "confirmed")
+        .where("start_time", ">", datetime.utcnow())
+        .stream()
+    )
+    active_count = sum(1 for _ in future_bookings)
+    
+    if active_count >= MAX_ACTIVE_BOOKINGS:
+        raise HTTPException(
+            status_code=403,
+            detail=f"Booking limit reached. You can only have {MAX_ACTIVE_BOOKINGS} active bookings at a time."
+        )
+
+    # Constraint B: 90-Day (now 60-Day) Club Recency
+    # Skip for instructors or admins
+    if user_role not in ("instructor", "admin"):
+        # Check for ANY confirmed booking in the last 60 days
+        cutoff_date = datetime.utcnow() - timedelta(days=CLUB_RECENCY_DAYS)
+        
+        recent_bookings = (
+            db.collection("bookings")
+            .where("pilot_uid", "==", user["uid"])
+            .where("status", "==", "confirmed")
+            .where("start_time", ">", cutoff_date)
+            .where("start_time", "<", datetime.utcnow()) # Must be in the past/completed
+            .limit(1)
+            .stream()
+        )
+        
+        has_recent = any(True for _ in recent_bookings)
+        
+        # If no recent bookings found, check if they are a "New" member? 
+        # For now, strict rule: Must have flown. 
+        # (MVP Handling: If they have NEVER flown, they likely need an instructor booking anyway, which we can allow if we add an 'instructor_id' check)
+        
+        # EXCEPTION: If this new booking HAS an instructor attached, allow it.
+        if not has_recent and not booking.instructor_id:
+             raise HTTPException(
+                status_code=403,
+                detail=f"Recency check failed. You haven't flown in {CLUB_RECENCY_DAYS} days. Please book with an instructor."
+            )
 
     # 1. Overlap check — same aircraft, overlapping time, confirmed
     existing = (
@@ -77,6 +140,11 @@ async def create_booking(booking: BookingRequest, user: dict = Depends(verify_to
     for doc in existing:
         data = doc.to_dict()
         existing_end = data.get("end_time")
+        # Fix: Ensure existing_end is timezone-naive or compatible
+        if existing_end:
+            if hasattr(existing_end, 'tzinfo') and existing_end.tzinfo:
+                existing_end = existing_end.replace(tzinfo=None)
+                
         if existing_end and existing_end > booking.start_time:
             raise HTTPException(
                 status_code=409,
@@ -101,7 +169,14 @@ async def create_booking(booking: BookingRequest, user: dict = Depends(verify_to
     try:
         from backend.logger import log_event
         log_event("booking_created", {"booking_id": doc_ref.id, "club": booking.club_slug, "aircraft": booking.aircraft_reg, "pilot": user["uid"]})
-        await sync_booking_to_calendar(response_data.model_dump(), "primary")
+        
+        # Get club calendar_id
+        club_doc = db.collection("clubs").document(booking.club_slug).get()
+        cal_id = "primary"
+        if club_doc.exists:
+            cal_id = club_doc.to_dict().get("calendar_id", "primary")
+            
+        await sync_booking_to_calendar(response_data.model_dump(), cal_id)
     except Exception as e:
         print(f"⚠️ Calendar sync failed (non-blocking): {e}")
 
@@ -134,7 +209,13 @@ async def cancel_booking(booking_id: str, user: dict = Depends(verify_token)):
     log_event("booking_cancelled", {"booking_id": booking_id, "pilot": user["uid"]})
 
     try:
-        await delete_booking_from_calendar(booking_id, "primary")
+        # Get club calendar_id
+        club_doc = db.collection("clubs").document(booking_data.get("club_slug")).get()
+        cal_id = "primary"
+        if club_doc.exists:
+            cal_id = club_doc.to_dict().get("calendar_id", "primary")
+            
+        await delete_booking_from_calendar(booking_id, cal_id)
     except Exception as e:
         print(f"⚠️ Calendar delete failed (non-blocking): {e}")
 
