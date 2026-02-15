@@ -32,7 +32,7 @@ class TestVerifyToken:
         from backend.main import app
         client = TestClient(app)
 
-        response = client.post("/api/bookings/", json={
+        response = client.post("/api/v1/bookings/", json={
             "club_slug": "strathaven",
             "aircraft_reg": "G-CDEF",
             "start_time": "2026-03-01T09:00:00",
@@ -50,7 +50,7 @@ class TestVerifyToken:
         client = TestClient(app)
 
         response = client.post(
-            "/api/bookings/",
+            "/api/v1/bookings/",
             json={
                 "club_slug": "strathaven",
                 "aircraft_reg": "G-CDEF",
@@ -85,7 +85,7 @@ class TestVerifyToken:
 
             client = TestClient(app)
             response = client.post(
-                "/api/bookings/",
+                "/api/v1/bookings/",
                 json={
                     "club_slug": "strathaven",
                     "aircraft_reg": "G-CDEF",

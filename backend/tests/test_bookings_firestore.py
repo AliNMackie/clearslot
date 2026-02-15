@@ -64,7 +64,7 @@ class TestListBookings:
         mock_query.stream.return_value = [mock_doc]
         mock_firestore.collection.return_value = mock_query
 
-        response = client.get("/api/bookings/strathaven")
+        response = client.get("/api/v1/bookings/strathaven")
         assert response.status_code == 200
         data = response.json()
         assert len(data) == 1
@@ -74,7 +74,7 @@ class TestListBookings:
 class TestCreateBooking:
     def test_create_booking_no_auth(self, client, mock_firestore):
         """Creating a booking without auth should return 401."""
-        response = client.post("/api/bookings/", json={
+        response = client.post("/api/v1/bookings/", json={
             "club_slug": "strathaven",
             "aircraft_reg": "G-CDEF",
             "start_time": "2026-03-01T09:00:00",
@@ -96,7 +96,7 @@ class TestCreateBooking:
         mock_query.add.return_value = (None, mock_doc_ref)
 
         response = client.post(
-            "/api/bookings/",
+            "/api/v1/bookings/",
             json={
                 "club_slug": "strathaven",
                 "aircraft_reg": "G-CDEF",
@@ -125,7 +125,7 @@ class TestCreateBooking:
         mock_firestore.collection.return_value = mock_query
 
         response = client.post(
-            "/api/bookings/",
+            "/api/v1/bookings/",
             json={
                 "club_slug": "strathaven",
                 "aircraft_reg": "G-CDEF",
@@ -150,7 +150,7 @@ class TestCancelBooking:
         mock_firestore.collection.return_value.document.return_value = mock_doc_ref
 
         response = client.put(
-            "/api/bookings/bk_1/cancel",
+            "/api/v1/bookings/bk_1/cancel",
             headers={"Authorization": "Bearer valid_token"},
         )
         assert response.status_code == 200
@@ -167,7 +167,7 @@ class TestCancelBooking:
         mock_firestore.collection.return_value.document.return_value = mock_doc_ref
 
         response = client.put(
-            "/api/bookings/bk_1/cancel",
+            "/api/v1/bookings/bk_1/cancel",
             headers={"Authorization": "Bearer valid_token"},
         )
         assert response.status_code == 403
