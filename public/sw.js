@@ -1,6 +1,6 @@
 // Basic Service Worker for PWA Offline Capability & Installability
 
-const CACHE_NAME = 'clearslot-v1';
+const CACHE_NAME = 'clearslot-v2';
 const URLS_TO_CACHE = [
     '/',
     '/index.html',
