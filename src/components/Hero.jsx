@@ -89,12 +89,12 @@ const Hero = () => {
 
                 {/* CTAs */}
                 <div className="animate-enter delay-300 flex items-center gap-4">
-                    <button className="btn btn-primary">
+                    <Link to="/clubs/strathaven/app" className="btn btn-primary">
                         View tomorrow’s schedule
-                    </button>
-                    <button className="btn btn-ghost">
+                    </Link>
+                    <a href="#how-it-works" className="btn btn-ghost">
                         See how ClearSlot works
-                    </button>
+                    </a>
                 </div>
             </div>
         </section>

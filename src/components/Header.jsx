@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [hovered, setHovered] = useState(false);
@@ -14,7 +15,8 @@ const Header = () => {
     }}>
       <div className="container flex items-center justify-between">
         {/* Logo */}
-        <div 
+        <Link
+          to="/"
           className="flex items-center gap-2"
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
@@ -37,22 +39,21 @@ const Header = () => {
           }}>
             C
           </div>
-          <span className="font-sans" style={{ 
-            fontWeight: 700, 
+          <span className="font-sans" style={{
+            fontWeight: 700,
             color: 'var(--color-navy)',
             letterSpacing: '-0.02em'
           }}>
             ClearSlot.space
           </span>
-        </div>
+        </Link>
 
         {/* Navigation */}
         <nav className="flex items-center gap-8">
-          <a href="#" className="font-sans text-navy" style={{ fontSize: '0.9rem', fontWeight: 600, opacity: 0.8 }}>How it works</a>
-          <a href="#" className="font-sans text-navy" style={{ fontSize: '0.9rem', fontWeight: 600, opacity: 0.8 }}>Pricing</a>
-          <button className="btn btn-primary" style={{ fontSize: '0.75rem', padding: '0.5rem 1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-            Operators
-          </button>
+          <a href="#how-it-works" className="font-sans text-navy" style={{ fontSize: '0.9rem', fontWeight: 600, opacity: 0.8 }}>How it works</a>
+          <Link to="/clubs/strathaven/app" className="btn btn-primary" style={{ fontSize: '0.75rem', padding: '0.5rem 1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            Member Login
+          </Link>
         </nav>
       </div>
     </header>
