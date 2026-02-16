@@ -11,6 +11,7 @@ const MemberPortal = () => {
     const { isAdmin } = useAuth(); // Assuming useAuth exposes isAdmin helper or we derive it
     const [refreshKey, setRefreshKey] = useState(0);
     const [showProfile, setShowProfile] = useState(false);
+    const [siteId, setSiteId] = useState('SAFE_SITE');
 
     const handleSlotClick = async (slot) => {
         if (!window.confirm(`Book flight for ${new Date(slot.start).toLocaleString()}?`)) return;
