@@ -31,60 +31,81 @@ const MemberPortal = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
             <UserProfileModal
                 isOpen={showProfile}
                 onClose={() => setShowProfile(false)}
-                onUpdate={() => setRefreshKey(k => k + 1)} // Refresh logic if needed
+                onUpdate={() => setRefreshKey(k => k + 1)}
             />
 
-            {/* App Bar */}
-            <div className="bg-white shadow p-4 flex justify-between items-center">
-                <h1 className="text-xl font-bold text-gray-800">Booking Portal</h1>
-                <div className="space-x-4 flex items-center">
-                    <button
-                        onClick={() => setShowProfile(true)}
-                        className="text-sm font-medium text-gray-600 hover:text-blue-600"
-                    >
-                        My Profile
-                    </button>
-                    {/* Admin Link Check - defaulting to rudimentary check if isAdmin not available */}
-                    <Link to={`/clubs/${clubSlug}/admin`} className="text-sm font-medium text-blue-600 hover:text-blue-800">
-                        Admin Portal
-                    </Link>
-                    <button className="text-sm font-medium text-red-600">Logout</button>
-                </div>
-            </div>
-
-            <main className="max-w-6xl mx-auto p-4 py-8">
-                <div className="mb-6 flex justify-between items-end">
-                    <div>
-                        <h2 className="text-2xl font-bold text-gray-900">Book a Pilot Slot</h2>
-                        <p className="text-gray-500">Check flyability and reserve your aircraft.</p>
+            {/* Glass/Sticky App Bar */}
+            <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-slate-200 px-4 py-3 sm:px-6 lg:px-8">
+                <div className="max-w-7xl mx-auto flex justify-between items-center">
+                    <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold shadow-sm">
+                            C
+                        </div>
+                        <h1 className="text-xl font-bold tracking-tight text-slate-900">ClearSlot <span className="text-slate-400 font-normal">Member</span></h1>
                     </div>
+
                     <div className="flex items-center gap-4">
+                        <button
+                            onClick={() => setShowProfile(true)}
+                            className="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors"
+                        >
+                            My Profile
+                        </button>
+                        {isAdmin && (
+                            <Link to={`/clubs/${clubSlug}/admin`} className="hidden sm:block text-sm font-medium text-blue-600 hover:text-blue-800 transition-colors">
+                                Admin Portal
+                            </Link>
+                        )}
+                        <button className="text-sm font-medium text-slate-500 hover:text-red-600 transition-colors">Logout</button>
+                    </div>
+                </div>
+            </header>
+
+            <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+                <div className="mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                    <div>
+                        <h2 className="text-3xl font-bold text-slate-900 tracking-tight">Book a Pilot Slot</h2>
+                        <p className="mt-1 text-slate-500">Check flyability and reserve your aircraft in real-time.</p>
+                    </div>
+
+                    <div className="flex items-center gap-3 bg-white p-2 rounded-xl border border-slate-200 shadow-sm">
                         {/* Demo Site Selector */}
-                        <div className="flex flex-col items-end">
-                            <label className="text-xs text-gray-500 font-medium">Demo Weather Site</label>
+                        <div className="flex items-center gap-2 px-2">
+                            <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Weather Source</label>
                             <select
                                 value={siteId}
                                 onChange={(e) => setSiteId(e.target.value)}
-                                className="border border-gray-300 rounded px-2 py-1 text-sm bg-white"
+                                className="border-none bg-transparent text-sm font-medium text-slate-700 focus:ring-0 cursor-pointer hover:text-blue-600"
                             >
                                 <option value="SAFE_SITE">Safe Site (GO)</option>
                                 <option value="WINDY_SITE">Windy Site (NO GO)</option>
                                 <option value="IFR_SITE">Low Cloud (CHECK)</option>
                             </select>
                         </div>
-                        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                        <div className="h-6 w-px bg-slate-200 mx-1"></div>
+                        <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-100">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5"></span>
                             License Valid
                         </span>
                     </div>
                 </div>
 
                 {/* The RAG Calendar */}
-                <div className="bg-white rounded-xl shadow-sm overflow-hidden p-6 border">
-                    <CalendarWeekView siteId={siteId} onSlotClick={handleSlotClick} refreshKey={refreshKey} />
+                <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div className="p-1 bg-slate-50 border-b border-slate-200">
+                        {/* Optional toolbar area if needed later */}
+                    </div>
+                    <div className="p-4 sm:p-6">
+                        <CalendarWeekView siteId={siteId} onSlotClick={handleSlotClick} refreshKey={refreshKey} />
+                    </div>
+                </div>
+
+                <div className="mt-6 text-center text-xs text-slate-400">
+                    &copy; 2026 ClearSlot Systems. All rights reserved.
                 </div>
             </main>
         </div>
