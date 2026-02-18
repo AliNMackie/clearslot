@@ -12,6 +12,7 @@ const CalendarWeekView = ({ siteId, onSlotClick, refreshKey }) => {
         licence_type: "NPPL(A)",
         ratings: ["Microlight"],
         total_hours: 100,
+        hours_on_type: 10,
         supervised_solo_hours: 20,
         logbook: []
     };
