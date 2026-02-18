@@ -19,7 +19,14 @@ def test_flyability_endpoint_safe():
     """Test the endpoint with a SAFE site ID."""
     response = client.post("/api/v1/flyability/check", json={
         "site_id": "SAFE_SITE",
-        "pilot": pilot_data,
+        "pilot": {
+            "licence_type": "NPPL(A)",
+            "ratings": ["Microlight"],
+            "total_hours": 100.0,
+            "hours_on_type": 10.0,
+            "supervised_solo_hours": 20.0,
+            "logbook": []
+        },
         "aircraft": aircraft_data,
         "runway_surface": "dry"
     })
