@@ -4,7 +4,7 @@ from typing import List, Optional
 from datetime import datetime, timedelta
 
 from backend.auth import verify_token
-from backend.db import get_db
+import backend.db
 from backend.integrations.calendar_sync import sync_booking_to_calendar, delete_booking_from_calendar
 
 router = APIRouter(prefix="/api/v1/bookings", tags=["bookings"])
@@ -39,7 +39,7 @@ async def list_bookings(club_slug: str):
     List all confirmed bookings for a specific club.
     Public endpoint — no auth required (so the calendar grid can load).
     """
-    db = get_db()
+    db = backend.db.get_db()
     docs = (
         db.collection("bookings")
         .where("club_slug", "==", club_slug)
@@ -64,7 +64,7 @@ async def create_booking(booking: BookingRequest, user: dict = Depends(verify_to
     Checks for overlapping bookings on the same aircraft.
     Triggers Google Calendar Sync (Stub).
     """
-    db = get_db()
+    db = backend.db.get_db()
     
     # --- Validation ---
     if booking.end_time <= booking.start_time:
@@ -189,7 +189,7 @@ async def cancel_booking(booking_id: str, user: dict = Depends(verify_token)):
     Cancel an existing booking. Requires authentication.
     Only the booking owner or a club admin can cancel.
     """
-    db = get_db()
+    db = backend.db.get_db()
     doc_ref = db.collection("bookings").document(booking_id)
     doc = doc_ref.get()
 
@@ -197,7 +197,7 @@ async def cancel_booking(booking_id: str, user: dict = Depends(verify_token)):
         raise HTTPException(status_code=404, detail="Booking not found")
 
     booking_data = doc.to_dict()
-
+    
     # Only the pilot who made the booking can cancel it
     # (TODO: also allow club admins once roles are implemented in T09)
     if booking_data.get("pilot_uid") != user["uid"]:

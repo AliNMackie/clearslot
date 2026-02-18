@@ -16,6 +16,13 @@ def mock_firebase():
         yield mock_admin
 
 
+@pytest.fixture(autouse=True)
+def mock_google_auth():
+    """Mock Google Auth credits to prevent DefaultCredentialsError."""
+    with patch("google.auth.default", return_value=(MagicMock(), "test-project")):
+        yield
+
+
 @pytest.fixture
 def mock_auth_token():
     """Mock a valid Firebase token for authenticated requests."""
@@ -28,12 +35,10 @@ def mock_auth_token():
 
 
 @pytest.fixture
-def mock_firestore():
+def mock_firestore(mock_get_db):
     """Mock Firestore client for booking operations."""
-    with patch("backend.bookings.get_db") as mock_db:
-        mock_client = MagicMock()
-        mock_db.return_value = mock_client
-        yield mock_client
+    # Reuse the global mock_get_db fixture
+    return mock_get_db
 
 
 @pytest.fixture
@@ -62,6 +67,8 @@ class TestListBookings:
         mock_query.where.return_value = mock_query
         mock_query.order_by.return_value = mock_query
         mock_query.stream.return_value = [mock_doc]
+        
+        # When chaining wheres, we need to ensure the final call returns the stream
         mock_firestore.collection.return_value = mock_query
 
         response = client.get("/api/v1/bookings/strathaven")
@@ -95,17 +102,21 @@ class TestCreateBooking:
         mock_doc_ref.id = "bk_new_1"
         mock_query.add.return_value = (None, mock_doc_ref)
 
-        response = client.post(
-            "/api/v1/bookings/",
-            json={
-                "club_slug": "strathaven",
-                "aircraft_reg": "G-CDEF",
-                "start_time": "2026-03-01T09:00:00",
-                "end_time": "2026-03-01T11:00:00",
-            },
-            headers={"Authorization": "Bearer valid_token"},
-        )
-        assert response.status_code == 200
+        # Mock get_user_profile to return an instructor (bypasses recency check)
+        with patch("backend.auth.get_user_profile") as mock_get_profile:
+            mock_get_profile.return_value = {"role": "instructor"}
+
+            response = client.post(
+                "/api/v1/bookings/",
+                json={
+                    "club_slug": "strathaven",
+                    "aircraft_reg": "G-CDEF",
+                    "start_time": "2026-03-01T09:00:00",
+                    "end_time": "2026-03-01T11:00:00",
+                },
+                headers={"Authorization": "Bearer valid_token"},
+            )
+            assert response.status_code == 200
         data = response.json()
         assert data["id"] == "bk_new_1"
         assert data["pilot_uid"] == "pilot_123"
@@ -124,30 +135,44 @@ class TestCreateBooking:
         mock_query.stream.return_value = [mock_existing]
         mock_firestore.collection.return_value = mock_query
 
-        response = client.post(
-            "/api/v1/bookings/",
-            json={
-                "club_slug": "strathaven",
-                "aircraft_reg": "G-CDEF",
-                "start_time": "2026-03-01T09:00:00",
-                "end_time": "2026-03-01T11:00:00",
-            },
-            headers={"Authorization": "Bearer valid_token"},
-        )
-        assert response.status_code == 409
-        assert "already booked" in response.json()["detail"]
+        # Mock get_user_profile to return an instructor (bypasses recency check)
+        with patch("backend.auth.get_user_profile") as mock_get_profile:
+            mock_get_profile.return_value = {"role": "instructor"}
+            
+            # Setup db mock for this test
+            mock_query.stream.return_value = [mock_existing]
+            mock_firestore.collection.return_value = mock_query
+
+            response = client.post(
+                "/api/v1/bookings/",
+                json={
+                    "club_slug": "strathaven",
+                    "aircraft_reg": "G-CDEF",
+                    "start_time": "2026-03-01T09:00:00",
+                    "end_time": "2026-03-01T11:00:00",
+                },
+                headers={"Authorization": "Bearer valid_token"},
+            )
+            assert response.status_code == 409
+            assert "already booked" in response.json()["detail"]
 
 
 class TestCancelBooking:
     def test_cancel_booking(self, client, mock_firestore, mock_auth_token):
         """Cancelling your own booking should set status to cancelled."""
-        mock_doc = MagicMock()
-        mock_doc.exists = True
-        mock_doc.to_dict.return_value = {"pilot_uid": "pilot_123", "status": "confirmed"}
+        # Simplified Mock: Return a "Super Doc" that works for both Booking and Club lookups
+        mock_super_doc = MagicMock()
+        mock_super_doc.exists = True
+        mock_super_doc.to_dict.return_value = {
+            "pilot_uid": "pilot_123",
+            "status": "confirmed",
+            "club_slug": "strathaven",
+            "calendar_id": "primary" # Added for club lookup
+        }
 
-        mock_doc_ref = MagicMock()
-        mock_doc_ref.get.return_value = mock_doc
-        mock_firestore.collection.return_value.document.return_value = mock_doc_ref
+        # Configure global firestore mock chain
+        # db.collection(...).document(...).get() -> mock_super_doc
+        mock_firestore.collection.return_value.document.return_value.get.return_value = mock_super_doc
 
         response = client.put(
             "/api/v1/bookings/bk_1/cancel",
@@ -162,9 +187,8 @@ class TestCancelBooking:
         mock_doc.exists = True
         mock_doc.to_dict.return_value = {"pilot_uid": "other_user_456", "status": "confirmed"}
 
-        mock_doc_ref = MagicMock()
-        mock_doc_ref.get.return_value = mock_doc
-        mock_firestore.collection.return_value.document.return_value = mock_doc_ref
+        # db.collection(...).document(...).get() -> mock_doc
+        mock_firestore.collection.return_value.document.return_value.get.return_value = mock_doc
 
         response = client.put(
             "/api/v1/bookings/bk_1/cancel",

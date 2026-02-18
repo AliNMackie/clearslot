@@ -17,6 +17,13 @@ def mock_firebase_admin():
         yield mock_admin
 
 
+@pytest.fixture(autouse=True)
+def mock_google_auth():
+    """Mock Google Auth credits to prevent DefaultCredentialsError."""
+    with patch("google.auth.default", return_value=(MagicMock(), "test-project")):
+        yield
+
+
 @pytest.fixture
 def mock_verify_id_token():
     """Mock firebase_admin.auth.verify_id_token."""
@@ -62,7 +69,7 @@ class TestVerifyToken:
 
         assert response.status_code == 401
 
-    def test_valid_token(self, mock_verify_id_token):
+    def test_valid_token(self, mock_verify_id_token, mock_get_db):
         """Request with a valid Firebase token should pass through with user info."""
         mock_verify_id_token.return_value = {
             "uid": "test_user_123",
@@ -70,18 +77,23 @@ class TestVerifyToken:
         }
 
         from backend.main import app
-        # We need to also mock Firestore for the booking creation
-        with patch("backend.bookings.get_db") as mock_db:
-            mock_collection = MagicMock()
-            mock_db.return_value.collection.return_value = mock_collection
+        
+        # Configure the shared mock_get_db
+        mock_client = mock_get_db
+        mock_collection = MagicMock()
+        mock_client.collection.return_value = mock_collection
 
-            # Mock stream() for overlap check — no overlaps
-            mock_collection.where.return_value.where.return_value.where.return_value.stream.return_value = []
+        # Mock stream() for overlap check — no overlaps
+        mock_collection.where.return_value.where.return_value.where.return_value.stream.return_value = []
+        
+        # Mock add() to return (timestamp, doc_ref)
+        mock_doc_ref = MagicMock()
+        mock_doc_ref.id = "bk_new_123"
+        mock_collection.add.return_value = (None, mock_doc_ref)
 
-            # Mock add() for creating the booking
-            mock_doc_ref = MagicMock()
-            mock_doc_ref.id = "bk_test_1"
-            mock_collection.add.return_value = (None, mock_doc_ref)
+        # Mock get_user_profile to return an instructor (bypasses recency check)
+        with patch("backend.auth.get_user_profile") as mock_get_profile:
+            mock_get_profile.return_value = {"role": "instructor"}
 
             client = TestClient(app)
             response = client.post(
@@ -94,7 +106,6 @@ class TestVerifyToken:
                 },
                 headers={"Authorization": "Bearer valid_token_abc"},
             )
-
             assert response.status_code == 200
             data = response.json()
             assert data["pilot_uid"] == "test_user_123"

@@ -6,6 +6,7 @@ and local credentials (gcloud auth) during development.
 """
 import os
 from google.cloud import firestore
+from unittest.mock import MagicMock
 
 _client = None
 
@@ -15,5 +16,8 @@ def get_db() -> firestore.Client:
     global _client
     if _client is None:
         project = os.environ.get("GCP_PROJECT_ID", "clearslot-486319")
+        # Ensure we don't try to connect during tests if not mocked
+        if os.environ.get("TESTING") == "true":
+            return MagicMock()
         _client = firestore.Client(project=project)
     return _client
