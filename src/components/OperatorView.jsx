@@ -20,7 +20,9 @@ const OperatorView = () => {
         return {
             licence_type: isStudent ? "NPPL(A)" : "PPL(A)",
             ratings: ["Microlight", "SEP"],
+            custom_constraints: [],
             total_hours: isStudent ? 15 : 150, // Student fails 32h min
+            hours_on_type: isStudent ? 5 : 50,
             supervised_solo_hours: isStudent ? 2 : 20, // Student fails 10h min
             microlight_differences_trained: true,
             xc_done: !isStudent,
