@@ -1,6 +1,6 @@
 // Basic Service Worker for PWA Offline Capability & Installability
 
-const CACHE_NAME = 'clearslot-v3';
+const CACHE_NAME = 'clearslot-v4';
 const URLS_TO_CACHE = [
     '/',
     '/index.html',
@@ -9,6 +9,7 @@ const URLS_TO_CACHE = [
 ];
 
 self.addEventListener('install', (event) => {
+    self.skipWaiting(); // Force activation
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then((cache) => {
