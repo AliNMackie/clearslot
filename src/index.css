@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Global Design System - ClearSlot.space */
 :root {
   /* Clear Sky Palette */
