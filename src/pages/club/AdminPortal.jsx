@@ -82,119 +82,202 @@ const AdminPortal = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-100 font-sans">
-            <div className="bg-gray-900 text-white p-4 shadow-md">
-                <div className="max-w-6xl mx-auto flex justify-between items-center">
+        <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
+            {/* Glass/Sticky App Bar */}
+            <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-slate-200 px-4 py-3 sm:px-6 lg:px-8">
+                <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div className="flex items-center gap-6">
-                        <h1 className="font-bold text-lg">Club Admin: {clubSlug}</h1>
-                        <nav className="flex gap-4 text-sm font-medium">
-                            <button onClick={() => setActiveTab('dashboard')} className={`hover:text-white ${activeTab === 'dashboard' ? 'text-white' : 'text-gray-400'}`}>Dashboard</button>
-                            <button onClick={() => setActiveTab('news')} className={`hover:text-white ${activeTab === 'news' ? 'text-white' : 'text-gray-400'}`}>News</button>
-                            <button onClick={() => setActiveTab('fleet')} className={`hover:text-white ${activeTab === 'fleet' ? 'text-white' : 'text-gray-400'}`}>Fleet</button>
+                        <div className="flex items-center gap-2">
+                            <div className="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center text-white font-bold shadow-sm">
+                                A
+                            </div>
+                            <h1 className="text-xl font-bold tracking-tight text-slate-900">Club Admin <span className="text-slate-400 font-normal">/ {clubSlug}</span></h1>
+                        </div>
+
+                        {/* Desktop Nav */}
+                        <nav className="hidden md:flex bg-slate-100/50 p-1 rounded-lg border border-slate-200/50">
+                            {[
+                                { id: 'dashboard', label: 'Dashboard' },
+                                { id: 'news', label: 'News' },
+                                { id: 'fleet', label: 'Fleet' }
+                            ].map(tab => (
+                                <button
+                                    key={tab.id}
+                                    onClick={() => setActiveTab(tab.id)}
+                                    className={`px-4 py-1.5 text-sm font-medium rounded-md transition-all duration-200 ${activeTab === tab.id
+                                            ? 'bg-white text-blue-600 shadow-sm ring-1 ring-slate-200'
+                                            : 'text-slate-500 hover:text-slate-900 hover:bg-slate-200/50'
+                                        }`}
+                                >
+                                    {tab.label}
+                                </button>
+                            ))}
                         </nav>
                     </div>
-                    <Link to={`/clubs/${clubSlug}/app`} className="text-sm opacity-80 hover:opacity-100 bg-gray-800 px-3 py-1 rounded">Back to Portal</Link>
-                </div>
-            </div>
 
-            <main className="max-w-6xl mx-auto p-6 space-y-6">
+                    <Link
+                        to={`/clubs/${clubSlug}/app`}
+                        className="inline-flex items-center justify-center px-4 py-2 border border-slate-300 shadow-sm text-sm font-medium rounded-lg text-slate-700 bg-white hover:bg-slate-50 transition-colors"
+                    >
+                        &larr; Back to Portal
+                    </Link>
+                </div>
+
+                {/* Mobile Nav */}
+                <div className="md:hidden mt-4 pb-2 overflow-x-auto">
+                    <div className="flex gap-2">
+                        {[
+                            { id: 'dashboard', label: 'Dashboard' },
+                            { id: 'news', label: 'News' },
+                            { id: 'fleet', label: 'Fleet' }
+                        ].map(tab => (
+                            <button
+                                key={tab.id}
+                                onClick={() => setActiveTab(tab.id)}
+                                className={`px-4 py-2 text-sm font-medium rounded-full whitespace-nowrap border transition-colors ${activeTab === tab.id
+                                        ? 'bg-blue-600 border-blue-600 text-white'
+                                        : 'bg-white border-slate-200 text-slate-600'
+                                    }`}
+                            >
+                                {tab.label}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            </header>
+
+            <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8 space-y-8">
 
                 {activeTab === 'dashboard' && (
                     <>
-                        {/* Quick Stats */}
+                        {/* KPI Cards */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
-                                <h3 className="text-sm font-medium text-gray-500 mb-2">Members</h3>
-                                <div className="text-3xl font-bold text-gray-900">142</div>
-                            </div>
-                            <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
-                                <h3 className="text-sm font-medium text-gray-500 mb-2">Fleet Status</h3>
-                                <div className="flex items-center gap-2">
-                                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                                    <span className="font-bold">{fleet.length} Aircraft Online</span>
+                            <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex items-center justify-between">
+                                <div>
+                                    <h3 className="text-sm font-semibold text-slate-500 uppercase tracking-wider">Total Members</h3>
+                                    <div className="mt-2 text-3xl font-bold text-slate-900">142</div>
+                                </div>
+                                <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center">
+                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
                                 </div>
                             </div>
-                            <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
-                                <h3 className="text-sm font-medium text-gray-500 mb-2">ClearSlot Score</h3>
-                                <div className="text-3xl font-bold text-green-600">85/100</div>
+
+                            <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex items-center justify-between">
+                                <div>
+                                    <h3 className="text-sm font-semibold text-slate-500 uppercase tracking-wider">Fleet Status</h3>
+                                    <div className="mt-2 flex items-center gap-2">
+                                        <div className="w-3 h-3 bg-emerald-500 rounded-full animate-pulse"></div>
+                                        <span className="text-xl font-bold text-slate-900">{fleet.length} Active</span>
+                                    </div>
+                                </div>
+                                <div className="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center">
+                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
+                                </div>
+                            </div>
+
+                            <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex items-center justify-between">
+                                <div>
+                                    <h3 className="text-sm font-semibold text-slate-500 uppercase tracking-wider">System Health</h3>
+                                    <div className="mt-2 text-3xl font-bold text-emerald-600">98%</div>
+                                </div>
+                                <div className="w-12 h-12 bg-purple-50 text-purple-600 rounded-full flex items-center justify-center">
+                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                </div>
                             </div>
                         </div>
 
-                        {/* Recent News */}
-                        <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
-                            <h2 className="text-xl font-bold mb-4">Latest News</h2>
-                            {loading ? (
-                                <div className="space-y-4">
-                                    <Skeleton className="h-5 w-1/3 mb-2" />
-                                    <Skeleton className="h-4 w-full" />
-                                    <Skeleton className="h-4 w-2/3" />
-                                </div>
-                            ) : (
-                                news.length === 0 ? <p className="text-gray-500">No news items.</p> : (
-                                    <ul className="space-y-3">
-                                        {news.slice(0, 3).map(item => (
-                                            <li key={item.id} className="border-b pb-2 last:border-0">
-                                                <div className="font-bold">{item.title}</div>
-                                                <div className="text-sm text-gray-600 truncate">{item.body}</div>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )
-                            )}
+                        {/* Recent News Preview */}
+                        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                            <div className="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+                                <h2 className="text-lg font-bold text-slate-900">Latest Announcements</h2>
+                                <button onClick={() => setActiveTab('news')} className="text-sm text-blue-600 font-medium hover:text-blue-700">Manage News &rarr;</button>
+                            </div>
+                            <div className="p-6">
+                                {loading ? (
+                                    <div className="space-y-4">
+                                        <Skeleton className="h-5 w-1/3 mb-2" />
+                                        <Skeleton className="h-4 w-full" />
+                                        <Skeleton className="h-4 w-2/3" />
+                                    </div>
+                                ) : (
+                                    news.length === 0 ? <p className="text-slate-400 italic">No news items posted.</p> : (
+                                        <ul className="space-y-4">
+                                            {news.slice(0, 3).map(item => (
+                                                <li key={item.id} className="pb-4 border-b border-slate-100 last:border-0 last:pb-0">
+                                                    <div className="font-bold text-slate-800">{item.title}</div>
+                                                    <div className="text-sm text-slate-600 mt-1 line-clamp-2">{item.body}</div>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )
+                                )}
+                            </div>
                         </div>
 
                         {/* Diary View */}
-                        <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
-                            <h2 className="text-xl font-bold mb-4">7-Day Diary</h2>
-                            <AdminDiary />
+                        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                            <div className="px-6 py-4 border-b border-slate-100 bg-slate-50/50">
+                                <h2 className="text-lg font-bold text-slate-900">7-Day Flight Diary</h2>
+                            </div>
+                            <div className="p-6">
+                                <AdminDiary />
+                            </div>
                         </div>
                     </>
                 )}
 
                 {activeTab === 'news' && (
-                    <div className="grid md:grid-cols-2 gap-8">
-                        <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-100 h-fit">
-                            <h2 className="text-xl font-bold mb-4">Post News</h2>
-                            <form onSubmit={handleCreateNews} className="space-y-4">
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700">Title</label>
-                                    <input
-                                        type="text"
-                                        required
-                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
-                                        value={newNews.title}
-                                        onChange={e => setNewNews({ ...newNews, title: e.target.value })}
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700">Content</label>
-                                    <textarea
-                                        required
-                                        rows={4}
-                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
-                                        value={newNews.body}
-                                        onChange={e => setNewNews({ ...newNews, body: e.target.value })}
-                                    />
-                                </div>
-                                <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 font-medium w-full">
-                                    Post Update
-                                </button>
-                            </form>
+                    <div className="grid lg:grid-cols-3 gap-8">
+                        {/* Form Column */}
+                        <div className="lg:col-span-1">
+                            <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sticky top-24">
+                                <h2 className="text-lg font-bold text-slate-900 mb-4">Post Announcement</h2>
+                                <form onSubmit={handleCreateNews} className="space-y-4">
+                                    <div>
+                                        <label className="block text-sm font-semibold text-slate-700 mb-1">Title</label>
+                                        <input
+                                            type="text"
+                                            required
+                                            className="w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm"
+                                            placeholder="e.g. Runway Maintenance"
+                                            value={newNews.title}
+                                            onChange={e => setNewNews({ ...newNews, title: e.target.value })}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-semibold text-slate-700 mb-1">Content</label>
+                                        <textarea
+                                            required
+                                            rows={6}
+                                            className="w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm"
+                                            placeholder="Details..."
+                                            value={newNews.body}
+                                            onChange={e => setNewNews({ ...newNews, body: e.target.value })}
+                                        />
+                                    </div>
+                                    <button type="submit" className="w-full bg-blue-600 text-white px-4 py-2.5 rounded-lg hover:bg-blue-700 font-semibold shadow-sm transition-all active:scale-95">
+                                        Post Update
+                                    </button>
+                                </form>
+                            </div>
                         </div>
 
-                        <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
-                            <h2 className="text-xl font-bold mb-4">Active News ({news.length})</h2>
+                        {/* List Column */}
+                        <div className="lg:col-span-2">
+                            <h2 className="text-lg font-bold text-slate-900 mb-4">Active News ({news.length})</h2>
                             <ul className="space-y-4">
                                 {news.map(item => (
-                                    <li key={item.id} className="p-4 bg-gray-50 rounded-lg relative group">
-                                        <button
-                                            onClick={() => handleDeleteNews(item.id)}
-                                            className="absolute top-2 right-2 text-gray-400 hover:text-red-600 opacity-0 group-hover:opacity-100 transition"
-                                        >
-                                            Delete
-                                        </button>
-                                        <h3 className="font-bold text-gray-900">{item.title}</h3>
-                                        <p className="text-sm text-gray-600 mt-1 whitespace-pre-wrap">{item.body}</p>
+                                    <li key={item.id} className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 relative group transition hover:shadow-md">
+                                        <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <button
+                                                onClick={() => handleDeleteNews(item.id)}
+                                                className="text-xs font-medium text-red-600 bg-red-50 hover:bg-red-100 px-3 py-1.5 rounded-full"
+                                            >
+                                                Delete
+                                            </button>
+                                        </div>
+                                        <h3 className="font-bold text-lg text-slate-900 pr-16">{item.title}</h3>
+                                        <p className="text-sm text-slate-600 mt-2 whitespace-pre-wrap leading-relaxed">{item.body}</p>
                                     </li>
                                 ))}
                             </ul>
@@ -203,68 +286,83 @@ const AdminPortal = () => {
                 )}
 
                 {activeTab === 'fleet' && (
-                    <div className="grid md:grid-cols-2 gap-8">
-                        <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-100 h-fit">
-                            <h2 className="text-xl font-bold mb-4">Add Aircraft</h2>
-                            <form onSubmit={handleCreateFleet} className="space-y-4">
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700">Registration</label>
-                                    <input
-                                        type="text"
-                                        required
-                                        placeholder="G-ABCD"
-                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border uppercase"
-                                        value={newFleet.registration}
-                                        onChange={e => setNewFleet({ ...newFleet, registration: e.target.value })}
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700">Type</label>
-                                    <input
-                                        type="text"
-                                        required
-                                        placeholder="Ikarus C42"
-                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
-                                        value={newFleet.type}
-                                        onChange={e => setNewFleet({ ...newFleet, type: e.target.value })}
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700">Rate (£/hr)</label>
-                                    <input
-                                        type="number"
-                                        required
-                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
-                                        value={newFleet.rate_per_hour}
-                                        onChange={e => setNewFleet({ ...newFleet, rate_per_hour: e.target.value })}
-                                    />
-                                </div>
-                                <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 font-medium w-full">
-                                    Add to Fleet
-                                </button>
-                            </form>
+                    <div className="grid lg:grid-cols-3 gap-8">
+                        <div className="lg:col-span-1">
+                            <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sticky top-24">
+                                <h2 className="text-lg font-bold text-slate-900 mb-4">Add Aircraft</h2>
+                                <form onSubmit={handleCreateFleet} className="space-y-4">
+                                    <div>
+                                        <label className="block text-sm font-semibold text-slate-700 mb-1">Registration</label>
+                                        <input
+                                            type="text"
+                                            required
+                                            placeholder="G-ABCD"
+                                            className="w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm uppercase font-mono"
+                                            value={newFleet.registration}
+                                            onChange={e => setNewFleet({ ...newFleet, registration: e.target.value })}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-semibold text-slate-700 mb-1">Type</label>
+                                        <input
+                                            type="text"
+                                            required
+                                            placeholder="Ikarus C42"
+                                            className="w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm"
+                                            value={newFleet.type}
+                                            onChange={e => setNewFleet({ ...newFleet, type: e.target.value })}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-semibold text-slate-700 mb-1">Hourly Rate (£)</label>
+                                        <input
+                                            type="number"
+                                            required
+                                            placeholder="95.00"
+                                            className="w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm"
+                                            value={newFleet.rate_per_hour}
+                                            onChange={e => setNewFleet({ ...newFleet, rate_per_hour: e.target.value })}
+                                        />
+                                    </div>
+                                    <button type="submit" className="w-full bg-emerald-600 text-white px-4 py-2.5 rounded-lg hover:bg-emerald-700 font-semibold shadow-sm transition-all active:scale-95">
+                                        Add to Fleet
+                                    </button>
+                                </form>
+                            </div>
                         </div>
 
-                        <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
-                            <h2 className="text-xl font-bold mb-4">Fleet List ({fleet.length})</h2>
-                            <div className="space-y-3">
-                                {fleet.map(item => (
-                                    <div key={item.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-100">
-                                        <div>
-                                            <div className="font-bold text-gray-900">{item.registration}</div>
-                                            <div className="text-sm text-gray-600">{item.type}</div>
+                        <div className="lg:col-span-2">
+                            <h2 className="text-lg font-bold text-slate-900 mb-4">Fleet List ({fleet.length})</h2>
+                            <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                                <div className="divide-y divide-slate-100">
+                                    {fleet.map(item => (
+                                        <div key={item.id} className="p-4 sm:p-6 flex items-center justify-between hover:bg-slate-50 transition-colors">
+                                            <div className="flex items-center gap-4">
+                                                <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500">
+                                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
+                                                </div>
+                                                <div>
+                                                    <div className="font-bold text-slate-900 font-mono text-lg">{item.registration}</div>
+                                                    <div className="text-sm text-slate-500">{item.type}</div>
+                                                </div>
+                                            </div>
+                                            <div className="text-right">
+                                                <div className="text-lg font-bold text-slate-700">£{item.rate_per_hour}<span className="text-sm font-normal text-slate-400">/hr</span></div>
+                                                <button
+                                                    onClick={() => handleDeleteFleet(item.id)}
+                                                    className="text-xs font-medium text-red-600 hover:text-red-700 hover:underline mt-1"
+                                                >
+                                                    Remove
+                                                </button>
+                                            </div>
                                         </div>
-                                        <div className="text-right">
-                                            <div className="font-mono text-gray-900 font-bold">£{item.rate_per_hour}/hr</div>
-                                            <button
-                                                onClick={() => handleDeleteFleet(item.id)}
-                                                className="text-xs text-red-600 hover:underline mt-1"
-                                            >
-                                                Remove
-                                            </button>
+                                    ))}
+                                    {fleet.length === 0 && (
+                                        <div className="p-8 text-center text-slate-400">
+                                            No aircraft in fleet. Add one to get started.
                                         </div>
-                                    </div>
-                                ))}
+                                    )}
+                                </div>
                             </div>
                         </div>
                     </div>

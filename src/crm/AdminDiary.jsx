@@ -9,36 +9,42 @@ const AdminDiary = () => {
     ];
 
     return (
-        <div className="border rounded-lg overflow-hidden">
-            <table className="w-full text-left text-sm">
-                <thead className="bg-gray-50 text-gray-600 border-b">
-                    <tr>
-                        <th className="p-3 font-medium">Time</th>
-                        <th className="p-3 font-medium">Aircraft</th>
-                        <th className="p-3 font-medium">Pilot / Info</th>
-                        <th className="p-3 font-medium">Type</th>
-                        <th className="p-3 font-medium text-right">Actions</th>
+        <div className="overflow-x-auto">
+            <table className="w-full text-left">
+                <thead>
+                    <tr className="border-b border-slate-200">
+                        <th className="pb-3 pl-2 font-semibold text-xs text-slate-500 uppercase tracking-wider">Time</th>
+                        <th className="pb-3 font-semibold text-xs text-slate-500 uppercase tracking-wider">Aircraft</th>
+                        <th className="pb-3 font-semibold text-xs text-slate-500 uppercase tracking-wider">Pilot</th>
+                        <th className="pb-3 font-semibold text-xs text-slate-500 uppercase tracking-wider">Type</th>
+                        <th className="pb-3 pr-2 font-semibold text-xs text-slate-500 uppercase tracking-wider text-right">Actions</th>
                     </tr>
                 </thead>
-                <tbody className="divide-y">
+                <tbody className="divide-y divide-slate-100">
                     {bookings.map(b => (
-                        <tr key={b.id} className="hover:bg-gray-50">
-                            <td className="p-3">{b.time}</td>
-                            <td className="p-3 font-medium">{b.aircraft}</td>
-                            <td className="p-3">{b.pilot}</td>
-                            <td className="p-3">
-                                <span className={`px-2 py-1 rounded-full text-xs font-medium ${b.type === 'Maintenance' ? 'bg-red-100 text-red-800' : 'bg-blue-100 text-blue-800'
+                        <tr key={b.id} className="group hover:bg-slate-50 transition-colors">
+                            <td className="py-3 pl-2 text-sm font-medium text-slate-900">{b.time}</td>
+                            <td className="py-3 text-sm font-mono text-slate-600 font-bold">{b.aircraft}</td>
+                            <td className="py-3 text-sm text-slate-600">
+                                <span className="font-medium text-slate-900">{b.pilot}</span>
+                            </td>
+                            <td className="py-3">
+                                <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-bold uppercase tracking-wide border ${b.type === 'Training' ? 'bg-indigo-50 text-indigo-700 border-indigo-100' :
+                                    b.type === 'Maintenance' ? 'bg-amber-50 text-amber-700 border-amber-100' :
+                                        'bg-sky-50 text-sky-700 border-sky-100'
                                     }`}>
                                     {b.type}
                                 </span>
                             </td>
-                            <td className="p-3 text-right">
-                                <button className="text-gray-400 hover:text-red-500">Cancel</button>
+                            <td className="py-3 pr-2 text-right">
+                                <button className="text-xs font-medium text-slate-400 hover:text-red-600 transition-colors opacity-0 group-hover:opacity-100">
+                                    Cancel
+                                </button>
                             </td>
                         </tr>
                     ))}
                     {bookings.length === 0 && (
-                        <tr><td colSpan="5" className="p-4 text-center text-gray-500">No bookings found.</td></tr>
+                        <tr><td colSpan="5" className="py-8 text-center text-slate-400 italic">No bookings found for this period.</td></tr>
                     )}
                 </tbody>
             </table>
