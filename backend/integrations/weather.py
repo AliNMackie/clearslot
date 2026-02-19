@@ -86,9 +86,10 @@ def _fetch_aviation_weather(icao: str) -> WeatherForecast:
             visibility_m=_vis_sm_to_m(obs.get("visib", 10)),
             precipitation_rate_mm_hr=0.0,  # METAR doesn't report rate directly
         )
-    except (httpx.HTTPError, httpx.TimeoutException, KeyError, IndexError, ValueError) as e:
-        # On any fetch/parse error, fall back to safe defaults rather than crashing
-        print(f"⚠️ AviationWeather.gov fetch failed for {icao}: {e}")
+    except Exception as e:
+        # On any fetch/parse error (network, timeout, bad JSON, missing fields), fall back safely.
+        # This prevents 500 errors if AviationWeather.gov is down or returns unexpected data.
+        print(f"⚠️ AviationWeather.gov fetch failed for {icao}: {type(e).__name__} {e}")
         return _get_default_forecast()
 
 
