@@ -1,0 +1,5 @@
+completed	failure	fix: enforce python 3.11 for github actions and cloud build to satisf???	Deploy Backend to Cloud Run	main	push	22760805364	1m35s	2026-03-06T11:07:58Z
+completed	failure	fix: enforce python 3.11 for github actions and cloud build to satisf???	ClearSlot CI	main	push	22760805350	24s	2026-03-06T11:07:57Z
+completed	failure	test: align tests with strict pydantic v2 validation and atomic get m???	Deploy Backend to Cloud Run	main	push	22759879779	1m45s	2026-03-06T10:40:37Z
+completed	failure	test: align tests with strict pydantic v2 validation and atomic get m???	ClearSlot CI	main	push	22759879749	18s	2026-03-06T10:40:37Z
+completed	failure	fix: correct requirements.txt encoding for linux CI runners	Deploy Backend to Cloud Run	main	push	22759098648	1m44s	2026-03-06T10:17:23Z

@@ -1,0 +1,598 @@
+backend-test	Set up job	???2026-03-06T11:08:01.1177094Z Current runner version: '2.332.0'
+backend-test	Set up job	2026-03-06T11:08:01.1205453Z ##[group]Runner Image Provisioner
+backend-test	Set up job	2026-03-06T11:08:01.1206256Z Hosted Compute Agent
+backend-test	Set up job	2026-03-06T11:08:01.1206844Z Version: 20260213.493
+backend-test	Set up job	2026-03-06T11:08:01.1207702Z Commit: 5c115507f6dd24b8de37d8bbe0bb4509d0cc0fa3
+backend-test	Set up job	2026-03-06T11:08:01.1208575Z Build Date: 2026-02-13T00:28:41Z
+backend-test	Set up job	2026-03-06T11:08:01.1209205Z Worker ID: {ae626352-b337-493f-b4f3-86ee42f23a9f}
+backend-test	Set up job	2026-03-06T11:08:01.1209879Z Azure Region: eastus2
+backend-test	Set up job	2026-03-06T11:08:01.1210456Z ##[endgroup]
+backend-test	Set up job	2026-03-06T11:08:01.1212995Z ##[group]Operating System
+backend-test	Set up job	2026-03-06T11:08:01.1213948Z Ubuntu
+backend-test	Set up job	2026-03-06T11:08:01.1214730Z 24.04.3
+backend-test	Set up job	2026-03-06T11:08:01.1215457Z LTS
+backend-test	Set up job	2026-03-06T11:08:01.1216120Z ##[endgroup]
+backend-test	Set up job	2026-03-06T11:08:01.1216984Z ##[group]Runner Image
+backend-test	Set up job	2026-03-06T11:08:01.1218008Z Image: ubuntu-24.04
+backend-test	Set up job	2026-03-06T11:08:01.1218853Z Version: 20260302.42.1
+backend-test	Set up job	2026-03-06T11:08:01.1220506Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260302.42/images/ubuntu/Ubuntu2404-Readme.md
+backend-test	Set up job	2026-03-06T11:08:01.1223160Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260302.42
+backend-test	Set up job	2026-03-06T11:08:01.1224739Z ##[endgroup]
+backend-test	Set up job	2026-03-06T11:08:01.1226562Z ##[group]GITHUB_TOKEN Permissions
+backend-test	Set up job	2026-03-06T11:08:01.1229618Z Contents: read
+backend-test	Set up job	2026-03-06T11:08:01.1230547Z Metadata: read
+backend-test	Set up job	2026-03-06T11:08:01.1231468Z Packages: read
+backend-test	Set up job	2026-03-06T11:08:01.1232384Z ##[endgroup]
+backend-test	Set up job	2026-03-06T11:08:01.1235694Z Secret source: Actions
+backend-test	Set up job	2026-03-06T11:08:01.1237804Z Prepare workflow directory
+backend-test	Set up job	2026-03-06T11:08:01.1705050Z Prepare all required actions
+backend-test	Set up job	2026-03-06T11:08:01.1760590Z Getting action download info
+backend-test	Set up job	2026-03-06T11:08:01.4642463Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+backend-test	Set up job	2026-03-06T11:08:01.6359253Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+backend-test	Set up job	2026-03-06T11:08:01.8558723Z Complete job name: backend-test
+backend-test	Run actions/checkout@v4	???2026-03-06T11:08:01.9272868Z ##[group]Run actions/checkout@v4
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:01.9273711Z with:
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:01.9274154Z   repository: AliNMackie/clearslot
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:01.9274831Z   token: ***
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:01.9275212Z   ssh-strict: true
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:01.9275612Z   ssh-user: git
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:01.9276027Z   persist-credentials: true
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:01.9276475Z   clean: true
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:01.9276886Z   sparse-checkout-cone-mode: true
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:01.9277358Z   fetch-depth: 1
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:01.9277929Z   fetch-tags: false
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:01.9278329Z   show-progress: true
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:01.9278735Z   lfs: false
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:01.9279099Z   submodules: false
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:01.9279507Z   set-safe-directory: true
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:01.9280229Z ##[endgroup]
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.0406017Z Syncing repository: AliNMackie/clearslot
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.0408253Z ##[group]Getting Git version info
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.0409310Z Working directory is '/home/runner/work/clearslot/clearslot'
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.0410957Z [command]/usr/bin/git version
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.0513097Z git version 2.53.0
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.0540037Z ##[endgroup]
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.0553792Z Temporarily overriding HOME='/home/runner/work/_temp/67fc6683-485c-484f-a5f5-a9e02d754dfe' before making global git config changes
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.0566678Z Adding repository directory to the temporary git global config as a safe directory
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.0568873Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/clearslot/clearslot
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.0612613Z Deleting the contents of '/home/runner/work/clearslot/clearslot'
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.0616482Z ##[group]Initializing the repository
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.0621964Z [command]/usr/bin/git init /home/runner/work/clearslot/clearslot
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.0751780Z hint: Using 'master' as the name for the initial branch. This default branch name
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.0753158Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.0754094Z hint: to use in all of your new repositories, which will suppress this warning,
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.0755072Z hint: call:
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.0755586Z hint:
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.0756096Z hint: 	git config --global init.defaultBranch <name>
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.0757121Z hint:
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.0758091Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.0759407Z hint: 'development'. The just-created branch can be renamed via this command:
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.0760695Z hint:
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.0761393Z hint: 	git branch -m <name>
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.0762196Z hint:
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.0763220Z hint: Disable this message with "git config set advice.defaultBranchName false"
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.0765041Z Initialized empty Git repository in /home/runner/work/clearslot/clearslot/.git/
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.0771470Z [command]/usr/bin/git remote add origin https://github.com/AliNMackie/clearslot
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.0811630Z ##[endgroup]
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.0812830Z ##[group]Disabling automatic garbage collection
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.0816658Z [command]/usr/bin/git config --local gc.auto 0
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.0846359Z ##[endgroup]
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.0847783Z ##[group]Setting up auth
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.0854302Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.0891174Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.1288423Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.1323719Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.1580900Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.1618677Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.1890607Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.1930837Z ##[endgroup]
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.1932093Z ##[group]Fetching the repository
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.1940857Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +bb8f53ffd1b960217be5383ccf04b80c0ded7934:refs/remotes/origin/main
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.4777101Z From https://github.com/AliNMackie/clearslot
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.4778426Z  * [new ref]         bb8f53ffd1b960217be5383ccf04b80c0ded7934 -> origin/main
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.4811701Z ##[endgroup]
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.4812429Z ##[group]Determining the checkout info
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.4814853Z ##[endgroup]
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.4821278Z [command]/usr/bin/git sparse-checkout disable
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.4867063Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.4898126Z ##[group]Checking out the ref
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.4903040Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.5191384Z Switched to a new branch 'main'
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.5192649Z branch 'main' set up to track 'origin/main'.
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.5196086Z ##[endgroup]
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.5237030Z [command]/usr/bin/git log -1 --format=%H
+backend-test	Run actions/checkout@v4	2026-03-06T11:08:02.5262683Z bb8f53ffd1b960217be5383ccf04b80c0ded7934
+backend-test	Set up Python 3.11	???2026-03-06T11:08:02.5531956Z ##[group]Run actions/setup-python@v5
+backend-test	Set up Python 3.11	2026-03-06T11:08:02.5532631Z with:
+backend-test	Set up Python 3.11	2026-03-06T11:08:02.5533029Z   python-version: 3.11
+backend-test	Set up Python 3.11	2026-03-06T11:08:02.5533505Z   check-latest: false
+backend-test	Set up Python 3.11	2026-03-06T11:08:02.5534135Z   token: ***
+backend-test	Set up Python 3.11	2026-03-06T11:08:02.5534547Z   update-environment: true
+backend-test	Set up Python 3.11	2026-03-06T11:08:02.5535073Z   allow-prereleases: false
+backend-test	Set up Python 3.11	2026-03-06T11:08:02.5535568Z   freethreaded: false
+backend-test	Set up Python 3.11	2026-03-06T11:08:02.5536012Z ##[endgroup]
+backend-test	Set up Python 3.11	2026-03-06T11:08:02.7204238Z ##[group]Installed versions
+backend-test	Set up Python 3.11	2026-03-06T11:08:02.7335224Z Successfully set up CPython (3.11.14)
+backend-test	Set up Python 3.11	2026-03-06T11:08:02.7337049Z ##[endgroup]
+backend-test	Install dependencies	???2026-03-06T11:08:02.7455006Z ##[group]Run python -m pip install --upgrade pip
+backend-test	Install dependencies	2026-03-06T11:08:02.7456192Z [36;1mpython -m pip install --upgrade pip[0m
+backend-test	Install dependencies	2026-03-06T11:08:02.7457242Z [36;1mpip install -r backend/requirements.txt[0m
+backend-test	Install dependencies	2026-03-06T11:08:02.7459046Z [36;1mpip install pytest pytest-asyncio httpx google-cloud-firestore firebase-admin[0m
+backend-test	Install dependencies	2026-03-06T11:08:02.7610184Z shell: /usr/bin/bash -e {0}
+backend-test	Install dependencies	2026-03-06T11:08:02.7610968Z env:
+backend-test	Install dependencies	2026-03-06T11:08:02.7611739Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.14/x64
+backend-test	Install dependencies	2026-03-06T11:08:02.7613034Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib/pkgconfig
+backend-test	Install dependencies	2026-03-06T11:08:02.7614309Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+backend-test	Install dependencies	2026-03-06T11:08:02.7615487Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+backend-test	Install dependencies	2026-03-06T11:08:02.7616646Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+backend-test	Install dependencies	2026-03-06T11:08:02.7618041Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib
+backend-test	Install dependencies	2026-03-06T11:08:02.7619109Z ##[endgroup]
+backend-test	Install dependencies	2026-03-06T11:08:05.1673954Z Requirement already satisfied: pip in /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages (26.0.1)
+backend-test	Install dependencies	2026-03-06T11:08:05.8943937Z Collecting absolufy-imports==0.3.1 (from -r backend/requirements.txt (line 1))
+backend-test	Install dependencies	2026-03-06T11:08:05.9619830Z   Downloading absolufy_imports-0.3.1-py2.py3-none-any.whl.metadata (2.9 kB)
+backend-test	Install dependencies	2026-03-06T11:08:05.9884209Z Collecting ag2==0.10.0 (from -r backend/requirements.txt (line 2))
+backend-test	Install dependencies	2026-03-06T11:08:05.9964611Z   Downloading ag2-0.10.0-py3-none-any.whl.metadata (36 kB)
+backend-test	Install dependencies	2026-03-06T11:08:06.0821982Z Collecting aiofiles==25.1.0 (from -r backend/requirements.txt (line 3))
+backend-test	Install dependencies	2026-03-06T11:08:06.0894731Z   Downloading aiofiles-25.1.0-py3-none-any.whl.metadata (6.3 kB)
+backend-test	Install dependencies	2026-03-06T11:08:06.1086056Z Collecting aiohappyeyeballs==2.6.1 (from -r backend/requirements.txt (line 4))
+backend-test	Install dependencies	2026-03-06T11:08:06.1157967Z   Downloading aiohappyeyeballs-2.6.1-py3-none-any.whl.metadata (5.9 kB)
+backend-test	Install dependencies	2026-03-06T11:08:06.6364001Z Collecting aiohttp==3.13.2 (from -r backend/requirements.txt (line 5))
+backend-test	Install dependencies	2026-03-06T11:08:06.6438968Z   Downloading aiohttp-3.13.2-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (8.1 kB)
+backend-test	Install dependencies	2026-03-06T11:08:06.6591877Z Collecting aiosignal==1.4.0 (from -r backend/requirements.txt (line 6))
+backend-test	Install dependencies	2026-03-06T11:08:06.6660544Z   Downloading aiosignal-1.4.0-py3-none-any.whl.metadata (3.7 kB)
+backend-test	Install dependencies	2026-03-06T11:08:06.6805412Z Collecting aiosqlite==0.21.0 (from -r backend/requirements.txt (line 7))
+backend-test	Install dependencies	2026-03-06T11:08:06.6874232Z   Downloading aiosqlite-0.21.0-py3-none-any.whl.metadata (4.3 kB)
+backend-test	Install dependencies	2026-03-06T11:08:06.7099710Z Collecting alembic==1.17.1 (from -r backend/requirements.txt (line 8))
+backend-test	Install dependencies	2026-03-06T11:08:06.7180086Z   Downloading alembic-1.17.1-py3-none-any.whl.metadata (7.2 kB)
+backend-test	Install dependencies	2026-03-06T11:08:06.7323750Z Collecting annotated-doc==0.0.4 (from -r backend/requirements.txt (line 9))
+backend-test	Install dependencies	2026-03-06T11:08:06.7392676Z   Downloading annotated_doc-0.0.4-py3-none-any.whl.metadata (6.6 kB)
+backend-test	Install dependencies	2026-03-06T11:08:06.7533900Z Collecting annotated-types==0.7.0 (from -r backend/requirements.txt (line 10))
+backend-test	Install dependencies	2026-03-06T11:08:06.7612276Z   Downloading annotated_types-0.7.0-py3-none-any.whl.metadata (15 kB)
+backend-test	Install dependencies	2026-03-06T11:08:06.7829182Z Collecting anyio==4.11.0 (from -r backend/requirements.txt (line 11))
+backend-test	Install dependencies	2026-03-06T11:08:06.7910423Z   Downloading anyio-4.11.0-py3-none-any.whl.metadata (4.1 kB)
+backend-test	Install dependencies	2026-03-06T11:08:06.8103315Z Collecting APScheduler==3.11.2 (from -r backend/requirements.txt (line 12))
+backend-test	Install dependencies	2026-03-06T11:08:06.8179135Z   Downloading apscheduler-3.11.2-py3-none-any.whl.metadata (6.4 kB)
+backend-test	Install dependencies	2026-03-06T11:08:06.8721022Z Collecting asyncpg==0.31.0 (from -r backend/requirements.txt (line 13))
+backend-test	Install dependencies	2026-03-06T11:08:06.8795200Z   Downloading asyncpg-0.31.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (4.4 kB)
+backend-test	Install dependencies	2026-03-06T11:08:06.8969104Z Collecting attrs==25.4.0 (from -r backend/requirements.txt (line 14))
+backend-test	Install dependencies	2026-03-06T11:08:06.9039041Z   Downloading attrs-25.4.0-py3-none-any.whl.metadata (10 kB)
+backend-test	Install dependencies	2026-03-06T11:08:06.9229001Z Collecting Authlib==1.6.5 (from -r backend/requirements.txt (line 15))
+backend-test	Install dependencies	2026-03-06T11:08:06.9300561Z   Downloading authlib-1.6.5-py2.py3-none-any.whl.metadata (9.8 kB)
+backend-test	Install dependencies	2026-03-06T11:08:06.9459076Z Collecting banks==2.2.0 (from -r backend/requirements.txt (line 16))
+backend-test	Install dependencies	2026-03-06T11:08:06.9533978Z   Downloading banks-2.2.0-py3-none-any.whl.metadata (12 kB)
+backend-test	Install dependencies	2026-03-06T11:08:06.9720465Z Collecting beautifulsoup4==4.14.2 (from -r backend/requirements.txt (line 17))
+backend-test	Install dependencies	2026-03-06T11:08:06.9794369Z   Downloading beautifulsoup4-4.14.2-py3-none-any.whl.metadata (3.8 kB)
+backend-test	Install dependencies	2026-03-06T11:08:07.0011159Z Collecting blinker==1.9.0 (from -r backend/requirements.txt (line 18))
+backend-test	Install dependencies	2026-03-06T11:08:07.0081840Z   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+backend-test	Install dependencies	2026-03-06T11:08:07.0688684Z Collecting Bottleneck==1.6.0 (from -r backend/requirements.txt (line 19))
+backend-test	Install dependencies	2026-03-06T11:08:07.0775441Z   Downloading bottleneck-1.6.0-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (8.2 kB)
+backend-test	Install dependencies	2026-03-06T11:08:07.1120340Z Collecting brotli==1.2.0 (from -r backend/requirements.txt (line 20))
+backend-test	Install dependencies	2026-03-06T11:08:07.1194663Z   Downloading brotli-1.2.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (6.1 kB)
+backend-test	Install dependencies	2026-03-06T11:08:07.1358670Z Collecting CacheControl==0.14.4 (from -r backend/requirements.txt (line 21))
+backend-test	Install dependencies	2026-03-06T11:08:07.1430185Z   Downloading cachecontrol-0.14.4-py3-none-any.whl.metadata (3.1 kB)
+backend-test	Install dependencies	2026-03-06T11:08:07.1625642Z Collecting cachetools==6.2.1 (from -r backend/requirements.txt (line 22))
+backend-test	Install dependencies	2026-03-06T11:08:07.1694952Z   Downloading cachetools-6.2.1-py3-none-any.whl.metadata (5.5 kB)
+backend-test	Install dependencies	2026-03-06T11:08:07.1892300Z Collecting certifi==2025.11.12 (from -r backend/requirements.txt (line 23))
+backend-test	Install dependencies	2026-03-06T11:08:07.1962634Z   Downloading certifi-2025.11.12-py3-none-any.whl.metadata (2.5 kB)
+backend-test	Install dependencies	2026-03-06T11:08:07.3186620Z Collecting cffi==2.0.0 (from -r backend/requirements.txt (line 24))
+backend-test	Install dependencies	2026-03-06T11:08:07.3258784Z   Downloading cffi-2.0.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.6 kB)
+backend-test	Install dependencies	2026-03-06T11:08:07.4077697Z Collecting charset-normalizer==3.4.4 (from -r backend/requirements.txt (line 25))
+backend-test	Install dependencies	2026-03-06T11:08:07.4152217Z   Downloading charset_normalizer-3.4.4-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (37 kB)
+backend-test	Install dependencies	2026-03-06T11:08:07.4369151Z Collecting click==8.3.0 (from -r backend/requirements.txt (line 26))
+backend-test	Install dependencies	2026-03-06T11:08:07.4440959Z   Downloading click-8.3.0-py3-none-any.whl.metadata (2.6 kB)
+backend-test	Install dependencies	2026-03-06T11:08:07.4623902Z Collecting cloud-sql-python-connector==1.20.0 (from -r backend/requirements.txt (line 27))
+backend-test	Install dependencies	2026-03-06T11:08:07.4702006Z   Downloading cloud_sql_python_connector-1.20.0-py3-none-any.whl.metadata (31 kB)
+backend-test	Install dependencies	2026-03-06T11:08:07.4892958Z Collecting cloudevents==1.12.0 (from -r backend/requirements.txt (line 28))
+backend-test	Install dependencies	2026-03-06T11:08:07.4962608Z   Downloading cloudevents-1.12.0-py3-none-any.whl.metadata (7.2 kB)
+backend-test	Install dependencies	2026-03-06T11:08:07.5139325Z Collecting cloudpickle==3.1.2 (from -r backend/requirements.txt (line 29))
+backend-test	Install dependencies	2026-03-06T11:08:07.5207967Z   Downloading cloudpickle-3.1.2-py3-none-any.whl.metadata (7.1 kB)
+backend-test	Install dependencies	2026-03-06T11:08:07.5394713Z Collecting colorama==0.4.6 (from -r backend/requirements.txt (line 30))
+backend-test	Install dependencies	2026-03-06T11:08:07.5463361Z   Downloading colorama-0.4.6-py2.py3-none-any.whl.metadata (17 kB)
+backend-test	Install dependencies	2026-03-06T11:08:07.7106969Z Collecting cryptography==46.0.3 (from -r backend/requirements.txt (line 31))
+backend-test	Install dependencies	2026-03-06T11:08:07.7180014Z   Downloading cryptography-46.0.3-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (5.7 kB)
+backend-test	Install dependencies	2026-03-06T11:08:07.7360360Z Collecting cssselect2==0.8.0 (from -r backend/requirements.txt (line 32))
+backend-test	Install dependencies	2026-03-06T11:08:07.7432460Z   Downloading cssselect2-0.8.0-py3-none-any.whl.metadata (2.9 kB)
+backend-test	Install dependencies	2026-03-06T11:08:07.7652090Z Collecting dataclasses-json==0.6.7 (from -r backend/requirements.txt (line 33))
+backend-test	Install dependencies	2026-03-06T11:08:07.7721272Z   Downloading dataclasses_json-0.6.7-py3-none-any.whl.metadata (25 kB)
+backend-test	Install dependencies	2026-03-06T11:08:07.7896547Z Collecting defusedxml==0.7.1 (from -r backend/requirements.txt (line 34))
+backend-test	Install dependencies	2026-03-06T11:08:07.7966040Z   Downloading defusedxml-0.7.1-py2.py3-none-any.whl.metadata (32 kB)
+backend-test	Install dependencies	2026-03-06T11:08:07.8144332Z Collecting Deprecated==1.2.18 (from -r backend/requirements.txt (line 35))
+backend-test	Install dependencies	2026-03-06T11:08:07.8218245Z   Downloading Deprecated-1.2.18-py2.py3-none-any.whl.metadata (5.7 kB)
+backend-test	Install dependencies	2026-03-06T11:08:07.8370919Z Collecting deprecation==2.1.0 (from -r backend/requirements.txt (line 36))
+backend-test	Install dependencies	2026-03-06T11:08:07.8446479Z   Downloading deprecation-2.1.0-py2.py3-none-any.whl.metadata (4.6 kB)
+backend-test	Install dependencies	2026-03-06T11:08:07.8585729Z Collecting dirtyjson==1.0.8 (from -r backend/requirements.txt (line 37))
+backend-test	Install dependencies	2026-03-06T11:08:07.8662925Z   Downloading dirtyjson-1.0.8-py3-none-any.whl.metadata (11 kB)
+backend-test	Install dependencies	2026-03-06T11:08:07.8871464Z Collecting diskcache==5.6.3 (from -r backend/requirements.txt (line 38))
+backend-test	Install dependencies	2026-03-06T11:08:07.8940838Z   Downloading diskcache-5.6.3-py3-none-any.whl.metadata (20 kB)
+backend-test	Install dependencies	2026-03-06T11:08:07.9108388Z Collecting distro==1.9.0 (from -r backend/requirements.txt (line 39))
+backend-test	Install dependencies	2026-03-06T11:08:07.9177021Z   Downloading distro-1.9.0-py3-none-any.whl.metadata (6.8 kB)
+backend-test	Install dependencies	2026-03-06T11:08:07.9347772Z Collecting dnspython==2.8.0 (from -r backend/requirements.txt (line 40))
+backend-test	Install dependencies	2026-03-06T11:08:07.9417790Z   Downloading dnspython-2.8.0-py3-none-any.whl.metadata (5.7 kB)
+backend-test	Install dependencies	2026-03-06T11:08:07.9616807Z Collecting docker==7.1.0 (from -r backend/requirements.txt (line 41))
+backend-test	Install dependencies	2026-03-06T11:08:07.9685881Z   Downloading docker-7.1.0-py3-none-any.whl.metadata (3.8 kB)
+backend-test	Install dependencies	2026-03-06T11:08:07.9836882Z Collecting docstring_parser==0.17.0 (from -r backend/requirements.txt (line 42))
+backend-test	Install dependencies	2026-03-06T11:08:07.9905967Z   Downloading docstring_parser-0.17.0-py3-none-any.whl.metadata (3.5 kB)
+backend-test	Install dependencies	2026-03-06T11:08:08.0133603Z Collecting docxtpl==0.20.2 (from -r backend/requirements.txt (line 43))
+backend-test	Install dependencies	2026-03-06T11:08:08.0201779Z   Downloading docxtpl-0.20.2-py3-none-any.whl.metadata (2.8 kB)
+backend-test	Install dependencies	2026-03-06T11:08:08.0351187Z Collecting ecdsa==0.19.1 (from -r backend/requirements.txt (line 44))
+backend-test	Install dependencies	2026-03-06T11:08:08.0420387Z   Downloading ecdsa-0.19.1-py2.py3-none-any.whl.metadata (29 kB)
+backend-test	Install dependencies	2026-03-06T11:08:08.0580371Z Collecting et_xmlfile==2.0.0 (from -r backend/requirements.txt (line 45))
+backend-test	Install dependencies	2026-03-06T11:08:08.0649784Z   Downloading et_xmlfile-2.0.0-py3-none-any.whl.metadata (2.7 kB)
+backend-test	Install dependencies	2026-03-06T11:08:08.1056662Z Collecting fastapi==0.121.1 (from -r backend/requirements.txt (line 46))
+backend-test	Install dependencies	2026-03-06T11:08:08.1132026Z   Downloading fastapi-0.121.1-py3-none-any.whl.metadata (28 kB)
+backend-test	Install dependencies	2026-03-06T11:08:08.1342722Z Collecting feedparser==6.0.12 (from -r backend/requirements.txt (line 47))
+backend-test	Install dependencies	2026-03-06T11:08:08.1413242Z   Downloading feedparser-6.0.12-py3-none-any.whl.metadata (2.7 kB)
+backend-test	Install dependencies	2026-03-06T11:08:08.1628904Z Collecting filelock==3.20.3 (from -r backend/requirements.txt (line 48))
+backend-test	Install dependencies	2026-03-06T11:08:08.1699329Z   Downloading filelock-3.20.3-py3-none-any.whl.metadata (2.1 kB)
+backend-test	Install dependencies	2026-03-06T11:08:08.1862075Z Collecting filetype==1.2.0 (from -r backend/requirements.txt (line 49))
+backend-test	Install dependencies	2026-03-06T11:08:08.1930957Z   Downloading filetype-1.2.0-py2.py3-none-any.whl.metadata (6.5 kB)
+backend-test	Install dependencies	2026-03-06T11:08:08.2123708Z Collecting firebase_admin==7.1.0 (from -r backend/requirements.txt (line 50))
+backend-test	Install dependencies	2026-03-06T11:08:08.2192596Z   Downloading firebase_admin-7.1.0-py3-none-any.whl.metadata (1.7 kB)
+backend-test	Install dependencies	2026-03-06T11:08:08.2481609Z Collecting firecrawl-py==4.12.0 (from -r backend/requirements.txt (line 51))
+backend-test	Install dependencies	2026-03-06T11:08:08.2560467Z   Downloading firecrawl_py-4.12.0-py3-none-any.whl.metadata (7.4 kB)
+backend-test	Install dependencies	2026-03-06T11:08:08.2763326Z Collecting Flask==3.1.2 (from -r backend/requirements.txt (line 52))
+backend-test	Install dependencies	2026-03-06T11:08:08.3199337Z   Downloading flask-3.1.2-py3-none-any.whl.metadata (3.2 kB)
+backend-test	Install dependencies	2026-03-06T11:08:08.4560555Z Collecting fonttools==4.61.1 (from -r backend/requirements.txt (line 53))
+backend-test	Install dependencies	2026-03-06T11:08:08.4638012Z   Downloading fonttools-4.61.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (114 kB)
+backend-test	Install dependencies	2026-03-06T11:08:08.5016511Z Collecting fpdf2==2.8.5 (from -r backend/requirements.txt (line 54))
+backend-test	Install dependencies	2026-03-06T11:08:08.5102589Z   Downloading fpdf2-2.8.5-py3-none-any.whl.metadata (76 kB)
+backend-test	Install dependencies	2026-03-06T11:08:08.5830492Z Collecting frozenlist==1.8.0 (from -r backend/requirements.txt (line 55))
+backend-test	Install dependencies	2026-03-06T11:08:08.5907933Z   Downloading frozenlist-1.8.0-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (20 kB)
+backend-test	Install dependencies	2026-03-06T11:08:08.6186165Z Collecting fsspec==2025.10.0 (from -r backend/requirements.txt (line 56))
+backend-test	Install dependencies	2026-03-06T11:08:08.6265160Z   Downloading fsspec-2025.10.0-py3-none-any.whl.metadata (10 kB)
+backend-test	Install dependencies	2026-03-06T11:08:08.6593270Z Collecting functions-framework==3.10.0 (from -r backend/requirements.txt (line 57))
+backend-test	Install dependencies	2026-03-06T11:08:08.6673019Z   Downloading functions_framework-3.10.0-py3-none-any.whl.metadata (15 kB)
+backend-test	Install dependencies	2026-03-06T11:08:08.6873472Z Collecting google-adk==1.17.0 (from -r backend/requirements.txt (line 58))
+backend-test	Install dependencies	2026-03-06T11:08:08.6948419Z   Downloading google_adk-1.17.0-py3-none-any.whl.metadata (14 kB)
+backend-test	Install dependencies	2026-03-06T11:08:08.7200832Z Collecting google-ai-generativelanguage==0.6.15 (from -r backend/requirements.txt (line 59))
+backend-test	Install dependencies	2026-03-06T11:08:08.7270431Z   Downloading google_ai_generativelanguage-0.6.15-py3-none-any.whl.metadata (5.7 kB)
+backend-test	Install dependencies	2026-03-06T11:08:08.7570033Z Collecting google-api-core==2.28.1 (from -r backend/requirements.txt (line 60))
+backend-test	Install dependencies	2026-03-06T11:08:08.7640635Z   Downloading google_api_core-2.28.1-py3-none-any.whl.metadata (3.3 kB)
+backend-test	Install dependencies	2026-03-06T11:08:08.8046462Z Collecting google-api-python-client==2.187.0 (from -r backend/requirements.txt (line 61))
+backend-test	Install dependencies	2026-03-06T11:08:08.8202495Z   Downloading google_api_python_client-2.187.0-py3-none-any.whl.metadata (7.0 kB)
+backend-test	Install dependencies	2026-03-06T11:08:08.8440762Z Collecting google-auth==2.41.1 (from -r backend/requirements.txt (line 62))
+backend-test	Install dependencies	2026-03-06T11:08:08.8523021Z   Downloading google_auth-2.41.1-py2.py3-none-any.whl.metadata (6.6 kB)
+backend-test	Install dependencies	2026-03-06T11:08:08.8715811Z Collecting google-auth-httplib2==0.2.1 (from -r backend/requirements.txt (line 63))
+backend-test	Install dependencies	2026-03-06T11:08:08.8786186Z   Downloading google_auth_httplib2-0.2.1-py3-none-any.whl.metadata (3.0 kB)
+backend-test	Install dependencies	2026-03-06T11:08:08.8964629Z Collecting google-auth-oauthlib==1.2.3 (from -r backend/requirements.txt (line 64))
+backend-test	Install dependencies	2026-03-06T11:08:08.9040443Z   Downloading google_auth_oauthlib-1.2.3-py3-none-any.whl.metadata (3.1 kB)
+backend-test	Install dependencies	2026-03-06T11:08:08.9413920Z Collecting google-cloud-aiplatform==1.127.0 (from -r backend/requirements.txt (line 65))
+backend-test	Install dependencies	2026-03-06T11:08:08.9485703Z   Downloading google_cloud_aiplatform-1.127.0-py2.py3-none-any.whl.metadata (46 kB)
+backend-test	Install dependencies	2026-03-06T11:08:09.0133869Z Collecting google-cloud-appengine-logging==1.7.0 (from -r backend/requirements.txt (line 66))
+backend-test	Install dependencies	2026-03-06T11:08:09.0203810Z   Downloading google_cloud_appengine_logging-1.7.0-py3-none-any.whl.metadata (10 kB)
+backend-test	Install dependencies	2026-03-06T11:08:09.0371570Z Collecting google-cloud-audit-log==0.4.0 (from -r backend/requirements.txt (line 67))
+backend-test	Install dependencies	2026-03-06T11:08:09.0441835Z   Downloading google_cloud_audit_log-0.4.0-py3-none-any.whl.metadata (9.3 kB)
+backend-test	Install dependencies	2026-03-06T11:08:09.0779285Z Collecting google-cloud-bigquery==3.38.0 (from -r backend/requirements.txt (line 68))
+backend-test	Install dependencies	2026-03-06T11:08:09.0857890Z   Downloading google_cloud_bigquery-3.38.0-py3-none-any.whl.metadata (8.0 kB)
+backend-test	Install dependencies	2026-03-06T11:08:09.1646718Z Collecting google-cloud-bigtable==2.34.0 (from -r backend/requirements.txt (line 69))
+backend-test	Install dependencies	2026-03-06T11:08:09.1719990Z   Downloading google_cloud_bigtable-2.34.0-py3-none-any.whl.metadata (5.8 kB)
+backend-test	Install dependencies	2026-03-06T11:08:09.1930513Z Collecting google-cloud-core==2.5.0 (from -r backend/requirements.txt (line 70))
+backend-test	Install dependencies	2026-03-06T11:08:09.2002272Z   Downloading google_cloud_core-2.5.0-py3-none-any.whl.metadata (3.1 kB)
+backend-test	Install dependencies	2026-03-06T11:08:09.2232593Z Collecting google-cloud-discoveryengine==0.13.12 (from -r backend/requirements.txt (line 71))
+backend-test	Install dependencies	2026-03-06T11:08:09.2304407Z   Downloading google_cloud_discoveryengine-0.13.12-py3-none-any.whl.metadata (9.6 kB)
+backend-test	Install dependencies	2026-03-06T11:08:09.2505526Z Collecting google-cloud-firestore==2.21.0 (from -r backend/requirements.txt (line 72))
+backend-test	Install dependencies	2026-03-06T11:08:09.2574953Z   Downloading google_cloud_firestore-2.21.0-py3-none-any.whl.metadata (9.9 kB)
+backend-test	Install dependencies	2026-03-06T11:08:09.2773098Z Collecting google-cloud-iam==2.21.0 (from -r backend/requirements.txt (line 73))
+backend-test	Install dependencies	2026-03-06T11:08:09.2842980Z   Downloading google_cloud_iam-2.21.0-py3-none-any.whl.metadata (10 kB)
+backend-test	Install dependencies	2026-03-06T11:08:09.3069746Z Collecting google-cloud-kms==3.7.0 (from -r backend/requirements.txt (line 74))
+backend-test	Install dependencies	2026-03-06T11:08:09.3145642Z   Downloading google_cloud_kms-3.7.0-py3-none-any.whl.metadata (10 kB)
+backend-test	Install dependencies	2026-03-06T11:08:09.3345493Z Collecting google-cloud-logging==3.12.1 (from -r backend/requirements.txt (line 75))
+backend-test	Install dependencies	2026-03-06T11:08:09.3415444Z   Downloading google_cloud_logging-3.12.1-py2.py3-none-any.whl.metadata (5.0 kB)
+backend-test	Install dependencies	2026-03-06T11:08:09.3629915Z Collecting google-cloud-monitoring==2.28.0 (from -r backend/requirements.txt (line 76))
+backend-test	Install dependencies	2026-03-06T11:08:09.3704682Z   Downloading google_cloud_monitoring-2.28.0-py3-none-any.whl.metadata (10 kB)
+backend-test	Install dependencies	2026-03-06T11:08:09.3986500Z Collecting google-cloud-pubsub==2.34.0 (from -r backend/requirements.txt (line 77))
+backend-test	Install dependencies	2026-03-06T11:08:09.4069294Z   Downloading google_cloud_pubsub-2.34.0-py3-none-any.whl.metadata (10 kB)
+backend-test	Install dependencies	2026-03-06T11:08:09.4284680Z Collecting google-cloud-resource-manager==1.15.0 (from -r backend/requirements.txt (line 78))
+backend-test	Install dependencies	2026-03-06T11:08:09.4355563Z   Downloading google_cloud_resource_manager-1.15.0-py3-none-any.whl.metadata (9.9 kB)
+backend-test	Install dependencies	2026-03-06T11:08:09.4553350Z Collecting google-cloud-secret-manager==2.25.0 (from -r backend/requirements.txt (line 79))
+backend-test	Install dependencies	2026-03-06T11:08:09.4640764Z   Downloading google_cloud_secret_manager-2.25.0-py3-none-any.whl.metadata (9.8 kB)
+backend-test	Install dependencies	2026-03-06T11:08:09.4911132Z Collecting google-cloud-spanner==3.59.0 (from -r backend/requirements.txt (line 80))
+backend-test	Install dependencies	2026-03-06T11:08:09.5011344Z   Downloading google_cloud_spanner-3.59.0-py3-none-any.whl.metadata (11 kB)
+backend-test	Install dependencies	2026-03-06T11:08:09.5248246Z Collecting google-cloud-speech==2.34.0 (from -r backend/requirements.txt (line 81))
+backend-test	Install dependencies	2026-03-06T11:08:09.5326492Z   Downloading google_cloud_speech-2.34.0-py3-none-any.whl.metadata (9.8 kB)
+backend-test	Install dependencies	2026-03-06T11:08:09.5568120Z Collecting google-cloud-storage==3.6.0 (from -r backend/requirements.txt (line 82))
+backend-test	Install dependencies	2026-03-06T11:08:09.5639156Z   Downloading google_cloud_storage-3.6.0-py3-none-any.whl.metadata (13 kB)
+backend-test	Install dependencies	2026-03-06T11:08:09.5836436Z Collecting google-cloud-tasks==2.20.0 (from -r backend/requirements.txt (line 83))
+backend-test	Install dependencies	2026-03-06T11:08:09.5906610Z   Downloading google_cloud_tasks-2.20.0-py3-none-any.whl.metadata (9.9 kB)
+backend-test	Install dependencies	2026-03-06T11:08:09.6143620Z Collecting google-cloud-trace==1.17.0 (from -r backend/requirements.txt (line 84))
+backend-test	Install dependencies	2026-03-06T11:08:09.6212793Z   Downloading google_cloud_trace-1.17.0-py3-none-any.whl.metadata (9.8 kB)
+backend-test	Install dependencies	2026-03-06T11:08:09.6704690Z Collecting google-crc32c==1.7.1 (from -r backend/requirements.txt (line 85))
+backend-test	Install dependencies	2026-03-06T11:08:09.6788146Z   Downloading google_crc32c-1.7.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.3 kB)
+backend-test	Install dependencies	2026-03-06T11:08:09.7000153Z Collecting google-genai==1.50.0 (from -r backend/requirements.txt (line 86))
+backend-test	Install dependencies	2026-03-06T11:08:09.7079660Z   Downloading google_genai-1.50.0-py3-none-any.whl.metadata (46 kB)
+backend-test	Install dependencies	2026-03-06T11:08:09.7278504Z Collecting google-generativeai==0.8.6 (from -r backend/requirements.txt (line 87))
+backend-test	Install dependencies	2026-03-06T11:08:09.7348804Z   Downloading google_generativeai-0.8.6-py3-none-any.whl.metadata (3.9 kB)
+backend-test	Install dependencies	2026-03-06T11:08:09.7541222Z Collecting google-resumable-media==2.7.2 (from -r backend/requirements.txt (line 88))
+backend-test	Install dependencies	2026-03-06T11:08:09.7615989Z   Downloading google_resumable_media-2.7.2-py2.py3-none-any.whl.metadata (2.2 kB)
+backend-test	Install dependencies	2026-03-06T11:08:09.7804376Z Collecting googleapis-common-protos==1.72.0 (from -r backend/requirements.txt (line 89))
+backend-test	Install dependencies	2026-03-06T11:08:09.7875886Z   Downloading googleapis_common_protos-1.72.0-py3-none-any.whl.metadata (9.4 kB)
+backend-test	Install dependencies	2026-03-06T11:08:09.8063208Z Collecting graphviz==0.21 (from -r backend/requirements.txt (line 90))
+backend-test	Install dependencies	2026-03-06T11:08:09.8137150Z   Downloading graphviz-0.21-py3-none-any.whl.metadata (12 kB)
+backend-test	Install dependencies	2026-03-06T11:08:09.9346828Z Collecting greenlet==3.2.4 (from -r backend/requirements.txt (line 91))
+backend-test	Install dependencies	2026-03-06T11:08:09.9425427Z   Downloading greenlet-3.2.4-cp311-cp311-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (4.1 kB)
+backend-test	Install dependencies	2026-03-06T11:08:09.9707950Z Collecting griffe==1.15.0 (from -r backend/requirements.txt (line 92))
+backend-test	Install dependencies	2026-03-06T11:08:09.9780032Z   Downloading griffe-1.15.0-py3-none-any.whl.metadata (5.2 kB)
+backend-test	Install dependencies	2026-03-06T11:08:09.9941515Z Collecting grpc-google-iam-v1==0.14.3 (from -r backend/requirements.txt (line 93))
+backend-test	Install dependencies	2026-03-06T11:08:10.0011181Z   Downloading grpc_google_iam_v1-0.14.3-py3-none-any.whl.metadata (9.2 kB)
+backend-test	Install dependencies	2026-03-06T11:08:10.0166051Z Collecting grpc-interceptor==0.15.4 (from -r backend/requirements.txt (line 94))
+backend-test	Install dependencies	2026-03-06T11:08:10.0236447Z   Downloading grpc_interceptor-0.15.4-py3-none-any.whl.metadata (8.4 kB)
+backend-test	Install dependencies	2026-03-06T11:08:10.5304976Z Collecting grpcio==1.76.0 (from -r backend/requirements.txt (line 95))
+backend-test	Install dependencies	2026-03-06T11:08:10.5387813Z   Downloading grpcio-1.76.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (3.7 kB)
+backend-test	Install dependencies	2026-03-06T11:08:10.5661222Z Collecting grpcio-status==1.71.2 (from -r backend/requirements.txt (line 96))
+backend-test	Install dependencies	2026-03-06T11:08:10.5736237Z   Downloading grpcio_status-1.71.2-py3-none-any.whl.metadata (1.1 kB)
+backend-test	Install dependencies	2026-03-06T11:08:10.5920022Z Collecting gunicorn==23.0.0 (from -r backend/requirements.txt (line 97))
+backend-test	Install dependencies	2026-03-06T11:08:10.5989522Z   Downloading gunicorn-23.0.0-py3-none-any.whl.metadata (4.4 kB)
+backend-test	Install dependencies	2026-03-06T11:08:10.6169019Z Collecting h11==0.16.0 (from -r backend/requirements.txt (line 98))
+backend-test	Install dependencies	2026-03-06T11:08:10.6239737Z   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+backend-test	Install dependencies	2026-03-06T11:08:10.6406735Z Collecting h2==4.3.0 (from -r backend/requirements.txt (line 99))
+backend-test	Install dependencies	2026-03-06T11:08:10.6475892Z   Downloading h2-4.3.0-py3-none-any.whl.metadata (5.1 kB)
+backend-test	Install dependencies	2026-03-06T11:08:10.6617215Z Collecting hpack==4.1.0 (from -r backend/requirements.txt (line 100))
+backend-test	Install dependencies	2026-03-06T11:08:10.6685495Z   Downloading hpack-4.1.0-py3-none-any.whl.metadata (4.6 kB)
+backend-test	Install dependencies	2026-03-06T11:08:10.6863892Z Collecting httpcore==1.0.9 (from -r backend/requirements.txt (line 101))
+backend-test	Install dependencies	2026-03-06T11:08:10.6935627Z   Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+backend-test	Install dependencies	2026-03-06T11:08:10.7110097Z Collecting httplib2==0.31.0 (from -r backend/requirements.txt (line 102))
+backend-test	Install dependencies	2026-03-06T11:08:10.7189195Z   Downloading httplib2-0.31.0-py3-none-any.whl.metadata (2.2 kB)
+backend-test	Install dependencies	2026-03-06T11:08:10.7487106Z Collecting httptools==0.7.1 (from -r backend/requirements.txt (line 103))
+backend-test	Install dependencies	2026-03-06T11:08:10.7558563Z   Downloading httptools-0.7.1-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (3.5 kB)
+backend-test	Install dependencies	2026-03-06T11:08:10.7748028Z Collecting httpx==0.28.1 (from -r backend/requirements.txt (line 104))
+backend-test	Install dependencies	2026-03-06T11:08:10.7817319Z   Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+backend-test	Install dependencies	2026-03-06T11:08:10.7958803Z Collecting httpx-sse==0.4.3 (from -r backend/requirements.txt (line 105))
+backend-test	Install dependencies	2026-03-06T11:08:10.8033224Z   Downloading httpx_sse-0.4.3-py3-none-any.whl.metadata (9.7 kB)
+backend-test	Install dependencies	2026-03-06T11:08:10.8182460Z Collecting hyperframe==6.1.0 (from -r backend/requirements.txt (line 106))
+backend-test	Install dependencies	2026-03-06T11:08:10.8251117Z   Downloading hyperframe-6.1.0-py3-none-any.whl.metadata (4.3 kB)
+backend-test	Install dependencies	2026-03-06T11:08:10.8416882Z Collecting idna==3.11 (from -r backend/requirements.txt (line 107))
+backend-test	Install dependencies	2026-03-06T11:08:10.8486914Z   Downloading idna-3.11-py3-none-any.whl.metadata (8.4 kB)
+backend-test	Install dependencies	2026-03-06T11:08:10.8735894Z Collecting importlib_metadata==8.7.0 (from -r backend/requirements.txt (line 108))
+backend-test	Install dependencies	2026-03-06T11:08:10.8811837Z   Downloading importlib_metadata-8.7.0-py3-none-any.whl.metadata (4.8 kB)
+backend-test	Install dependencies	2026-03-06T11:08:10.8976223Z Collecting iniconfig==2.3.0 (from -r backend/requirements.txt (line 109))
+backend-test	Install dependencies	2026-03-06T11:08:10.9046068Z   Downloading iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+backend-test	Install dependencies	2026-03-06T11:08:10.9234667Z Collecting instaloader==4.15 (from -r backend/requirements.txt (line 110))
+backend-test	Install dependencies	2026-03-06T11:08:10.9311406Z   Downloading instaloader-4.15-py3-none-any.whl.metadata (6.8 kB)
+backend-test	Install dependencies	2026-03-06T11:08:10.9455251Z Collecting itsdangerous==2.2.0 (from -r backend/requirements.txt (line 111))
+backend-test	Install dependencies	2026-03-06T11:08:10.9526362Z   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+backend-test	Install dependencies	2026-03-06T11:08:10.9693209Z Collecting Jinja2==3.1.6 (from -r backend/requirements.txt (line 112))
+backend-test	Install dependencies	2026-03-06T11:08:10.9762235Z   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+backend-test	Install dependencies	2026-03-06T11:08:11.0463034Z Collecting jiter==0.12.0 (from -r backend/requirements.txt (line 113))
+backend-test	Install dependencies	2026-03-06T11:08:11.0540467Z   Downloading jiter-0.12.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.2 kB)
+backend-test	Install dependencies	2026-03-06T11:08:11.0751991Z Collecting joblib==1.5.2 (from -r backend/requirements.txt (line 114))
+backend-test	Install dependencies	2026-03-06T11:08:11.0822699Z   Downloading joblib-1.5.2-py3-none-any.whl.metadata (5.6 kB)
+backend-test	Install dependencies	2026-03-06T11:08:11.0979299Z Collecting jsonpatch==1.33 (from -r backend/requirements.txt (line 115))
+backend-test	Install dependencies	2026-03-06T11:08:11.1049784Z   Downloading jsonpatch-1.33-py2.py3-none-any.whl.metadata (3.0 kB)
+backend-test	Install dependencies	2026-03-06T11:08:11.1194582Z Collecting jsonpointer==3.0.0 (from -r backend/requirements.txt (line 116))
+backend-test	Install dependencies	2026-03-06T11:08:11.1264963Z   Downloading jsonpointer-3.0.0-py2.py3-none-any.whl.metadata (2.3 kB)
+backend-test	Install dependencies	2026-03-06T11:08:11.1483391Z Collecting jsonschema==4.25.1 (from -r backend/requirements.txt (line 117))
+backend-test	Install dependencies	2026-03-06T11:08:11.1551214Z   Downloading jsonschema-4.25.1-py3-none-any.whl.metadata (7.6 kB)
+backend-test	Install dependencies	2026-03-06T11:08:11.1711633Z Collecting jsonschema-specifications==2025.9.1 (from -r backend/requirements.txt (line 118))
+backend-test	Install dependencies	2026-03-06T11:08:11.1780699Z   Downloading jsonschema_specifications-2025.9.1-py3-none-any.whl.metadata (2.9 kB)
+backend-test	Install dependencies	2026-03-06T11:08:11.3137874Z Collecting langchain==0.3.27 (from -r backend/requirements.txt (line 119))
+backend-test	Install dependencies	2026-03-06T11:08:11.3210786Z   Downloading langchain-0.3.27-py3-none-any.whl.metadata (7.8 kB)
+backend-test	Install dependencies	2026-03-06T11:08:11.3591645Z Collecting langchain-core==0.3.79 (from -r backend/requirements.txt (line 120))
+backend-test	Install dependencies	2026-03-06T11:08:11.3663489Z   Downloading langchain_core-0.3.79-py3-none-any.whl.metadata (3.2 kB)
+backend-test	Install dependencies	2026-03-06T11:08:11.3865056Z Collecting langchain-google-vertexai==2.1.2 (from -r backend/requirements.txt (line 121))
+backend-test	Install dependencies	2026-03-06T11:08:11.3946270Z   Downloading langchain_google_vertexai-2.1.2-py3-none-any.whl.metadata (4.9 kB)
+backend-test	Install dependencies	2026-03-06T11:08:11.4118313Z Collecting langchain-text-splitters==0.3.11 (from -r backend/requirements.txt (line 122))
+backend-test	Install dependencies	2026-03-06T11:08:11.4190783Z   Downloading langchain_text_splitters-0.3.11-py3-none-any.whl.metadata (1.8 kB)
+backend-test	Install dependencies	2026-03-06T11:08:11.4530015Z Collecting langgraph==0.3.34 (from -r backend/requirements.txt (line 123))
+backend-test	Install dependencies	2026-03-06T11:08:11.4606188Z   Downloading langgraph-0.3.34-py3-none-any.whl.metadata (7.9 kB)
+backend-test	Install dependencies	2026-03-06T11:08:11.4783436Z Collecting langgraph-checkpoint==2.1.2 (from -r backend/requirements.txt (line 124))
+backend-test	Install dependencies	2026-03-06T11:08:11.4852640Z   Downloading langgraph_checkpoint-2.1.2-py3-none-any.whl.metadata (4.2 kB)
+backend-test	Install dependencies	2026-03-06T11:08:11.5009780Z Collecting langgraph-prebuilt==0.1.8 (from -r backend/requirements.txt (line 125))
+backend-test	Install dependencies	2026-03-06T11:08:11.5109625Z   Downloading langgraph_prebuilt-0.1.8-py3-none-any.whl.metadata (5.0 kB)
+backend-test	Install dependencies	2026-03-06T11:08:11.5338928Z Collecting langgraph-sdk==0.1.74 (from -r backend/requirements.txt (line 126))
+backend-test	Install dependencies	2026-03-06T11:08:11.5416215Z   Downloading langgraph_sdk-0.1.74-py3-none-any.whl.metadata (1.5 kB)
+backend-test	Install dependencies	2026-03-06T11:08:11.5920192Z Collecting langsmith==0.4.42 (from -r backend/requirements.txt (line 127))
+backend-test	Install dependencies	2026-03-06T11:08:11.6005620Z   Downloading langsmith-0.4.42-py3-none-any.whl.metadata (14 kB)
+backend-test	Install dependencies	2026-03-06T11:08:11.6236145Z Collecting limits==5.8.0 (from -r backend/requirements.txt (line 128))
+backend-test	Install dependencies	2026-03-06T11:08:11.6313438Z   Downloading limits-5.8.0-py3-none-any.whl.metadata (10 kB)
+backend-test	Install dependencies	2026-03-06T11:08:11.6524393Z Collecting llama-cloud==0.1.35 (from -r backend/requirements.txt (line 129))
+backend-test	Install dependencies	2026-03-06T11:08:11.6594635Z   Downloading llama_cloud-0.1.35-py3-none-any.whl.metadata (1.2 kB)
+backend-test	Install dependencies	2026-03-06T11:08:11.6799305Z Collecting llama-cloud-services==0.6.54 (from -r backend/requirements.txt (line 130))
+backend-test	Install dependencies	2026-03-06T11:08:11.6869329Z   Downloading llama_cloud_services-0.6.54-py3-none-any.whl.metadata (3.6 kB)
+backend-test	Install dependencies	2026-03-06T11:08:11.7402189Z Collecting llama-index==0.14.8 (from -r backend/requirements.txt (line 131))
+backend-test	Install dependencies	2026-03-06T11:08:11.7478598Z   Downloading llama_index-0.14.8-py3-none-any.whl.metadata (13 kB)
+backend-test	Install dependencies	2026-03-06T11:08:11.7642050Z Collecting llama-index-cli==0.5.3 (from -r backend/requirements.txt (line 132))
+backend-test	Install dependencies	2026-03-06T11:08:11.7717670Z   Downloading llama_index_cli-0.5.3-py3-none-any.whl.metadata (1.4 kB)
+backend-test	Install dependencies	2026-03-06T11:08:11.8054225Z Collecting llama-index-core==0.14.8 (from -r backend/requirements.txt (line 133))
+backend-test	Install dependencies	2026-03-06T11:08:11.8130210Z   Downloading llama_index_core-0.14.8-py3-none-any.whl.metadata (2.5 kB)
+backend-test	Install dependencies	2026-03-06T11:08:11.8313316Z Collecting llama-index-embeddings-openai==0.5.1 (from -r backend/requirements.txt (line 134))
+backend-test	Install dependencies	2026-03-06T11:08:11.8404441Z   Downloading llama_index_embeddings_openai-0.5.1-py3-none-any.whl.metadata (400 bytes)
+backend-test	Install dependencies	2026-03-06T11:08:11.8592121Z Collecting llama-index-indices-managed-llama-cloud==0.9.4 (from -r backend/requirements.txt (line 135))
+backend-test	Install dependencies	2026-03-06T11:08:11.8671309Z   Downloading llama_index_indices_managed_llama_cloud-0.9.4-py3-none-any.whl.metadata (3.7 kB)
+backend-test	Install dependencies	2026-03-06T11:08:11.8811190Z Collecting llama-index-instrumentation==0.4.2 (from -r backend/requirements.txt (line 136))
+backend-test	Install dependencies	2026-03-06T11:08:11.8886615Z   Downloading llama_index_instrumentation-0.4.2-py3-none-any.whl.metadata (1.1 kB)
+backend-test	Install dependencies	2026-03-06T11:08:11.9066108Z Collecting llama-index-llms-google-genai==0.7.3 (from -r backend/requirements.txt (line 137))
+backend-test	Install dependencies	2026-03-06T11:08:11.9143288Z   Downloading llama_index_llms_google_genai-0.7.3-py3-none-any.whl.metadata (3.0 kB)
+backend-test	Install dependencies	2026-03-06T11:08:11.9395277Z Collecting llama-index-llms-openai==0.6.8 (from -r backend/requirements.txt (line 138))
+backend-test	Install dependencies	2026-03-06T11:08:11.9470572Z   Downloading llama_index_llms_openai-0.6.8-py3-none-any.whl.metadata (3.0 kB)
+backend-test	Install dependencies	2026-03-06T11:08:11.9661392Z Collecting llama-index-readers-file==0.5.4 (from -r backend/requirements.txt (line 139))
+backend-test	Install dependencies	2026-03-06T11:08:11.9741790Z   Downloading llama_index_readers_file-0.5.4-py3-none-any.whl.metadata (5.7 kB)
+backend-test	Install dependencies	2026-03-06T11:08:11.9881955Z Collecting llama-index-readers-llama-parse==0.5.1 (from -r backend/requirements.txt (line 140))
+backend-test	Install dependencies	2026-03-06T11:08:11.9958062Z   Downloading llama_index_readers_llama_parse-0.5.1-py3-none-any.whl.metadata (3.1 kB)
+backend-test	Install dependencies	2026-03-06T11:08:12.0142383Z Collecting llama-index-workflows==2.11.1 (from -r backend/requirements.txt (line 141))
+backend-test	Install dependencies	2026-03-06T11:08:12.0222130Z   Downloading llama_index_workflows-2.11.1-py3-none-any.whl.metadata (6.5 kB)
+backend-test	Install dependencies	2026-03-06T11:08:12.0470133Z Collecting llama-parse==0.6.54 (from -r backend/requirements.txt (line 142))
+backend-test	Install dependencies	2026-03-06T11:08:12.0539378Z   Downloading llama_parse-0.6.54-py3-none-any.whl.metadata (6.6 kB)
+backend-test	Install dependencies	2026-03-06T11:08:12.1121299Z Collecting llvmlite==0.46.0 (from -r backend/requirements.txt (line 143))
+backend-test	Install dependencies	2026-03-06T11:08:12.1193565Z   Downloading llvmlite-0.46.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (5.0 kB)
+backend-test	Install dependencies	2026-03-06T11:08:12.2865237Z Collecting lxml==6.0.2 (from -r backend/requirements.txt (line 144))
+backend-test	Install dependencies	2026-03-06T11:08:12.2938690Z   Downloading lxml-6.0.2-cp311-cp311-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl.metadata (3.6 kB)
+backend-test	Install dependencies	2026-03-06T11:08:12.3112317Z Collecting Mako==1.3.10 (from -r backend/requirements.txt (line 145))
+backend-test	Install dependencies	2026-03-06T11:08:12.3181552Z   Downloading mako-1.3.10-py3-none-any.whl.metadata (2.9 kB)
+backend-test	Install dependencies	2026-03-06T11:08:12.3686097Z Collecting MarkupSafe==3.0.3 (from -r backend/requirements.txt (line 146))
+backend-test	Install dependencies	2026-03-06T11:08:12.3760567Z   Downloading markupsafe-3.0.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+backend-test	Install dependencies	2026-03-06T11:08:12.4058936Z Collecting marshmallow==3.26.1 (from -r backend/requirements.txt (line 147))
+backend-test	Install dependencies	2026-03-06T11:08:12.4130238Z   Downloading marshmallow-3.26.1-py3-none-any.whl.metadata (7.3 kB)
+backend-test	Install dependencies	2026-03-06T11:08:12.4322167Z Collecting mcp==1.21.0 (from -r backend/requirements.txt (line 148))
+backend-test	Install dependencies	2026-03-06T11:08:12.4390652Z   Downloading mcp-1.21.0-py3-none-any.whl.metadata (85 kB)
+backend-test	Install dependencies	2026-03-06T11:08:12.5806283Z Collecting more-itertools==10.8.0 (from -r backend/requirements.txt (line 149))
+backend-test	Install dependencies	2026-03-06T11:08:12.5882554Z   Downloading more_itertools-10.8.0-py3-none-any.whl.metadata (39 kB)
+backend-test	Install dependencies	2026-03-06T11:08:12.6070431Z Collecting mpmath==1.3.0 (from -r backend/requirements.txt (line 150))
+backend-test	Install dependencies	2026-03-06T11:08:12.6143142Z   Downloading mpmath-1.3.0-py3-none-any.whl.metadata (8.6 kB)
+backend-test	Install dependencies	2026-03-06T11:08:12.6388231Z Collecting msal==1.34.0 (from -r backend/requirements.txt (line 151))
+backend-test	Install dependencies	2026-03-06T11:08:12.6458323Z   Downloading msal-1.34.0-py3-none-any.whl.metadata (11 kB)
+backend-test	Install dependencies	2026-03-06T11:08:12.7088912Z Collecting msgpack==1.1.2 (from -r backend/requirements.txt (line 152))
+backend-test	Install dependencies	2026-03-06T11:08:12.7164907Z   Downloading msgpack-1.1.2-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (8.1 kB)
+backend-test	Install dependencies	2026-03-06T11:08:12.9250224Z Collecting multidict==6.7.0 (from -r backend/requirements.txt (line 153))
+backend-test	Install dependencies	2026-03-06T11:08:12.9324427Z   Downloading multidict-6.7.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (5.3 kB)
+backend-test	Install dependencies	2026-03-06T11:08:12.9460465Z Collecting mypy_extensions==1.1.0 (from -r backend/requirements.txt (line 154))
+backend-test	Install dependencies	2026-03-06T11:08:12.9529833Z   Downloading mypy_extensions-1.1.0-py3-none-any.whl.metadata (1.1 kB)
+backend-test	Install dependencies	2026-03-06T11:08:12.9680121Z Collecting nest-asyncio==1.6.0 (from -r backend/requirements.txt (line 155))
+backend-test	Install dependencies	2026-03-06T11:08:12.9751689Z   Downloading nest_asyncio-1.6.0-py3-none-any.whl.metadata (2.8 kB)
+backend-test	Install dependencies	2026-03-06T11:08:12.9958576Z Collecting networkx==3.5 (from -r backend/requirements.txt (line 156))
+backend-test	Install dependencies	2026-03-06T11:08:13.0027755Z   Downloading networkx-3.5-py3-none-any.whl.metadata (6.3 kB)
+backend-test	Install dependencies	2026-03-06T11:08:13.0216591Z Collecting nltk==3.9.2 (from -r backend/requirements.txt (line 157))
+backend-test	Install dependencies	2026-03-06T11:08:13.0290174Z   Downloading nltk-3.9.2-py3-none-any.whl.metadata (3.2 kB)
+backend-test	Install dependencies	2026-03-06T11:08:13.1143407Z Collecting numba==0.63.1 (from -r backend/requirements.txt (line 158))
+backend-test	Install dependencies	2026-03-06T11:08:13.1230234Z   Downloading numba-0.63.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.9 kB)
+backend-test	Install dependencies	2026-03-06T11:08:13.1862298Z Collecting numexpr==2.14.1 (from -r backend/requirements.txt (line 159))
+backend-test	Install dependencies	2026-03-06T11:08:13.1943515Z   Downloading numexpr-2.14.1-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.0 kB)
+backend-test	Install dependencies	2026-03-06T11:08:13.3655779Z Collecting numpy==2.3.4 (from -r backend/requirements.txt (line 160))
+backend-test	Install dependencies	2026-03-06T11:08:13.3737266Z   Downloading numpy-2.3.4-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (62 kB)
+backend-test	Install dependencies	2026-03-06T11:08:13.4059246Z Collecting oauthlib==3.3.1 (from -r backend/requirements.txt (line 161))
+backend-test	Install dependencies	2026-03-06T11:08:13.4136780Z   Downloading oauthlib-3.3.1-py3-none-any.whl.metadata (7.9 kB)
+backend-test	Install dependencies	2026-03-06T11:08:13.4570895Z Collecting openai==2.7.2 (from -r backend/requirements.txt (line 162))
+backend-test	Install dependencies	2026-03-06T11:08:13.4670263Z   Downloading openai-2.7.2-py3-none-any.whl.metadata (29 kB)
+backend-test	Install dependencies	2026-03-06T11:08:13.4827706Z Collecting openai-whisper==20250625 (from -r backend/requirements.txt (line 163))
+backend-test	Install dependencies	2026-03-06T11:08:13.4915467Z   Downloading openai_whisper-20250625.tar.gz (803 kB)
+backend-test	Install dependencies	2026-03-06T11:08:13.5521769Z      ???????????????????????????????????????????????????????????????????????????????????????????????????????????????????????? 803.2/803.2 kB 14.5 MB/s  0:00:00
+backend-test	Install dependencies	2026-03-06T11:08:13.5863487Z   Installing build dependencies: started
+backend-test	Install dependencies	2026-03-06T11:08:14.3857145Z   Installing build dependencies: finished with status 'done'
+backend-test	Install dependencies	2026-03-06T11:08:14.3862940Z   Getting requirements to build wheel: started
+backend-test	Install dependencies	2026-03-06T11:08:14.8784267Z   Getting requirements to build wheel: finished with status 'done'
+backend-test	Install dependencies	2026-03-06T11:08:14.8793652Z   Preparing metadata (pyproject.toml): started
+backend-test	Install dependencies	2026-03-06T11:08:15.0512458Z   Preparing metadata (pyproject.toml): finished with status 'done'
+backend-test	Install dependencies	2026-03-06T11:08:15.0679277Z Collecting openinference-instrumentation==0.1.42 (from -r backend/requirements.txt (line 164))
+backend-test	Install dependencies	2026-03-06T11:08:15.0755000Z   Downloading openinference_instrumentation-0.1.42-py3-none-any.whl.metadata (5.0 kB)
+backend-test	Install dependencies	2026-03-06T11:08:15.0914274Z Collecting openinference-instrumentation-autogen==0.1.10 (from -r backend/requirements.txt (line 165))
+backend-test	Install dependencies	2026-03-06T11:08:15.0991865Z   Downloading openinference_instrumentation_autogen-0.1.10-py3-none-any.whl.metadata (1.4 kB)
+backend-test	Install dependencies	2026-03-06T11:08:15.1197330Z Collecting openinference-instrumentation-langchain==0.1.55 (from -r backend/requirements.txt (line 166))
+backend-test	Install dependencies	2026-03-06T11:08:15.1283226Z   Downloading openinference_instrumentation_langchain-0.1.55-py3-none-any.whl.metadata (5.2 kB)
+backend-test	Install dependencies	2026-03-06T11:08:15.1551406Z Collecting openinference-instrumentation-llama-index==3.3.3 (from -r backend/requirements.txt (line 167))
+backend-test	Install dependencies	2026-03-06T11:08:15.1627902Z   Downloading openinference_instrumentation_llama_index-3.3.3-py3-none-any.whl.metadata (5.7 kB)
+backend-test	Install dependencies	2026-03-06T11:08:15.1800514Z Collecting openinference-semantic-conventions==0.1.25 (from -r backend/requirements.txt (line 168))
+backend-test	Install dependencies	2026-03-06T11:08:15.1870803Z   Downloading openinference_semantic_conventions-0.1.25-py3-none-any.whl.metadata (1.3 kB)
+backend-test	Install dependencies	2026-03-06T11:08:15.2050176Z Collecting openpyxl==3.1.5 (from -r backend/requirements.txt (line 169))
+backend-test	Install dependencies	2026-03-06T11:08:15.2121848Z   Downloading openpyxl-3.1.5-py2.py3-none-any.whl.metadata (2.5 kB)
+backend-test	Install dependencies	2026-03-06T11:08:15.2312283Z Collecting opentelemetry-api==1.37.0 (from -r backend/requirements.txt (line 170))
+backend-test	Install dependencies	2026-03-06T11:08:15.2382323Z   Downloading opentelemetry_api-1.37.0-py3-none-any.whl.metadata (1.5 kB)
+backend-test	Install dependencies	2026-03-06T11:08:15.2523657Z Collecting opentelemetry-exporter-gcp-logging==1.11.0a0 (from -r backend/requirements.txt (line 171))
+backend-test	Install dependencies	2026-03-06T11:08:15.2594495Z   Downloading opentelemetry_exporter_gcp_logging-1.11.0a0-py3-none-any.whl.metadata (4.8 kB)
+backend-test	Install dependencies	2026-03-06T11:08:15.2778212Z Collecting opentelemetry-exporter-gcp-monitoring==1.11.0a0 (from -r backend/requirements.txt (line 172))
+backend-test	Install dependencies	2026-03-06T11:08:15.2851754Z   Downloading opentelemetry_exporter_gcp_monitoring-1.11.0a0-py3-none-any.whl.metadata (4.0 kB)
+backend-test	Install dependencies	2026-03-06T11:08:15.3010184Z Collecting opentelemetry-exporter-gcp-trace==1.11.0 (from -r backend/requirements.txt (line 173))
+backend-test	Install dependencies	2026-03-06T11:08:15.3079566Z   Downloading opentelemetry_exporter_gcp_trace-1.11.0-py3-none-any.whl.metadata (3.3 kB)
+backend-test	Install dependencies	2026-03-06T11:08:15.3259368Z Collecting opentelemetry-exporter-otlp-proto-common==1.37.0 (from -r backend/requirements.txt (line 174))
+backend-test	Install dependencies	2026-03-06T11:08:15.3328668Z   Downloading opentelemetry_exporter_otlp_proto_common-1.37.0-py3-none-any.whl.metadata (1.8 kB)
+backend-test	Install dependencies	2026-03-06T11:08:15.3513917Z Collecting opentelemetry-exporter-otlp-proto-http==1.37.0 (from -r backend/requirements.txt (line 175))
+backend-test	Install dependencies	2026-03-06T11:08:15.3585620Z   Downloading opentelemetry_exporter_otlp_proto_http-1.37.0-py3-none-any.whl.metadata (2.3 kB)
+backend-test	Install dependencies	2026-03-06T11:08:15.3797791Z Collecting opentelemetry-instrumentation==0.58b0 (from -r backend/requirements.txt (line 176))
+backend-test	Install dependencies	2026-03-06T11:08:15.3868690Z   Downloading opentelemetry_instrumentation-0.58b0-py3-none-any.whl.metadata (7.1 kB)
+backend-test	Install dependencies	2026-03-06T11:08:15.4035100Z Collecting opentelemetry-instrumentation-google-genai==0.4b0 (from -r backend/requirements.txt (line 177))
+backend-test	Install dependencies	2026-03-06T11:08:15.4113704Z   Downloading opentelemetry_instrumentation_google_genai-0.4b0-py3-none-any.whl.metadata (4.5 kB)
+backend-test	Install dependencies	2026-03-06T11:08:15.4311688Z Collecting opentelemetry-proto==1.37.0 (from -r backend/requirements.txt (line 178))
+backend-test	Install dependencies	2026-03-06T11:08:15.4381656Z   Downloading opentelemetry_proto-1.37.0-py3-none-any.whl.metadata (2.3 kB)
+backend-test	Install dependencies	2026-03-06T11:08:15.4535581Z Collecting opentelemetry-resourcedetector-gcp==1.11.0a0 (from -r backend/requirements.txt (line 179))
+backend-test	Install dependencies	2026-03-06T11:08:15.4605100Z   Downloading opentelemetry_resourcedetector_gcp-1.11.0a0-py3-none-any.whl.metadata (3.2 kB)
+backend-test	Install dependencies	2026-03-06T11:08:15.4827265Z Collecting opentelemetry-sdk==1.37.0 (from -r backend/requirements.txt (line 180))
+backend-test	Install dependencies	2026-03-06T11:08:15.4896726Z   Downloading opentelemetry_sdk-1.37.0-py3-none-any.whl.metadata (1.5 kB)
+backend-test	Install dependencies	2026-03-06T11:08:15.5096101Z Collecting opentelemetry-semantic-conventions==0.58b0 (from -r backend/requirements.txt (line 181))
+backend-test	Install dependencies	2026-03-06T11:08:15.5168083Z   Downloading opentelemetry_semantic_conventions-0.58b0-py3-none-any.whl.metadata (2.4 kB)
+backend-test	Install dependencies	2026-03-06T11:08:15.5298311Z Collecting opentelemetry-util-genai==0.2b0 (from -r backend/requirements.txt (line 182))
+backend-test	Install dependencies	2026-03-06T11:08:15.5378061Z   Downloading opentelemetry_util_genai-0.2b0-py3-none-any.whl.metadata (3.2 kB)
+backend-test	Install dependencies	2026-03-06T11:08:15.9012865Z Collecting orjson==3.11.4 (from -r backend/requirements.txt (line 183))
+backend-test	Install dependencies	2026-03-06T11:08:15.9134416Z   Downloading orjson-3.11.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (41 kB)
+backend-test	Install dependencies	2026-03-06T11:08:15.9678570Z Collecting ormsgpack==1.12.0 (from -r backend/requirements.txt (line 184))
+backend-test	Install dependencies	2026-03-06T11:08:15.9757252Z   Downloading ormsgpack-1.12.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (1.2 kB)
+backend-test	Install dependencies	2026-03-06T11:08:15.9946292Z Collecting packaging==25.0 (from -r backend/requirements.txt (line 185))
+backend-test	Install dependencies	2026-03-06T11:08:16.0018360Z   Downloading packaging-25.0-py3-none-any.whl.metadata (3.3 kB)
+backend-test	Install dependencies	2026-03-06T11:08:16.1041407Z Collecting pandas==2.2.3 (from -r backend/requirements.txt (line 186))
+backend-test	Install dependencies	2026-03-06T11:08:16.1116131Z   Downloading pandas-2.2.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (89 kB)
+backend-test	Install dependencies	2026-03-06T11:08:16.1570402Z Collecting pgvector==0.4.2 (from -r backend/requirements.txt (line 187))
+backend-test	Install dependencies	2026-03-06T11:08:16.1645734Z   Downloading pgvector-0.4.2-py3-none-any.whl.metadata (19 kB)
+backend-test	Install dependencies	2026-03-06T11:08:16.3183081Z Collecting pillow==12.0.0 (from -r backend/requirements.txt (line 188))
+backend-test	Install dependencies	2026-03-06T11:08:16.3258688Z   Downloading pillow-12.0.0-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (8.8 kB)
+backend-test	Install dependencies	2026-03-06T11:08:16.3466388Z Collecting platformdirs==4.5.0 (from -r backend/requirements.txt (line 189))
+backend-test	Install dependencies	2026-03-06T11:08:16.3535516Z   Downloading platformdirs-4.5.0-py3-none-any.whl.metadata (12 kB)
+backend-test	Install dependencies	2026-03-06T11:08:16.3907277Z Collecting playwright==1.58.0 (from -r backend/requirements.txt (line 190))
+backend-test	Install dependencies	2026-03-06T11:08:16.3982154Z   Downloading playwright-1.58.0-py3-none-manylinux1_x86_64.whl.metadata (3.5 kB)
+backend-test	Install dependencies	2026-03-06T11:08:16.4135681Z Collecting playwright-stealth==2.0.1 (from -r backend/requirements.txt (line 191))
+backend-test	Install dependencies	2026-03-06T11:08:16.4214570Z   Downloading playwright_stealth-2.0.1-py3-none-any.whl.metadata (4.5 kB)
+backend-test	Install dependencies	2026-03-06T11:08:16.4392520Z Collecting pluggy==1.6.0 (from -r backend/requirements.txt (line 192))
+backend-test	Install dependencies	2026-03-06T11:08:16.4462488Z   Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+backend-test	Install dependencies	2026-03-06T11:08:16.5002163Z Collecting propcache==0.4.1 (from -r backend/requirements.txt (line 193))
+backend-test	Install dependencies	2026-03-06T11:08:16.5074323Z   Downloading propcache-0.4.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (13 kB)
+backend-test	Install dependencies	2026-03-06T11:08:16.5286827Z Collecting proto-plus==1.26.1 (from -r backend/requirements.txt (line 194))
+backend-test	Install dependencies	2026-03-06T11:08:16.5356404Z   Downloading proto_plus-1.26.1-py3-none-any.whl.metadata (2.2 kB)
+backend-test	Install dependencies	2026-03-06T11:08:16.6730985Z Collecting protobuf==5.29.5 (from -r backend/requirements.txt (line 195))
+backend-test	Install dependencies	2026-03-06T11:08:16.6805746Z   Downloading protobuf-5.29.5-cp38-abi3-manylinux2014_x86_64.whl.metadata (592 bytes)
+backend-test	Install dependencies	2026-03-06T11:08:16.7387156Z Collecting psycopg2-binary==2.9.11 (from -r backend/requirements.txt (line 196))
+backend-test	Install dependencies	2026-03-06T11:08:16.7464353Z   Downloading psycopg2_binary-2.9.11-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (4.9 kB)
+backend-test	Install dependencies	2026-03-06T11:08:16.8218080Z Collecting pyarrow==21.0.0 (from -r backend/requirements.txt (line 197))
+backend-test	Install dependencies	2026-03-06T11:08:16.8294802Z   Downloading pyarrow-21.0.0-cp311-cp311-manylinux_2_28_x86_64.whl.metadata (3.3 kB)
+backend-test	Install dependencies	2026-03-06T11:08:16.8522437Z Collecting pyasn1==0.6.1 (from -r backend/requirements.txt (line 198))
+backend-test	Install dependencies	2026-03-06T11:08:16.8590647Z   Downloading pyasn1-0.6.1-py3-none-any.whl.metadata (8.4 kB)
+backend-test	Install dependencies	2026-03-06T11:08:16.8817244Z Collecting pyasn1_modules==0.4.2 (from -r backend/requirements.txt (line 199))
+backend-test	Install dependencies	2026-03-06T11:08:16.8889532Z   Downloading pyasn1_modules-0.4.2-py3-none-any.whl.metadata (3.5 kB)
+backend-test	Install dependencies	2026-03-06T11:08:16.9060282Z Collecting pycparser==2.23 (from -r backend/requirements.txt (line 200))
+backend-test	Install dependencies	2026-03-06T11:08:16.9129583Z   Downloading pycparser-2.23-py3-none-any.whl.metadata (993 bytes)
+backend-test	Install dependencies	2026-03-06T11:08:17.0126338Z Collecting pydantic==2.12.4 (from -r backend/requirements.txt (line 201))
+backend-test	Install dependencies	2026-03-06T11:08:17.0198530Z   Downloading pydantic-2.12.4-py3-none-any.whl.metadata (89 kB)
+backend-test	Install dependencies	2026-03-06T11:08:17.0428013Z Collecting pydantic-settings==2.12.0 (from -r backend/requirements.txt (line 202))
+backend-test	Install dependencies	2026-03-06T11:08:17.0499114Z   Downloading pydantic_settings-2.12.0-py3-none-any.whl.metadata (3.4 kB)
+backend-test	Install dependencies	2026-03-06T11:08:17.7870124Z Collecting pydantic_core==2.41.5 (from -r backend/requirements.txt (line 203))
+backend-test	Install dependencies	2026-03-06T11:08:17.7944278Z   Downloading pydantic_core-2.41.5-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (7.3 kB)
+backend-test	Install dependencies	2026-03-06T11:08:17.8120962Z Collecting pydyf==0.12.1 (from -r backend/requirements.txt (line 204))
+backend-test	Install dependencies	2026-03-06T11:08:17.8192831Z   Downloading pydyf-0.12.1-py3-none-any.whl.metadata (2.5 kB)
+backend-test	Install dependencies	2026-03-06T11:08:17.8371279Z Collecting pyee==13.0.0 (from -r backend/requirements.txt (line 205))
+backend-test	Install dependencies	2026-03-06T11:08:17.8442126Z   Downloading pyee-13.0.0-py3-none-any.whl.metadata (2.9 kB)
+backend-test	Install dependencies	2026-03-06T11:08:17.8651759Z Collecting PyGithub==2.8.1 (from -r backend/requirements.txt (line 206))
+backend-test	Install dependencies	2026-03-06T11:08:17.8721847Z   Downloading pygithub-2.8.1-py3-none-any.whl.metadata (3.9 kB)
+backend-test	Install dependencies	2026-03-06T11:08:17.8947734Z Collecting Pygments==2.19.2 (from -r backend/requirements.txt (line 207))
+backend-test	Install dependencies	2026-03-06T11:08:17.9017883Z   Downloading pygments-2.19.2-py3-none-any.whl.metadata (2.5 kB)
+backend-test	Install dependencies	2026-03-06T11:08:17.9234773Z Collecting PyJWT==2.10.1 (from -r backend/requirements.txt (line 208))
+backend-test	Install dependencies	2026-03-06T11:08:17.9306122Z   Downloading PyJWT-2.10.1-py3-none-any.whl.metadata (4.0 kB)
+backend-test	Install dependencies	2026-03-06T11:08:17.9588430Z Collecting PyNaCl==1.6.1 (from -r backend/requirements.txt (line 209))
+backend-test	Install dependencies	2026-03-06T11:08:17.9659897Z   Downloading pynacl-1.6.1-cp38-abi3-manylinux_2_34_x86_64.whl.metadata (9.8 kB)
+backend-test	Install dependencies	2026-03-06T11:08:17.9952680Z Collecting pyparsing==3.2.5 (from -r backend/requirements.txt (line 210))
+backend-test	Install dependencies	2026-03-06T11:08:18.0026101Z   Downloading pyparsing-3.2.5-py3-none-any.whl.metadata (5.0 kB)
+backend-test	Install dependencies	2026-03-06T11:08:18.0257831Z Collecting pypdf==6.2.0 (from -r backend/requirements.txt (line 211))
+backend-test	Install dependencies	2026-03-06T11:08:18.0344464Z   Downloading pypdf-6.2.0-py3-none-any.whl.metadata (7.1 kB)
+backend-test	Install dependencies	2026-03-06T11:08:18.0536912Z Collecting pyphen==0.17.2 (from -r backend/requirements.txt (line 212))
+backend-test	Install dependencies	2026-03-06T11:08:18.0608955Z   Downloading pyphen-0.17.2-py3-none-any.whl.metadata (3.2 kB)
+backend-test	Install dependencies	2026-03-06T11:08:18.0914546Z Collecting pytest==8.4.2 (from -r backend/requirements.txt (line 213))
+backend-test	Install dependencies	2026-03-06T11:08:18.0985340Z   Downloading pytest-8.4.2-py3-none-any.whl.metadata (7.7 kB)
+backend-test	Install dependencies	2026-03-06T11:08:18.1194884Z Collecting pytest-asyncio==1.3.0 (from -r backend/requirements.txt (line 214))
+backend-test	Install dependencies	2026-03-06T11:08:18.1266445Z   Downloading pytest_asyncio-1.3.0-py3-none-any.whl.metadata (4.1 kB)
+backend-test	Install dependencies	2026-03-06T11:08:18.1441236Z Collecting python-dateutil==2.9.0.post0 (from -r backend/requirements.txt (line 215))
+backend-test	Install dependencies	2026-03-06T11:08:18.1510699Z   Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+backend-test	Install dependencies	2026-03-06T11:08:18.1680413Z Collecting python-docx==1.2.0 (from -r backend/requirements.txt (line 216))
+backend-test	Install dependencies	2026-03-06T11:08:18.1748373Z   Downloading python_docx-1.2.0-py3-none-any.whl.metadata (2.0 kB)
+backend-test	Install dependencies	2026-03-06T11:08:18.1929362Z Collecting python-dotenv==1.2.1 (from -r backend/requirements.txt (line 217))
+backend-test	Install dependencies	2026-03-06T11:08:18.2000346Z   Downloading python_dotenv-1.2.1-py3-none-any.whl.metadata (25 kB)
+backend-test	Install dependencies	2026-03-06T11:08:18.2180734Z Collecting python-http-client==3.3.7 (from -r backend/requirements.txt (line 218))
+backend-test	Install dependencies	2026-03-06T11:08:18.2250089Z   Downloading python_http_client-3.3.7-py3-none-any.whl.metadata (6.9 kB)
+backend-test	Install dependencies	2026-03-06T11:08:18.2430210Z Collecting python-jose==3.5.0 (from -r backend/requirements.txt (line 219))
+backend-test	Install dependencies	2026-03-06T11:08:18.2500132Z   Downloading python_jose-3.5.0-py2.py3-none-any.whl.metadata (5.5 kB)
+backend-test	Install dependencies	2026-03-06T11:08:18.2679413Z Collecting python-multipart==0.0.20 (from -r backend/requirements.txt (line 220))
+backend-test	Install dependencies	2026-03-06T11:08:18.2752119Z   Downloading python_multipart-0.0.20-py3-none-any.whl.metadata (1.8 kB)
+backend-test	Install dependencies	2026-03-06T11:08:18.3111447Z Collecting pytz==2025.2 (from -r backend/requirements.txt (line 221))
+backend-test	Install dependencies	2026-03-06T11:08:18.3182082Z   Downloading pytz-2025.2-py2.py3-none-any.whl.metadata (22 kB)
+backend-test	Install dependencies	2026-03-06T11:08:18.3745063Z ERROR: Ignored the following versions that require a different python version: 0.36.0 Requires-Python >=3.6,<3.10; 0.37.0 Requires-Python >=3.7,<3.10; 0.38.0 Requires-Python >=3.7,<3.11; 0.38.1 Requires-Python >=3.7,<3.11; 0.52.0 Requires-Python >=3.6,<3.9; 0.52.0rc3 Requires-Python >=3.6,<3.9; 0.53.0 Requires-Python >=3.6,<3.10; 0.53.0rc1.post1 Requires-Python >=3.6,<3.10; 0.53.0rc2 Requires-Python >=3.6,<3.10; 0.53.0rc3 Requires-Python >=3.6,<3.10; 0.53.1 Requires-Python >=3.6,<3.10; 0.54.0 Requires-Python >=3.7,<3.10; 0.54.0rc2 Requires-Python >=3.7,<3.10; 0.54.0rc3 Requires-Python >=3.7,<3.10; 0.54.1 Requires-Python >=3.7,<3.10; 0.55.0 Requires-Python >=3.7,<3.11; 0.55.0rc1 Requires-Python >=3.7,<3.11; 0.55.1 Requires-Python >=3.7,<3.11; 0.55.2 Requires-Python >=3.7,<3.11; 1.21.2 Requires-Python >=3.7,<3.11; 1.21.3 Requires-Python >=3.7,<3.11; 1.21.4 Requires-Python >=3.7,<3.11; 1.21.5 Requires-Python >=3.7,<3.11; 1.21.6 Requires-Python >=3.7,<3.11; 2.10.0 Requires-Python >=3.6,<3.10; 2.11.0 Requires-Python >=3.6,<3.10; 2.12.0 Requires-Python >=3.6,<3.10; 2.13.0 Requires-Python >=3.6,<3.10; 2.13.1 Requires-Python >=3.6,<3.10; 2.14.0 Requires-Python >=3.6,<3.10; 2.15.0 Requires-Python >=3.6,<3.10; 2.16.0 Requires-Python >=3.6,<3.10; 2.16.1 Requires-Python >=3.6,<3.10; 2.17.0 Requires-Python >=3.6,<3.10; 2.18.0 Requires-Python >=3.6,<3.10; 2.19.0 Requires-Python >=3.6,<3.10; 2.20.0 Requires-Python >=3.6,<3.10; 2.21.0 Requires-Python >=3.6,<3.10; 2.22.0 Requires-Python >=3.6,<3.10; 2.22.1 Requires-Python >=3.6,<3.10; 2.23.0 Requires-Python >=3.6,<3.10; 2.23.1 Requires-Python >=3.6,<3.10; 2.23.2 Requires-Python >=3.6,<3.10; 2.23.3 Requires-Python >=3.6,<3.10; 2.24.0 Requires-Python >=3.6,<3.10; 2.24.1 Requires-Python >=3.6,<3.10; 2.25.0 Requires-Python >=3.6,<3.10; 2.25.1 Requires-Python >=3.6,<3.10; 2.25.2 Requires-Python >=3.6,<3.10; 2.26.0 Requires-Python >=3.6,<3.10; 2.27.0 Requires-Python >=3.6,<3.10; 2.27.1 Requires-Python >=3.6,<3.10; 2.28.0 Requires-Python >=3.6,<3.10; 2.28.1 Requires-Python >=3.6,<3.10; 2.29.0 Requires-Python >=3.6,<3.10; 2.30.0 Requires-Python >=3.6,<3.11; 2.30.1 Requires-Python >=3.6,<3.11; 2.31.0 Requires-Python >=3.6,<3.11; 2.32.0 Requires-Python >=3.6,<3.11; 2.33.0 Requires-Python >=3.6,<3.11; 2.34.0 Requires-Python >=3.6,<3.11; 2.34.1 Requires-Python >=3.6,<3.11; 2.34.2 Requires-Python >=3.6,<3.11; 2.34.3 Requires-Python >=3.6,<3.11; 2.34.4 Requires-Python >=3.6,<3.11; 2.6.2 Requires-Python >=3.6,<3.9; 2.7.0 Requires-Python >=3.6,<3.10; 2.8.0 Requires-Python >=3.6,<3.10; 2.9.0 Requires-Python >=3.6,<3.10; 3.0.0 Requires-Python >=3.6,<3.11; 3.0.0b1 Requires-Python >=3.6,<3.11; 3.0.1 Requires-Python >=3.6,<3.11; 3.1.0 Requires-Python >=3.6,<3.11; 3.2.0 Requires-Python >=3.6,<3.11; 3.3.0 Requires-Python >=3.7,<3.11; 3.3.1 Requires-Python >=3.7,<3.11; 3.3.2 Requires-Python >=3.7,<3.11; 3.3.3 Requires-Python >=3.7,<3.11; 3.3.5 Requires-Python >=3.7,<3.11; 3.3.6 Requires-Python >=3.7,<3.11
+backend-test	Install dependencies	2026-03-06T11:08:18.3761750Z ERROR: Could not find a version that satisfies the requirement pywin32==311 (from versions: none)
+backend-test	Install dependencies	2026-03-06T11:08:18.3762977Z ERROR: No matching distribution found for pywin32==311
+backend-test	Install dependencies	2026-03-06T11:08:18.9991577Z ##[error]Process completed with exit code 1.
+backend-test	Post Run actions/checkout@v4	???2026-03-06T11:08:19.0109742Z Post job cleanup.
+backend-test	Post Run actions/checkout@v4	2026-03-06T11:08:19.1068965Z [command]/usr/bin/git version
+backend-test	Post Run actions/checkout@v4	2026-03-06T11:08:19.1105864Z git version 2.53.0
+backend-test	Post Run actions/checkout@v4	2026-03-06T11:08:19.1150394Z Temporarily overriding HOME='/home/runner/work/_temp/3b444f13-2878-46bd-bd33-b2e79b80bfb9' before making global git config changes
+backend-test	Post Run actions/checkout@v4	2026-03-06T11:08:19.1151780Z Adding repository directory to the temporary git global config as a safe directory
+backend-test	Post Run actions/checkout@v4	2026-03-06T11:08:19.1157676Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/clearslot/clearslot
+backend-test	Post Run actions/checkout@v4	2026-03-06T11:08:19.1200113Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+backend-test	Post Run actions/checkout@v4	2026-03-06T11:08:19.1235237Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+backend-test	Post Run actions/checkout@v4	2026-03-06T11:08:19.1482960Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+backend-test	Post Run actions/checkout@v4	2026-03-06T11:08:19.1504663Z http.https://github.com/.extraheader
+backend-test	Post Run actions/checkout@v4	2026-03-06T11:08:19.1517973Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+backend-test	Post Run actions/checkout@v4	2026-03-06T11:08:19.1550843Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+backend-test	Post Run actions/checkout@v4	2026-03-06T11:08:19.1786548Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+backend-test	Post Run actions/checkout@v4	2026-03-06T11:08:19.1817934Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+backend-test	Complete job	???2026-03-06T11:08:19.2166246Z Cleaning up orphan processes
