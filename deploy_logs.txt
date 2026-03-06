@@ -1,0 +1,193 @@
+deploy	Set up job	???2026-03-06T10:40:41.6994556Z Current runner version: '2.332.0'
+deploy	Set up job	2026-03-06T10:40:41.7019216Z ##[group]Runner Image Provisioner
+deploy	Set up job	2026-03-06T10:40:41.7020227Z Hosted Compute Agent
+deploy	Set up job	2026-03-06T10:40:41.7020758Z Version: 20260213.493
+deploy	Set up job	2026-03-06T10:40:41.7021351Z Commit: 5c115507f6dd24b8de37d8bbe0bb4509d0cc0fa3
+deploy	Set up job	2026-03-06T10:40:41.7022139Z Build Date: 2026-02-13T00:28:41Z
+deploy	Set up job	2026-03-06T10:40:41.7022771Z Worker ID: {e9d6a4de-6b98-4677-8108-a0bb9cb501c6}
+deploy	Set up job	2026-03-06T10:40:41.7023622Z Azure Region: westus
+deploy	Set up job	2026-03-06T10:40:41.7024282Z ##[endgroup]
+deploy	Set up job	2026-03-06T10:40:41.7025643Z ##[group]Operating System
+deploy	Set up job	2026-03-06T10:40:41.7026234Z Ubuntu
+deploy	Set up job	2026-03-06T10:40:41.7026773Z 24.04.3
+deploy	Set up job	2026-03-06T10:40:41.7027244Z LTS
+deploy	Set up job	2026-03-06T10:40:41.7027688Z ##[endgroup]
+deploy	Set up job	2026-03-06T10:40:41.7028272Z ##[group]Runner Image
+deploy	Set up job	2026-03-06T10:40:41.7028825Z Image: ubuntu-24.04
+deploy	Set up job	2026-03-06T10:40:41.7029330Z Version: 20260302.42.1
+deploy	Set up job	2026-03-06T10:40:41.7030402Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260302.42/images/ubuntu/Ubuntu2404-Readme.md
+deploy	Set up job	2026-03-06T10:40:41.7031995Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260302.42
+deploy	Set up job	2026-03-06T10:40:41.7033194Z ##[endgroup]
+deploy	Set up job	2026-03-06T10:40:41.7034296Z ##[group]GITHUB_TOKEN Permissions
+deploy	Set up job	2026-03-06T10:40:41.7036216Z Contents: read
+deploy	Set up job	2026-03-06T10:40:41.7036785Z Metadata: read
+deploy	Set up job	2026-03-06T10:40:41.7037258Z Packages: read
+deploy	Set up job	2026-03-06T10:40:41.7037890Z ##[endgroup]
+deploy	Set up job	2026-03-06T10:40:41.7040351Z Secret source: Actions
+deploy	Set up job	2026-03-06T10:40:41.7041026Z Prepare workflow directory
+deploy	Set up job	2026-03-06T10:40:41.7433819Z Prepare all required actions
+deploy	Set up job	2026-03-06T10:40:41.7475258Z Getting action download info
+deploy	Set up job	2026-03-06T10:40:42.1706368Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+deploy	Set up job	2026-03-06T10:40:42.3311043Z Download action repository 'google-github-actions/setup-gcloud@v2' (SHA:e427ad8a34f8676edf47cf7d7925499adf3eb74f)
+deploy	Set up job	2026-03-06T10:40:42.9900244Z Complete job name: deploy
+deploy	Checkout	???2026-03-06T10:40:43.0658176Z ##[group]Run actions/checkout@v4
+deploy	Checkout	2026-03-06T10:40:43.0659144Z with:
+deploy	Checkout	2026-03-06T10:40:43.0659597Z   repository: AliNMackie/clearslot
+deploy	Checkout	2026-03-06T10:40:43.0660331Z   token: ***
+deploy	Checkout	2026-03-06T10:40:43.0660737Z   ssh-strict: true
+deploy	Checkout	2026-03-06T10:40:43.0661161Z   ssh-user: git
+deploy	Checkout	2026-03-06T10:40:43.0661582Z   persist-credentials: true
+deploy	Checkout	2026-03-06T10:40:43.0662063Z   clean: true
+deploy	Checkout	2026-03-06T10:40:43.0662500Z   sparse-checkout-cone-mode: true
+deploy	Checkout	2026-03-06T10:40:43.0663022Z   fetch-depth: 1
+deploy	Checkout	2026-03-06T10:40:43.0663621Z   fetch-tags: false
+deploy	Checkout	2026-03-06T10:40:43.0664045Z   show-progress: true
+deploy	Checkout	2026-03-06T10:40:43.0664478Z   lfs: false
+deploy	Checkout	2026-03-06T10:40:43.0664870Z   submodules: false
+deploy	Checkout	2026-03-06T10:40:43.0665325Z   set-safe-directory: true
+deploy	Checkout	2026-03-06T10:40:43.0666044Z env:
+deploy	Checkout	2026-03-06T10:40:43.0666482Z   PROJECT_ID: clearslot-486319
+deploy	Checkout	2026-03-06T10:40:43.0666997Z   REGION: europe-west2
+deploy	Checkout	2026-03-06T10:40:43.0667465Z   SERVICE_NAME: clearslot-backend
+deploy	Checkout	2026-03-06T10:40:43.0667976Z ##[endgroup]
+deploy	Checkout	2026-03-06T10:40:43.1797008Z Syncing repository: AliNMackie/clearslot
+deploy	Checkout	2026-03-06T10:40:43.1798989Z ##[group]Getting Git version info
+deploy	Checkout	2026-03-06T10:40:43.1799777Z Working directory is '/home/runner/work/clearslot/clearslot'
+deploy	Checkout	2026-03-06T10:40:43.1800840Z [command]/usr/bin/git version
+deploy	Checkout	2026-03-06T10:40:43.1886240Z git version 2.53.0
+deploy	Checkout	2026-03-06T10:40:43.1913657Z ##[endgroup]
+deploy	Checkout	2026-03-06T10:40:43.1939505Z Temporarily overriding HOME='/home/runner/work/_temp/60a97b41-e0bb-48c3-a7b8-50e553b8b6e2' before making global git config changes
+deploy	Checkout	2026-03-06T10:40:43.1941024Z Adding repository directory to the temporary git global config as a safe directory
+deploy	Checkout	2026-03-06T10:40:43.1944806Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/clearslot/clearslot
+deploy	Checkout	2026-03-06T10:40:43.1986963Z Deleting the contents of '/home/runner/work/clearslot/clearslot'
+deploy	Checkout	2026-03-06T10:40:43.1990465Z ##[group]Initializing the repository
+deploy	Checkout	2026-03-06T10:40:43.1995176Z [command]/usr/bin/git init /home/runner/work/clearslot/clearslot
+deploy	Checkout	2026-03-06T10:40:43.2115363Z hint: Using 'master' as the name for the initial branch. This default branch name
+deploy	Checkout	2026-03-06T10:40:43.2117814Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+deploy	Checkout	2026-03-06T10:40:43.2119558Z hint: to use in all of your new repositories, which will suppress this warning,
+deploy	Checkout	2026-03-06T10:40:43.2121296Z hint: call:
+deploy	Checkout	2026-03-06T10:40:43.2122242Z hint:
+deploy	Checkout	2026-03-06T10:40:43.2123484Z hint: 	git config --global init.defaultBranch <name>
+deploy	Checkout	2026-03-06T10:40:43.2124741Z hint:
+deploy	Checkout	2026-03-06T10:40:43.2125906Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+deploy	Checkout	2026-03-06T10:40:43.2127823Z hint: 'development'. The just-created branch can be renamed via this command:
+deploy	Checkout	2026-03-06T10:40:43.2129261Z hint:
+deploy	Checkout	2026-03-06T10:40:43.2130008Z hint: 	git branch -m <name>
+deploy	Checkout	2026-03-06T10:40:43.2130968Z hint:
+deploy	Checkout	2026-03-06T10:40:43.2132233Z hint: Disable this message with "git config set advice.defaultBranchName false"
+deploy	Checkout	2026-03-06T10:40:43.2134186Z Initialized empty Git repository in /home/runner/work/clearslot/clearslot/.git/
+deploy	Checkout	2026-03-06T10:40:43.2135959Z [command]/usr/bin/git remote add origin https://github.com/AliNMackie/clearslot
+deploy	Checkout	2026-03-06T10:40:43.2173275Z ##[endgroup]
+deploy	Checkout	2026-03-06T10:40:43.2174673Z ##[group]Disabling automatic garbage collection
+deploy	Checkout	2026-03-06T10:40:43.2177317Z [command]/usr/bin/git config --local gc.auto 0
+deploy	Checkout	2026-03-06T10:40:43.2209515Z ##[endgroup]
+deploy	Checkout	2026-03-06T10:40:43.2210730Z ##[group]Setting up auth
+deploy	Checkout	2026-03-06T10:40:43.2216248Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+deploy	Checkout	2026-03-06T10:40:43.2248738Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+deploy	Checkout	2026-03-06T10:40:43.2610649Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+deploy	Checkout	2026-03-06T10:40:43.2642386Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+deploy	Checkout	2026-03-06T10:40:43.2880191Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+deploy	Checkout	2026-03-06T10:40:43.2917234Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+deploy	Checkout	2026-03-06T10:40:43.3163545Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+deploy	Checkout	2026-03-06T10:40:43.3201491Z ##[endgroup]
+deploy	Checkout	2026-03-06T10:40:43.3203017Z ##[group]Fetching the repository
+deploy	Checkout	2026-03-06T10:40:43.3211896Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +7df9f8094b3d9339b0c94a0829a6b7d9bf444a9c:refs/remotes/origin/main
+deploy	Checkout	2026-03-06T10:40:43.9119297Z From https://github.com/AliNMackie/clearslot
+deploy	Checkout	2026-03-06T10:40:43.9121167Z  * [new ref]         7df9f8094b3d9339b0c94a0829a6b7d9bf444a9c -> origin/main
+deploy	Checkout	2026-03-06T10:40:43.9156963Z ##[endgroup]
+deploy	Checkout	2026-03-06T10:40:43.9157988Z ##[group]Determining the checkout info
+deploy	Checkout	2026-03-06T10:40:43.9159703Z ##[endgroup]
+deploy	Checkout	2026-03-06T10:40:43.9164253Z [command]/usr/bin/git sparse-checkout disable
+deploy	Checkout	2026-03-06T10:40:43.9208797Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+deploy	Checkout	2026-03-06T10:40:43.9237138Z ##[group]Checking out the ref
+deploy	Checkout	2026-03-06T10:40:43.9241077Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+deploy	Checkout	2026-03-06T10:40:43.9509312Z Switched to a new branch 'main'
+deploy	Checkout	2026-03-06T10:40:43.9513402Z branch 'main' set up to track 'origin/main'.
+deploy	Checkout	2026-03-06T10:40:43.9520499Z ##[endgroup]
+deploy	Checkout	2026-03-06T10:40:43.9559565Z [command]/usr/bin/git log -1 --format=%H
+deploy	Checkout	2026-03-06T10:40:43.9585359Z 7df9f8094b3d9339b0c94a0829a6b7d9bf444a9c
+deploy	Verify Backend Structure	???2026-03-06T10:40:43.9771207Z ##[group]Run if [ ! -f "backend/requirements.txt" ]; then
+deploy	Verify Backend Structure	2026-03-06T10:40:43.9772086Z [36;1mif [ ! -f "backend/requirements.txt" ]; then[0m
+deploy	Verify Backend Structure	2026-03-06T10:40:43.9772827Z [36;1m  echo "::error::backend/requirements.txt not found!"[0m
+deploy	Verify Backend Structure	2026-03-06T10:40:43.9773661Z [36;1m  exit 1[0m
+deploy	Verify Backend Structure	2026-03-06T10:40:43.9774311Z [36;1mfi[0m
+deploy	Verify Backend Structure	2026-03-06T10:40:43.9827920Z shell: /usr/bin/bash -e {0}
+deploy	Verify Backend Structure	2026-03-06T10:40:43.9828477Z env:
+deploy	Verify Backend Structure	2026-03-06T10:40:43.9828909Z   PROJECT_ID: clearslot-486319
+deploy	Verify Backend Structure	2026-03-06T10:40:43.9829441Z   REGION: europe-west2
+deploy	Verify Backend Structure	2026-03-06T10:40:43.9829926Z   SERVICE_NAME: clearslot-backend
+deploy	Verify Backend Structure	2026-03-06T10:40:43.9830443Z ##[endgroup]
+deploy	Set up Cloud SDK	???2026-03-06T10:40:44.0005087Z ##[group]Run google-github-actions/setup-gcloud@v2
+deploy	Set up Cloud SDK	2026-03-06T10:40:44.0005752Z with:
+deploy	Set up Cloud SDK	2026-03-06T10:40:44.0006140Z   version: latest
+deploy	Set up Cloud SDK	2026-03-06T10:40:44.0006554Z   skip_install: false
+deploy	Set up Cloud SDK	2026-03-06T10:40:44.0006993Z   skip_tool_cache: false
+deploy	Set up Cloud SDK	2026-03-06T10:40:44.0007431Z env:
+deploy	Set up Cloud SDK	2026-03-06T10:40:44.0007820Z   PROJECT_ID: clearslot-486319
+deploy	Set up Cloud SDK	2026-03-06T10:40:44.0008316Z   REGION: europe-west2
+deploy	Set up Cloud SDK	2026-03-06T10:40:44.0008781Z   SERVICE_NAME: clearslot-backend
+deploy	Set up Cloud SDK	2026-03-06T10:40:44.0009266Z ##[endgroup]
+deploy	Set up Cloud SDK	2026-03-06T10:40:45.4254030Z [command]/usr/bin/tar xz --warning=no-unknown-keyword --overwrite -C /home/runner/work/_temp/8e4df05e-c044-417a-beb8-9ad179e659bf -f /home/runner/work/_temp/40129cd2-0cbc-4755-bceb-c157560deb02
+deploy	Set up Cloud SDK	2026-03-06T10:41:07.2953835Z ##[warning]The gcloud CLI is not authenticated (or it is not installed). Authenticate by adding the "google-github-actions/auth" step prior this one.
+deploy	Decode GCP Key	???2026-03-06T10:41:07.3234570Z ##[group]Run echo "***" | base64 -d > gcp-key.json
+deploy	Decode GCP Key	2026-03-06T10:41:07.3328685Z [36;1mecho "***" | base64 -d > gcp-key.json[0m
+deploy	Decode GCP Key	2026-03-06T10:41:07.3383747Z shell: /usr/bin/bash -e {0}
+deploy	Decode GCP Key	2026-03-06T10:41:07.3384022Z env:
+deploy	Decode GCP Key	2026-03-06T10:41:07.3384223Z   PROJECT_ID: clearslot-486319
+deploy	Decode GCP Key	2026-03-06T10:41:07.3384464Z   REGION: europe-west2
+deploy	Decode GCP Key	2026-03-06T10:41:07.3384676Z   SERVICE_NAME: clearslot-backend
+deploy	Decode GCP Key	2026-03-06T10:41:07.3384994Z   CLOUDSDK_METRICS_ENVIRONMENT: github-actions-setup-gcloud
+deploy	Decode GCP Key	2026-03-06T10:41:07.3385349Z   CLOUDSDK_METRICS_ENVIRONMENT_VERSION: 2.2.1
+deploy	Decode GCP Key	2026-03-06T10:41:07.3385604Z ##[endgroup]
+deploy	Authenticate gcloud	???2026-03-06T10:41:07.3518227Z ##[group]Run gcloud auth activate-service-account --key-file=gcp-key.json
+deploy	Authenticate gcloud	2026-03-06T10:41:07.3518819Z [36;1mgcloud auth activate-service-account --key-file=gcp-key.json[0m
+deploy	Authenticate gcloud	2026-03-06T10:41:07.3519248Z [36;1mgcloud config set project clearslot-486319[0m
+deploy	Authenticate gcloud	2026-03-06T10:41:07.3633800Z shell: /usr/bin/bash -e {0}
+deploy	Authenticate gcloud	2026-03-06T10:41:07.3634270Z env:
+deploy	Authenticate gcloud	2026-03-06T10:41:07.3634490Z   PROJECT_ID: clearslot-486319
+deploy	Authenticate gcloud	2026-03-06T10:41:07.3634740Z   REGION: europe-west2
+deploy	Authenticate gcloud	2026-03-06T10:41:07.3634961Z   SERVICE_NAME: clearslot-backend
+deploy	Authenticate gcloud	2026-03-06T10:41:07.3635280Z   CLOUDSDK_METRICS_ENVIRONMENT: github-actions-setup-gcloud
+deploy	Authenticate gcloud	2026-03-06T10:41:07.3635659Z   CLOUDSDK_METRICS_ENVIRONMENT_VERSION: 2.2.1
+deploy	Authenticate gcloud	2026-03-06T10:41:07.3635941Z ##[endgroup]
+deploy	Authenticate gcloud	2026-03-06T10:41:08.1324076Z Activated service account credentials for: [github-deployer@clearslot-486319.iam.gserviceaccount.com]
+deploy	Authenticate gcloud	2026-03-06T10:41:09.5785496Z Project 'clearslot-486319' lacks an 'environment' tag. Please create or add a tag with key 'environment' and a value like 'Production', 'Development', 'Test', or 'Staging'. Add an 'environment' tag using `gcloud resource-manager tags bindings create`. See https://cloud.google.com/resource-manager/docs/creating-managing-projects#designate_project_environments_with_tags for details.
+deploy	Authenticate gcloud	2026-03-06T10:41:09.5790956Z Updated property [core/project].
+deploy	Deploy to Cloud Run	???2026-03-06T10:41:09.6666357Z ##[group]Run gcloud run deploy clearslot-backend \
+deploy	Deploy to Cloud Run	2026-03-06T10:41:09.6666768Z [36;1mgcloud run deploy clearslot-backend \[0m
+deploy	Deploy to Cloud Run	2026-03-06T10:41:09.6667068Z [36;1m  --source ./backend \[0m
+deploy	Deploy to Cloud Run	2026-03-06T10:41:09.6667332Z [36;1m  --region europe-west2 \[0m
+deploy	Deploy to Cloud Run	2026-03-06T10:41:09.6667628Z [36;1m  --allow-unauthenticated \[0m
+deploy	Deploy to Cloud Run	2026-03-06T10:41:09.6667987Z [36;1m  --set-env-vars PYTHONPATH=/app,GCP_PROJECT_ID=clearslot-486319 \[0m
+deploy	Deploy to Cloud Run	2026-03-06T10:41:09.6668349Z [36;1m  --quiet[0m
+deploy	Deploy to Cloud Run	2026-03-06T10:41:09.6716274Z shell: /usr/bin/bash -e {0}
+deploy	Deploy to Cloud Run	2026-03-06T10:41:09.6716510Z env:
+deploy	Deploy to Cloud Run	2026-03-06T10:41:09.6716696Z   PROJECT_ID: clearslot-486319
+deploy	Deploy to Cloud Run	2026-03-06T10:41:09.6716929Z   REGION: europe-west2
+deploy	Deploy to Cloud Run	2026-03-06T10:41:09.6717140Z   SERVICE_NAME: clearslot-backend
+deploy	Deploy to Cloud Run	2026-03-06T10:41:09.6717451Z   CLOUDSDK_METRICS_ENVIRONMENT: github-actions-setup-gcloud
+deploy	Deploy to Cloud Run	2026-03-06T10:41:09.6718035Z   CLOUDSDK_METRICS_ENVIRONMENT_VERSION: 2.2.1
+deploy	Deploy to Cloud Run	2026-03-06T10:41:09.6718300Z ##[endgroup]
+deploy	Deploy to Cloud Run	2026-03-06T10:41:15.3665044Z Building using Dockerfile and deploying container to Cloud Run service [clearslot-backend] in project [clearslot-486319] region [europe-west2]
+deploy	Deploy to Cloud Run	2026-03-06T10:41:15.3667284Z Building and deploying...
+deploy	Deploy to Cloud Run	2026-03-06T10:41:16.8012163Z Validating configuration..................done
+deploy	Deploy to Cloud Run	2026-03-06T10:41:18.8827946Z Uploading sources.........................done
+deploy	Deploy to Cloud Run	2026-03-06T10:42:18.4611263Z Building Container.................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................failed
+deploy	Deploy to Cloud Run	2026-03-06T10:42:18.4614332Z Deployment failed
+deploy	Deploy to Cloud Run	2026-03-06T10:42:18.4925179Z ERROR: (gcloud.run.deploy) Build failed; check build logs for details
+deploy	Deploy to Cloud Run	2026-03-06T10:42:18.7077312Z ##[error]Process completed with exit code 1.
+deploy	Post Checkout	???2026-03-06T10:42:18.7171509Z Post job cleanup.
+deploy	Post Checkout	2026-03-06T10:42:18.8140084Z [command]/usr/bin/git version
+deploy	Post Checkout	2026-03-06T10:42:18.8180116Z git version 2.53.0
+deploy	Post Checkout	2026-03-06T10:42:18.8225498Z Temporarily overriding HOME='/home/runner/work/_temp/82bf4465-ed29-4bc3-8da5-35e99263e147' before making global git config changes
+deploy	Post Checkout	2026-03-06T10:42:18.8226740Z Adding repository directory to the temporary git global config as a safe directory
+deploy	Post Checkout	2026-03-06T10:42:18.8231615Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/clearslot/clearslot
+deploy	Post Checkout	2026-03-06T10:42:18.8272278Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+deploy	Post Checkout	2026-03-06T10:42:18.8309248Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+deploy	Post Checkout	2026-03-06T10:42:18.8566234Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+deploy	Post Checkout	2026-03-06T10:42:18.8596897Z http.https://github.com/.extraheader
+deploy	Post Checkout	2026-03-06T10:42:18.8611500Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+deploy	Post Checkout	2026-03-06T10:42:18.8649045Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+deploy	Post Checkout	2026-03-06T10:42:18.8899419Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+deploy	Post Checkout	2026-03-06T10:42:18.8937614Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+deploy	Complete job	???2026-03-06T10:42:18.9343360Z Cleaning up orphan processes

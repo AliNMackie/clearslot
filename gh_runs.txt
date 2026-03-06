@@ -1,0 +1,5 @@
+completed	failure	test: align tests with strict pydantic v2 validation and atomic get m???	Deploy Backend to Cloud Run	main	push	22759879779	1m45s	2026-03-06T10:40:37Z
+completed	failure	test: align tests with strict pydantic v2 validation and atomic get m???	ClearSlot CI	main	push	22759879749	18s	2026-03-06T10:40:37Z
+completed	failure	fix: correct requirements.txt encoding for linux CI runners	Deploy Backend to Cloud Run	main	push	22759098648	1m44s	2026-03-06T10:17:23Z
+completed	failure	fix: correct requirements.txt encoding for linux CI runners	ClearSlot CI	main	push	22759098623	21s	2026-03-06T10:17:23Z
+completed	failure	feat(architecture): harden multi-tenant security and operational reli???	Deploy Backend to Cloud Run	main	push	22757525090	2m30s	2026-03-06T09:31:49Z
