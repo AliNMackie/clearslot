@@ -42,8 +42,8 @@ class TestVerifyToken:
         response = client.post("/api/v1/bookings/", json={
             "club_slug": "strathaven",
             "aircraft_reg": "G-CDEF",
-            "start_time": "2026-03-01T09:00:00",
-            "end_time": "2026-03-01T11:00:00",
+            "start_time": "2027-03-01T09:00:00",
+            "end_time": "2027-03-01T11:00:00",
         })
 
         assert response.status_code == 401
@@ -61,8 +61,8 @@ class TestVerifyToken:
             json={
                 "club_slug": "strathaven",
                 "aircraft_reg": "G-CDEF",
-                "start_time": "2026-03-01T09:00:00",
-                "end_time": "2026-03-01T11:00:00",
+                "start_time": "2027-03-01T09:00:00",
+                "end_time": "2027-03-01T11:00:00",
             },
             headers={"Authorization": "Bearer garbage_token_123"},
         )
@@ -83,13 +83,15 @@ class TestVerifyToken:
         mock_collection = MagicMock()
         mock_client.collection.return_value = mock_collection
 
-        # Mock stream() for overlap check — no overlaps
+        # Mock stream() and get() for overlap check — no overlaps
         mock_collection.where.return_value.where.return_value.where.return_value.stream.return_value = []
+        mock_collection.where.return_value.where.return_value.where.return_value.where.return_value.get.return_value = []
         
         # Mock add() to return (timestamp, doc_ref)
         mock_doc_ref = MagicMock()
         mock_doc_ref.id = "bk_new_123"
         mock_collection.add.return_value = (None, mock_doc_ref)
+        mock_collection.document.return_value = mock_doc_ref
 
         # Mock get_user_profile to return an instructor (bypasses recency check)
         with patch("backend.auth.get_user_profile") as mock_get_profile:
@@ -101,8 +103,8 @@ class TestVerifyToken:
                 json={
                     "club_slug": "strathaven",
                     "aircraft_reg": "G-CDEF",
-                    "start_time": "2026-03-01T09:00:00",
-                    "end_time": "2026-03-01T11:00:00",
+                    "start_time": "2027-03-01T09:00:00",
+                    "end_time": "2027-03-01T11:00:00",
                 },
                 headers={"Authorization": "Bearer valid_token_abc"},
             )

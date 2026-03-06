@@ -1,0 +1,46 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.12, pytest-8.4.2, pluggy-1.6.0 -- C:\Users\Alastair Mackie\AppData\Local\Microsoft\WindowsApps\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Alastair Mackie\.gemini\antigravity\scratch\clearslot-space
+plugins: anyio-4.11.0, langsmith-0.4.42, asyncio-1.3.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 4 items
+
+backend/tests/test_weather.py::test_get_mock_forecast_safe PASSED        [ 25%]
+backend/tests/test_weather.py::test_get_mock_forecast_windy PASSED       [ 50%]
+backend/tests/test_weather.py::test_get_mock_forecast_ifr PASSED         [ 75%]
+backend/tests/test_weather.py::test_real_forecast_fallback_on_bad_icao FAILED [100%]
+
+================================== FAILURES ===================================
+___________________ test_real_forecast_fallback_on_bad_icao ___________________
+
+mock_get_db_func = <MagicMock name='get_db' id='2392673698544'>
+mock_fetch = <MagicMock name='_fetch_aviation_weather' id='2392673698880'>
+
+    @patch("backend.integrations.weather._fetch_aviation_weather")
+    @patch("backend.integrations.weather.get_db")
+    def test_real_forecast_fallback_on_bad_icao(mock_get_db_func, mock_fetch):
+        """When real weather fetch fails (bad ICAO), should return safe defaults, not crash."""
+        t0 = datetime.now()
+    
+        # Mock Firestore to return nothing via patch
+        mock_db = MagicMock()
+        mock_doc = MagicMock()
+        mock_doc.exists = False
+        mock_db.collection.return_value.document.return_value.get.return_value = mock_doc
+        mock_get_db_func.return_value = mock_db
+    
+        # "XXXX" is not a valid ICAO ? AviationWeather.gov will error or return empty
+        mock_fetch.return_value = None  # Force failure
+        forecast = get_forecast("XXXX", t0, t0, mock=False)
+    
+>       assert isinstance(forecast, WeatherForecast)
+E       assert False
+E        +  where False = isinstance(None, WeatherForecast)
+
+backend\tests\test_weather.py:46: AssertionError
+---------------------------- Captured stdout call -----------------------------
+\u26a0\ufe0f Cache miss in Firestore for XXXX, fetching on-demand.\n\u26a0\ufe0f Failed to write weather cache to Firestore: 'NoneType' object has no attribute 'model_dump'
+=========================== short test summary info ===========================
+FAILED backend/tests/test_weather.py::test_real_forecast_fallback_on_bad_icao
+========================= 1 failed, 3 passed in 1.44s =========================

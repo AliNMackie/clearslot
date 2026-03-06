@@ -1,5 +1,6 @@
 import pytest
 from datetime import datetime
+from unittest.mock import MagicMock, patch
 from backend.integrations.weather import get_forecast
 from backend.schemas import WeatherForecast
 
@@ -25,13 +26,24 @@ def test_get_mock_forecast_ifr():
     assert forecast.cloud_base_ft < 1000
     assert forecast.visibility_m == 4000.0
 
-def test_real_forecast_fallback_on_bad_icao():
+@patch("backend.integrations.weather.get_db")
+def test_real_forecast_fallback_on_bad_icao(mock_get_db_func):
     """When real weather fetch fails (bad ICAO), should return safe defaults, not crash."""
     t0 = datetime.now()
+    
+    # Mock Firestore to return nothing via patch
+    mock_db = MagicMock()
+    mock_doc = MagicMock()
+    mock_doc.exists = False
+    mock_db.collection.return_value.document.return_value.get.return_value = mock_doc
+    mock_get_db_func.return_value = mock_db
+
     # "XXXX" is not a valid ICAO — AviationWeather.gov will error or return empty
     forecast = get_forecast("XXXX", t0, t0, mock=False)
+    
     assert isinstance(forecast, WeatherForecast)
-    # Should return cautious defaults (the _get_default_forecast values)
+    # Should return cautious defaults (the _get_fallback_forecast or default values)
     assert forecast.wind_speed_kt >= 0
     assert forecast.cloud_base_ft > 0
     assert forecast.visibility_m > 0
+

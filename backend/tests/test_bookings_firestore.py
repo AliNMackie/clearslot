@@ -58,8 +58,8 @@ class TestListBookings:
             "club_slug": "strathaven",
             "aircraft_reg": "G-CDEF",
             "pilot_uid": "pilot_123",
-            "start_time": datetime(2026, 3, 1, 9, 0),
-            "end_time": datetime(2026, 3, 1, 11, 0),
+            "start_time": datetime(2027, 3, 1, 9, 0),
+            "end_time": datetime(2027, 3, 1, 11, 0),
             "status": "confirmed",
         }
 
@@ -84,8 +84,8 @@ class TestCreateBooking:
         response = client.post("/api/v1/bookings/", json={
             "club_slug": "strathaven",
             "aircraft_reg": "G-CDEF",
-            "start_time": "2026-03-01T09:00:00",
-            "end_time": "2026-03-01T11:00:00",
+            "start_time": "2027-03-01T09:00:00",
+            "end_time": "2027-03-01T11:00:00",
         })
         assert response.status_code == 401
 
@@ -95,12 +95,16 @@ class TestCreateBooking:
         mock_query = MagicMock()
         mock_query.where.return_value = mock_query
         mock_query.stream.return_value = []
+        mock_query.get.return_value = []
         mock_firestore.collection.return_value = mock_query
 
         # Mock add (returns tuple of (timestamp, doc_ref))
         mock_doc_ref = MagicMock()
         mock_doc_ref.id = "bk_new_1"
         mock_query.add.return_value = (None, mock_doc_ref)
+        
+        # We also need to mock document() because bookings.py uses it as: db.collection("bookings").document()
+        mock_query.document.return_value = mock_doc_ref
 
         # Mock get_user_profile to return an instructor (bypasses recency check)
         with patch("backend.auth.get_user_profile") as mock_get_profile:
@@ -111,8 +115,8 @@ class TestCreateBooking:
                 json={
                     "club_slug": "strathaven",
                     "aircraft_reg": "G-CDEF",
-                    "start_time": "2026-03-01T09:00:00",
-                    "end_time": "2026-03-01T11:00:00",
+                    "start_time": "2027-03-01T09:00:00",
+                    "end_time": "2027-03-01T11:00:00",
                 },
                 headers={"Authorization": "Bearer valid_token"},
             )
@@ -127,12 +131,13 @@ class TestCreateBooking:
         # Mock existing overlapping booking
         mock_existing = MagicMock()
         mock_existing.to_dict.return_value = {
-            "end_time": datetime(2026, 3, 1, 11, 0),  # Overlaps with requested 09:00-11:00
+            "end_time": datetime(2027, 3, 1, 11, 0),  # Overlaps with requested 09:00-11:00
         }
 
         mock_query = MagicMock()
         mock_query.where.return_value = mock_query
         mock_query.stream.return_value = [mock_existing]
+        mock_query.get.return_value = [mock_existing]
         mock_firestore.collection.return_value = mock_query
 
         # Mock get_user_profile to return an instructor (bypasses recency check)
@@ -141,6 +146,7 @@ class TestCreateBooking:
             
             # Setup db mock for this test
             mock_query.stream.return_value = [mock_existing]
+            mock_query.get.return_value = [mock_existing]
             mock_firestore.collection.return_value = mock_query
 
             response = client.post(
@@ -148,8 +154,8 @@ class TestCreateBooking:
                 json={
                     "club_slug": "strathaven",
                     "aircraft_reg": "G-CDEF",
-                    "start_time": "2026-03-01T09:00:00",
-                    "end_time": "2026-03-01T11:00:00",
+                    "start_time": "2027-03-01T09:00:00",
+                    "end_time": "2027-03-01T11:00:00",
                 },
                 headers={"Authorization": "Bearer valid_token"},
             )

@@ -1,0 +1,796 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.12, pytest-8.4.2, pluggy-1.6.0 -- C:\Users\Alastair Mackie\AppData\Local\Microsoft\WindowsApps\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Alastair Mackie\.gemini\antigravity\scratch\clearslot-space
+plugins: anyio-4.11.0, langsmith-0.4.42, asyncio-1.3.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 67 items
+
+backend/tests/test_admin_crud.py::TestNewsCRUD::test_create_news PASSED  [  1%]
+backend/tests/test_admin_crud.py::TestNewsCRUD::test_update_news PASSED  [  2%]
+backend/tests/test_admin_crud.py::TestNewsCRUD::test_delete_news PASSED  [  4%]
+backend/tests/test_admin_crud.py::TestNewsCRUD::test_update_news_not_found PASSED [  5%]
+backend/tests/test_admin_crud.py::TestFleetCRUD::test_create_fleet PASSED [  7%]
+backend/tests/test_admin_crud.py::TestFleetCRUD::test_delete_fleet PASSED [  8%]
+backend/tests/test_admin_crud.py::TestFleetCRUD::test_non_admin_cannot_create PASSED [ 10%]
+backend/tests/test_api_flyability.py::test_flyability_endpoint_safe PASSED [ 11%]
+backend/tests/test_api_flyability.py::test_flyability_endpoint_windy PASSED [ 13%]
+backend/tests/test_api_flyability.py::test_flyability_endpoint_defaults_time PASSED [ 14%]
+backend/tests/test_auth.py::TestVerifyToken::test_missing_auth_header PASSED [ 16%]
+backend/tests/test_auth.py::TestVerifyToken::test_invalid_token PASSED   [ 17%]
+backend/tests/test_auth.py::TestVerifyToken::test_valid_token FAILED     [ 19%]
+backend/tests/test_bookings_firestore.py::TestListBookings::test_list_bookings_filters_club PASSED [ 20%]
+backend/tests/test_bookings_firestore.py::TestCreateBooking::test_create_booking_no_auth PASSED [ 22%]
+backend/tests/test_bookings_firestore.py::TestCreateBooking::test_create_booking_success FAILED [ 23%]
+backend/tests/test_bookings_firestore.py::TestCreateBooking::test_overlap_detection FAILED [ 25%]
+backend/tests/test_bookings_firestore.py::TestCancelBooking::test_cancel_booking PASSED [ 26%]
+backend/tests/test_bookings_firestore.py::TestCancelBooking::test_cancel_other_users_booking PASSED [ 28%]
+backend/tests/test_flyability.py::test_flyability_go PASSED              [ 29%]
+backend/tests/test_flyability.py::test_flyability_no_go_wind PASSED      [ 31%]
+backend/tests/test_flyability.py::test_flyability_check_cloud PASSED     [ 32%]
+backend/tests/test_flyability.py::test_flyability_ice_no_go PASSED       [ 34%]
+backend/tests/test_flyability_slots.py::TestFlyabilitySlots::test_returns_array_of_slots PASSED [ 35%]
+backend/tests/test_flyability_slots.py::TestFlyabilitySlots::test_start_equals_end_returns_empty PASSED [ 37%]
+backend/tests/test_flyability_slots.py::TestFlyabilitySlots::test_short_range_single_slot PASSED [ 38%]
+backend/tests/test_flyability_slots.py::TestFlyabilitySlots::test_windy_slot_returns_no_go PASSED [ 40%]
+backend/tests/test_geospatial.py::test_haversine_distance PASSED         [ 41%]
+backend/tests/test_geospatial.py::test_is_inside_geofence PASSED         [ 43%]
+backend/tests/test_legality.py::TestHasValidLicence::test_valid_nppl_licence PASSED [ 44%]
+backend/tests/test_legality.py::TestHasValidLicence::test_invalid_nppl_hours PASSED [ 46%]
+backend/tests/test_legality.py::TestHasValidLicence::test_valid_ppl_licence PASSED [ 47%]
+backend/tests/test_legality.py::TestHasValidLicence::test_ppl_missing_xc PASSED [ 49%]
+backend/tests/test_legality.py::TestHasValidLicence::test_unknown_licence_type PASSED [ 50%]
+backend/tests/test_legality.py::TestGetRelevantRating::test_microlight_rating PASSED [ 52%]
+backend/tests/test_legality.py::TestGetRelevantRating::test_sep_with_differences PASSED [ 53%]
+backend/tests/test_legality.py::TestGetRelevantRating::test_no_rating_for_aircraft PASSED [ 55%]
+backend/tests/test_legality.py::TestGetRelevantRating::test_sep_without_differences PASSED [ 56%]
+backend/tests/test_legality.py::TestIsSlotLegal::test_recency_sufficient PASSED [ 58%]
+backend/tests/test_legality.py::TestIsSlotLegal::test_recency_insufficient_hours PASSED [ 59%]
+backend/tests/test_legality.py::TestIsSlotLegal::test_recency_insufficient_landings PASSED [ 61%]
+backend/tests/test_legality.py::TestIsSlotLegal::test_single_seat_constraint PASSED [ 62%]
+backend/tests/test_legality.py::TestIsSlotLegal::test_invalid_licence_fails_early PASSED [ 64%]
+backend/tests/test_legality.py::TestIsSlotLegal::test_no_rating_fails PASSED [ 65%]
+backend/tests/test_medical_permit.py::TestMedicalExpiry::test_expired_medical_blocks PASSED [ 67%]
+backend/tests/test_medical_permit.py::TestMedicalExpiry::test_valid_medical_passes PASSED [ 68%]
+backend/tests/test_medical_permit.py::TestMedicalExpiry::test_no_medical_field_passes PASSED [ 70%]
+backend/tests/test_medical_permit.py::TestPermitExpiry::test_expired_permit_blocks PASSED [ 71%]
+backend/tests/test_medical_permit.py::TestPermitExpiry::test_valid_permit_passes PASSED [ 73%]
+backend/tests/test_medical_permit.py::TestPermitExpiry::test_no_permit_field_passes PASSED [ 74%]
+backend/tests/test_medical_permit.py::TestPermitExpiry::test_no_aircraft_details_passes PASSED [ 76%]
+backend/tests/test_medical_permit.py::TestPermitExpiry::test_medical_checked_before_permit PASSED [ 77%]
+backend/tests/test_roles.py::TestRequireClubAdmin::test_non_member_gets_403 PASSED [ 79%]
+backend/tests/test_roles.py::TestRequireClubAdmin::test_pilot_gets_403_on_admin_endpoint PASSED [ 80%]
+backend/tests/test_roles.py::TestRequireClubAdmin::test_admin_can_access PASSED [ 82%]
+backend/tests/test_roles.py::TestRequireClubAdmin::test_instructor_can_access PASSED [ 83%]
+backend/tests/test_roles.py::TestRequireClubAdmin::test_no_profile_gets_403 PASSED [ 85%]
+backend/tests/test_scoring.py::TestClubOperationalScore::test_modernised_band PASSED [ 86%]
+backend/tests/test_scoring.py::TestClubOperationalScore::test_in_transition_band PASSED [ 88%]
+backend/tests/test_scoring.py::TestClubOperationalScore::test_legacy_heavy_band PASSED [ 89%]
+backend/tests/test_scoring.py::TestClubOperationalScore::test_score_clamping_max PASSED [ 91%]
+backend/tests/test_scoring.py::TestClubOperationalScore::test_score_clamping_min PASSED [ 92%]
+backend/tests/test_scoring.py::TestClubOperationalScore::test_explanation_not_empty PASSED [ 94%]
+backend/tests/test_weather.py::test_get_mock_forecast_safe PASSED        [ 95%]
+backend/tests/test_weather.py::test_get_mock_forecast_windy PASSED       [ 97%]
+backend/tests/test_weather.py::test_get_mock_forecast_ifr PASSED         [ 98%]
+backend/tests/test_weather.py::test_real_forecast_fallback_on_bad_icao FAILED [100%]
+
+================================== FAILURES ===================================
+______________________ TestVerifyToken.test_valid_token _______________________
+
+self = <test_auth.TestVerifyToken object at 0x000001AD10BDDBA0>
+mock_verify_id_token = <MagicMock name='verify_id_token' id='1842823781008'>
+mock_get_db = <MagicMock name='get_db()' id='1842823788400'>
+
+    def test_valid_token(self, mock_verify_id_token, mock_get_db):
+        """Request with a valid Firebase token should pass through with user info."""
+        mock_verify_id_token.return_value = {
+            "uid": "test_user_123",
+            "email": "pilot@strathaven.co.uk",
+        }
+    
+        from backend.main import app
+    
+        # Configure the shared mock_get_db
+        mock_client = mock_get_db
+        mock_collection = MagicMock()
+        mock_client.collection.return_value = mock_collection
+    
+        # Mock stream() for overlap check ? no overlaps
+        mock_collection.where.return_value.where.return_value.where.return_value.stream.return_value = []
+    
+        # Mock add() to return (timestamp, doc_ref)
+        mock_doc_ref = MagicMock()
+        mock_doc_ref.id = "bk_new_123"
+        mock_collection.add.return_value = (None, mock_doc_ref)
+    
+        # Mock get_user_profile to return an instructor (bypasses recency check)
+        with patch("backend.auth.get_user_profile") as mock_get_profile:
+            mock_get_profile.return_value = {"role": "instructor"}
+    
+            client = TestClient(app)
+            response = client.post(
+                "/api/v1/bookings/",
+                json={
+                    "club_slug": "strathaven",
+                    "aircraft_reg": "G-CDEF",
+                    "start_time": "2026-03-01T09:00:00",
+                    "end_time": "2026-03-01T11:00:00",
+                },
+                headers={"Authorization": "Bearer valid_token_abc"},
+            )
+>           assert response.status_code == 200
+E           assert 400 == 200
+E            +  where 400 = <Response [400 Bad Request]>.status_code
+
+backend\tests\test_auth.py:109: AssertionError
+________________ TestCreateBooking.test_create_booking_success ________________
+
+self = <test_bookings_firestore.TestCreateBooking object at 0x000001AD10C7A350>
+client = <starlette.testclient.TestClient object at 0x000001AD10CFDE10>
+mock_firestore = <MagicMock name='get_db()' id='1842822377696'>
+mock_auth_token = <MagicMock name='verify_id_token' id='1842822378032'>
+
+    def test_create_booking_success(self, client, mock_firestore, mock_auth_token):
+        """Authenticated booking creation should persist and return 200."""
+        # Mock no overlaps
+        mock_query = MagicMock()
+        mock_query.where.return_value = mock_query
+        mock_query.stream.return_value = []
+        mock_firestore.collection.return_value = mock_query
+    
+        # Mock add (returns tuple of (timestamp, doc_ref))
+        mock_doc_ref = MagicMock()
+        mock_doc_ref.id = "bk_new_1"
+        mock_query.add.return_value = (None, mock_doc_ref)
+    
+        # Mock get_user_profile to return an instructor (bypasses recency check)
+        with patch("backend.auth.get_user_profile") as mock_get_profile:
+            mock_get_profile.return_value = {"role": "instructor"}
+    
+>           response = client.post(
+                "/api/v1/bookings/",
+                json={
+                    "club_slug": "strathaven",
+                    "aircraft_reg": "G-CDEF",
+                    "start_time": "2027-03-01T09:00:00",
+                    "end_time": "2027-03-01T11:00:00",
+                },
+                headers={"Authorization": "Bearer valid_token"},
+            )
+
+backend\tests\test_bookings_firestore.py:109: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\testclient.py:552: in post
+    return super().post(
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\httpx\_client.py:1144: in post
+    return self.request(
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\testclient.py:451: in request
+    return super().request(
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\httpx\_client.py:825: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\httpx\_client.py:914: in send
+    response = self._send_handling_auth(
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\httpx\_client.py:942: in _send_handling_auth
+    response = self._send_handling_redirects(
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\httpx\_client.py:979: in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\httpx\_client.py:1014: in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\testclient.py:354: in handle_request
+    raise exc
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\testclient.py:351: in handle_request
+    portal.call(self.app, scope, receive, send)
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\anyio\from_thread.py:321: in call
+    return cast(T_Retval, self.start_task_soon(func, *args).result())
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3312.0_x64__qbz5n2kfra8p0\Lib\concurrent\futures\_base.py:456: in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3312.0_x64__qbz5n2kfra8p0\Lib\concurrent\futures\_base.py:401: in __get_result
+    raise self._exception
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\anyio\from_thread.py:252: in _call_func
+    retval = await retval_or_awaitable
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\fastapi\applications.py:1134: in __call__
+    await super().__call__(scope, receive, send)
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\applications.py:113: in __call__
+    await self.middleware_stack(scope, receive, send)
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\middleware\errors.py:186: in __call__
+    raise exc
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\middleware\errors.py:164: in __call__
+    await self.app(scope, receive, _send)
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\middleware\cors.py:85: in __call__
+    await self.app(scope, receive, send)
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\middleware\base.py:191: in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+                                   ^^^^^^^^^^^^^^^^^^^^
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3312.0_x64__qbz5n2kfra8p0\Lib\contextlib.py:162: in __exit__
+    self.gen.throw(value)
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\_utils.py:85: in collapse_excgroups
+    raise exc
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\middleware\base.py:193: in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend\main.py:59: in log_requests
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\middleware\base.py:168: in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\middleware\base.py:144: in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\middleware\exceptions.py:63: in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\fastapi\middleware\asyncexitstack.py:18: in __call__
+    await self.app(scope, receive, send)
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\routing.py:716: in __call__
+    await self.middleware_stack(scope, receive, send)
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\routing.py:736: in app
+    await route.handle(scope, receive, send)
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\routing.py:290: in handle
+    await self.app(scope, receive, send)
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\fastapi\routing.py:125: in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\fastapi\routing.py:111: in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\fastapi\routing.py:391: in app
+    raw_response = await run_endpoint_function(
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\fastapi\routing.py:290: in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+booking = BookingRequest(club_slug='strathaven', aircraft_reg='G-CDEF', instructor_id=None, start_time=datetime.datetime(2027, 3, 1, 9, 0), end_time=datetime.datetime(2027, 3, 1, 11, 0), notes=None, flyability_score=None, raw_weather_payload=None)
+user = {'email': 'pilot@strathaven.co.uk', 'uid': 'pilot_123'}
+
+    @router.post("/", response_model=BookingResponse)
+    async def create_booking(booking: BookingRequest, user: dict = Depends(verify_token)):
+        """
+        Create a new booking. Requires authentication.
+        Checks for overlapping bookings on the same aircraft.
+        Triggers Google Calendar Sync (Stub).
+        """
+        db = backend.db.get_db()
+    
+        # --- Validation ---
+        if booking.end_time <= booking.start_time:
+             raise HTTPException(status_code=400, detail="End time must be after start time")
+    
+        if booking.start_time < datetime.utcnow() - timedelta(minutes=15):
+             # Allow 15 min grace period for "just missed it" or clock skew
+             raise HTTPException(status_code=400, detail="Cannot book slots in the past")
+    
+        # --- T19: Advanced Booking Constraints ---
+        MAX_ACTIVE_BOOKINGS = 3
+        CLUB_RECENCY_DAYS = 60
+    
+        # 0. Get User Profile (to check for instructor role exemption)
+        from backend.auth import get_user_profile
+        profile = get_user_profile(user["uid"])
+        user_role = profile.get("role", "pilot")
+    
+        # Constraint A: Max Active Bookings
+        # Count confirmed bookings in the future for this user
+        future_bookings = (
+            db.collection("bookings")
+            .where("pilot_uid", "==", user["uid"])
+            .where("status", "==", "confirmed")
+            .where("start_time", ">", datetime.utcnow())
+            .stream()
+        )
+        active_count = sum(1 for _ in future_bookings)
+    
+        if active_count >= MAX_ACTIVE_BOOKINGS:
+            raise HTTPException(
+                status_code=403,
+                detail=f"Booking limit reached. You can only have {MAX_ACTIVE_BOOKINGS} active bookings at a time."
+            )
+    
+        # Constraint B: 90-Day (now 60-Day) Club Recency
+        # Skip for instructors or admins
+        if user_role not in ("instructor", "admin"):
+            # Check for ANY confirmed booking in the last 60 days
+            cutoff_date = datetime.utcnow() - timedelta(days=CLUB_RECENCY_DAYS)
+    
+            recent_bookings = (
+                db.collection("bookings")
+                .where("pilot_uid", "==", user["uid"])
+                .where("status", "==", "confirmed")
+                .where("start_time", ">", cutoff_date)
+                .where("start_time", "<", datetime.utcnow()) # Must be in the past/completed
+                .limit(1)
+                .stream()
+            )
+    
+            has_recent = any(True for _ in recent_bookings)
+    
+            # If no recent bookings found, check if they are a "New" member?
+            # For now, strict rule: Must have flown.
+            # (MVP Handling: If they have NEVER flown, they likely need an instructor booking anyway, which we can allow if we add an 'instructor_id' check)
+    
+            # EXCEPTION: If this new booking HAS an instructor attached, allow it.
+            if not has_recent and not booking.instructor_id:
+                 raise HTTPException(
+                    status_code=403,
+                    detail=f"Recency check failed. You haven't flown in {CLUB_RECENCY_DAYS} days. Please book with an instructor."
+                )
+    
+        # --- ATOMIC Overlap Check + Write (Firestore Transaction) ---
+        # Date floor: only check bookings starting from 24h ago onwards.
+        # This prevents unbounded historical reads as the collection grows.
+        date_floor = datetime.utcnow() - timedelta(days=1)
+    
+        booking_data = {
+            **booking.model_dump(),
+            "pilot_uid": user["uid"],
+            "status": "confirmed",
+            "created_at": datetime.utcnow(),
+        }
+    
+        # Pre-generate document references so the transaction can write to them
+        new_booking_ref = db.collection("bookings").document()
+        new_audit_ref = db.collection("booking_audit_logs").document()
+    
+        @transactional
+        def _create_booking_txn(transaction):
+            """Atomically check for overlaps and write the booking + audit log."""
+            # 1. Query for overlapping confirmed bookings (inside the transaction)
+            overlap_query = (
+                db.collection("bookings")
+                .where("aircraft_reg", "==", booking.aircraft_reg)
+                .where("status", "==", "confirmed")
+                .where("start_time", ">=", date_floor)
+                .where("start_time", "<", booking.end_time)
+            )
+            # Read inside the transaction for consistency
+            overlapping_docs = overlap_query.get(transaction=transaction)
+    
+            for doc in overlapping_docs:
+                data = doc.to_dict()
+                existing_end = data.get("end_time")
+                if existing_end:
+                    # Normalize timezone for comparison
+                    if hasattr(existing_end, 'tzinfo') and existing_end.tzinfo:
+                        existing_end = existing_end.replace(tzinfo=None)
+                    if existing_end > booking.start_time:
+                        raise HTTPException(
+                            status_code=409,
+                            detail=f"Aircraft {booking.aircraft_reg} is already booked for an overlapping time slot."
+                        )
+    
+            # 2. No overlap found ? write the booking atomically
+            transaction.set(new_booking_ref, booking_data)
+    
+            # 3. Truth Machine Audit Log (Snapshot Pattern) ? also inside the transaction
+            audit_data = {
+                "booking_id": new_booking_ref.id,
+                "user_id": user["uid"],
+                "club_slug": booking.club_slug,
+                "aircraft_reg": booking.aircraft_reg,
+                "flyability_score": booking.flyability_score,
+                "raw_weather_payload": booking.raw_weather_payload,
+                "timestamp": datetime.utcnow()
+            }
+            transaction.set(new_audit_ref, audit_data)
+    
+        # Execute the transaction (retries automatically on contention)
+        _create_booking_txn(db.transaction())
+    
+        # 4. Build response (exclude internal fields)
+>       response_data = BookingResponse(id=new_booking_ref.id, **{
+            k: v for k, v in booking_data.items() if k != "created_at"
+        })
+E       pydantic_core._pydantic_core.ValidationError: 1 validation error for BookingResponse
+E       id
+E         Input should be a valid string [type=string_type, input_value=<MagicMock name='get_db()....id' id='1842826052672'>, input_type=MagicMock]
+E           For further information visit https://errors.pydantic.dev/2.12/v/string_type
+
+backend\bookings.py:198: ValidationError
+------------------------------ Captured log call ------------------------------
+ERROR    clearslot.main:main.py:65 Request failed: POST /api/v1/bookings/ - 1 validation error for BookingResponse
+id
+  Input should be a valid string [type=string_type, input_value=<MagicMock name='get_db()....id' id='1842826052672'>, input_type=MagicMock]
+    For further information visit https://errors.pydantic.dev/2.12/v/string_type - 4.35ms
+__________________ TestCreateBooking.test_overlap_detection ___________________
+
+self = <test_bookings_firestore.TestCreateBooking object at 0x000001AD10BDDE00>
+client = <starlette.testclient.TestClient object at 0x000001AD10D78AD0>
+mock_firestore = <MagicMock name='get_db()' id='1842822372992'>
+mock_auth_token = <MagicMock name='verify_id_token' id='1842822374336'>
+
+    def test_overlap_detection(self, client, mock_firestore, mock_auth_token):
+        """Booking for an already-booked aircraft should return 409."""
+        # Mock existing overlapping booking
+        mock_existing = MagicMock()
+        mock_existing.to_dict.return_value = {
+            "end_time": datetime(2027, 3, 1, 11, 0),  # Overlaps with requested 09:00-11:00
+        }
+    
+        mock_query = MagicMock()
+        mock_query.where.return_value = mock_query
+        mock_query.stream.return_value = [mock_existing]
+        mock_firestore.collection.return_value = mock_query
+    
+        # Mock get_user_profile to return an instructor (bypasses recency check)
+        with patch("backend.auth.get_user_profile") as mock_get_profile:
+            mock_get_profile.return_value = {"role": "instructor"}
+    
+            # Setup db mock for this test
+            mock_query.stream.return_value = [mock_existing]
+            mock_firestore.collection.return_value = mock_query
+    
+>           response = client.post(
+                "/api/v1/bookings/",
+                json={
+                    "club_slug": "strathaven",
+                    "aircraft_reg": "G-CDEF",
+                    "start_time": "2027-03-01T09:00:00",
+                    "end_time": "2027-03-01T11:00:00",
+                },
+                headers={"Authorization": "Bearer valid_token"},
+            )
+
+backend\tests\test_bookings_firestore.py:146: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\testclient.py:552: in post
+    return super().post(
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\httpx\_client.py:1144: in post
+    return self.request(
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\testclient.py:451: in request
+    return super().request(
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\httpx\_client.py:825: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\httpx\_client.py:914: in send
+    response = self._send_handling_auth(
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\httpx\_client.py:942: in _send_handling_auth
+    response = self._send_handling_redirects(
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\httpx\_client.py:979: in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\httpx\_client.py:1014: in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\testclient.py:354: in handle_request
+    raise exc
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\testclient.py:351: in handle_request
+    portal.call(self.app, scope, receive, send)
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\anyio\from_thread.py:321: in call
+    return cast(T_Retval, self.start_task_soon(func, *args).result())
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3312.0_x64__qbz5n2kfra8p0\Lib\concurrent\futures\_base.py:456: in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3312.0_x64__qbz5n2kfra8p0\Lib\concurrent\futures\_base.py:401: in __get_result
+    raise self._exception
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\anyio\from_thread.py:252: in _call_func
+    retval = await retval_or_awaitable
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\fastapi\applications.py:1134: in __call__
+    await super().__call__(scope, receive, send)
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\applications.py:113: in __call__
+    await self.middleware_stack(scope, receive, send)
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\middleware\errors.py:186: in __call__
+    raise exc
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\middleware\errors.py:164: in __call__
+    await self.app(scope, receive, _send)
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\middleware\cors.py:85: in __call__
+    await self.app(scope, receive, send)
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\middleware\base.py:191: in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+                                   ^^^^^^^^^^^^^^^^^^^^
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3312.0_x64__qbz5n2kfra8p0\Lib\contextlib.py:162: in __exit__
+    self.gen.throw(value)
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\_utils.py:85: in collapse_excgroups
+    raise exc
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\middleware\base.py:193: in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend\main.py:59: in log_requests
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\middleware\base.py:168: in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\middleware\base.py:144: in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\middleware\exceptions.py:63: in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\fastapi\middleware\asyncexitstack.py:18: in __call__
+    await self.app(scope, receive, send)
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\routing.py:716: in __call__
+    await self.middleware_stack(scope, receive, send)
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\routing.py:736: in app
+    await route.handle(scope, receive, send)
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\routing.py:290: in handle
+    await self.app(scope, receive, send)
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\fastapi\routing.py:125: in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\fastapi\routing.py:111: in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\fastapi\routing.py:391: in app
+    raw_response = await run_endpoint_function(
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\fastapi\routing.py:290: in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+booking = BookingRequest(club_slug='strathaven', aircraft_reg='G-CDEF', instructor_id=None, start_time=datetime.datetime(2027, 3, 1, 9, 0), end_time=datetime.datetime(2027, 3, 1, 11, 0), notes=None, flyability_score=None, raw_weather_payload=None)
+user = {'email': 'pilot@strathaven.co.uk', 'uid': 'pilot_123'}
+
+    @router.post("/", response_model=BookingResponse)
+    async def create_booking(booking: BookingRequest, user: dict = Depends(verify_token)):
+        """
+        Create a new booking. Requires authentication.
+        Checks for overlapping bookings on the same aircraft.
+        Triggers Google Calendar Sync (Stub).
+        """
+        db = backend.db.get_db()
+    
+        # --- Validation ---
+        if booking.end_time <= booking.start_time:
+             raise HTTPException(status_code=400, detail="End time must be after start time")
+    
+        if booking.start_time < datetime.utcnow() - timedelta(minutes=15):
+             # Allow 15 min grace period for "just missed it" or clock skew
+             raise HTTPException(status_code=400, detail="Cannot book slots in the past")
+    
+        # --- T19: Advanced Booking Constraints ---
+        MAX_ACTIVE_BOOKINGS = 3
+        CLUB_RECENCY_DAYS = 60
+    
+        # 0. Get User Profile (to check for instructor role exemption)
+        from backend.auth import get_user_profile
+        profile = get_user_profile(user["uid"])
+        user_role = profile.get("role", "pilot")
+    
+        # Constraint A: Max Active Bookings
+        # Count confirmed bookings in the future for this user
+        future_bookings = (
+            db.collection("bookings")
+            .where("pilot_uid", "==", user["uid"])
+            .where("status", "==", "confirmed")
+            .where("start_time", ">", datetime.utcnow())
+            .stream()
+        )
+        active_count = sum(1 for _ in future_bookings)
+    
+        if active_count >= MAX_ACTIVE_BOOKINGS:
+            raise HTTPException(
+                status_code=403,
+                detail=f"Booking limit reached. You can only have {MAX_ACTIVE_BOOKINGS} active bookings at a time."
+            )
+    
+        # Constraint B: 90-Day (now 60-Day) Club Recency
+        # Skip for instructors or admins
+        if user_role not in ("instructor", "admin"):
+            # Check for ANY confirmed booking in the last 60 days
+            cutoff_date = datetime.utcnow() - timedelta(days=CLUB_RECENCY_DAYS)
+    
+            recent_bookings = (
+                db.collection("bookings")
+                .where("pilot_uid", "==", user["uid"])
+                .where("status", "==", "confirmed")
+                .where("start_time", ">", cutoff_date)
+                .where("start_time", "<", datetime.utcnow()) # Must be in the past/completed
+                .limit(1)
+                .stream()
+            )
+    
+            has_recent = any(True for _ in recent_bookings)
+    
+            # If no recent bookings found, check if they are a "New" member?
+            # For now, strict rule: Must have flown.
+            # (MVP Handling: If they have NEVER flown, they likely need an instructor booking anyway, which we can allow if we add an 'instructor_id' check)
+    
+            # EXCEPTION: If this new booking HAS an instructor attached, allow it.
+            if not has_recent and not booking.instructor_id:
+                 raise HTTPException(
+                    status_code=403,
+                    detail=f"Recency check failed. You haven't flown in {CLUB_RECENCY_DAYS} days. Please book with an instructor."
+                )
+    
+        # --- ATOMIC Overlap Check + Write (Firestore Transaction) ---
+        # Date floor: only check bookings starting from 24h ago onwards.
+        # This prevents unbounded historical reads as the collection grows.
+        date_floor = datetime.utcnow() - timedelta(days=1)
+    
+        booking_data = {
+            **booking.model_dump(),
+            "pilot_uid": user["uid"],
+            "status": "confirmed",
+            "created_at": datetime.utcnow(),
+        }
+    
+        # Pre-generate document references so the transaction can write to them
+        new_booking_ref = db.collection("bookings").document()
+        new_audit_ref = db.collection("booking_audit_logs").document()
+    
+        @transactional
+        def _create_booking_txn(transaction):
+            """Atomically check for overlaps and write the booking + audit log."""
+            # 1. Query for overlapping confirmed bookings (inside the transaction)
+            overlap_query = (
+                db.collection("bookings")
+                .where("aircraft_reg", "==", booking.aircraft_reg)
+                .where("status", "==", "confirmed")
+                .where("start_time", ">=", date_floor)
+                .where("start_time", "<", booking.end_time)
+            )
+            # Read inside the transaction for consistency
+            overlapping_docs = overlap_query.get(transaction=transaction)
+    
+            for doc in overlapping_docs:
+                data = doc.to_dict()
+                existing_end = data.get("end_time")
+                if existing_end:
+                    # Normalize timezone for comparison
+                    if hasattr(existing_end, 'tzinfo') and existing_end.tzinfo:
+                        existing_end = existing_end.replace(tzinfo=None)
+                    if existing_end > booking.start_time:
+                        raise HTTPException(
+                            status_code=409,
+                            detail=f"Aircraft {booking.aircraft_reg} is already booked for an overlapping time slot."
+                        )
+    
+            # 2. No overlap found ? write the booking atomically
+            transaction.set(new_booking_ref, booking_data)
+    
+            # 3. Truth Machine Audit Log (Snapshot Pattern) ? also inside the transaction
+            audit_data = {
+                "booking_id": new_booking_ref.id,
+                "user_id": user["uid"],
+                "club_slug": booking.club_slug,
+                "aircraft_reg": booking.aircraft_reg,
+                "flyability_score": booking.flyability_score,
+                "raw_weather_payload": booking.raw_weather_payload,
+                "timestamp": datetime.utcnow()
+            }
+            transaction.set(new_audit_ref, audit_data)
+    
+        # Execute the transaction (retries automatically on contention)
+        _create_booking_txn(db.transaction())
+    
+        # 4. Build response (exclude internal fields)
+>       response_data = BookingResponse(id=new_booking_ref.id, **{
+            k: v for k, v in booking_data.items() if k != "created_at"
+        })
+E       pydantic_core._pydantic_core.ValidationError: 1 validation error for BookingResponse
+E       id
+E         Input should be a valid string [type=string_type, input_value=<MagicMock name='get_db()....id' id='1842823787728'>, input_type=MagicMock]
+E           For further information visit https://errors.pydantic.dev/2.12/v/string_type
+
+backend\bookings.py:198: ValidationError
+------------------------------ Captured log call ------------------------------
+ERROR    clearslot.main:main.py:65 Request failed: POST /api/v1/bookings/ - 1 validation error for BookingResponse
+id
+  Input should be a valid string [type=string_type, input_value=<MagicMock name='get_db()....id' id='1842823787728'>, input_type=MagicMock]
+    For further information visit https://errors.pydantic.dev/2.12/v/string_type - 4.99ms
+___________________ test_real_forecast_fallback_on_bad_icao ___________________
+
+    def test_real_forecast_fallback_on_bad_icao():
+        """When real weather fetch fails (bad ICAO), should return safe defaults, not crash."""
+        t0 = datetime.now()
+        # "XXXX" is not a valid ICAO ? AviationWeather.gov will error or return empty
+>       forecast = get_forecast("XXXX", t0, t0, mock=False)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend\tests\test_weather.py:32: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+site_id = 'XXXX', t0 = datetime.datetime(2026, 3, 6, 10, 26, 34, 232695)
+t1 = datetime.datetime(2026, 3, 6, 10, 26, 34, 232695), mock = False
+
+    def get_forecast(site_id: str, t0: datetime, t1: datetime, mock: Optional[bool] = None) -> WeatherForecast:
+        """Fetch weather forecast for a site and time range from Firestore Cache."""
+        if mock is None:
+            mock = os.environ.get("MOCK_EXTERNAL_APIS", "true").lower() == "true"
+    
+        if mock:
+            return _get_mock_forecast(site_id, t0)
+    
+        # Read strictly from Firestore Cache for <200ms latency
+        db = get_db()
+    
+        # We store the latest weather by site_id
+        doc_ref = db.collection("weather_cache").document(site_id)
+        doc = doc_ref.get()
+    
+        if doc.exists:
+            data = doc.to_dict()
+            last_updated = data.get("updated_at")
+    
+            # We can still return it even if slightly stale, but ideally the background worker keeps it fresh
+            forecast_data = data.get("forecast", {})
+            if forecast_data:
+>               return WeatherForecast(**forecast_data)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               pydantic_core._pydantic_core.ValidationError: 5 validation errors for WeatherForecast
+E               wind_speed_kt
+E                 Field required [type=missing, input_value={}, input_type=dict]
+E                   For further information visit https://errors.pydantic.dev/2.12/v/missing
+E               gust_speed_kt
+E                 Field required [type=missing, input_value={}, input_type=dict]
+E                   For further information visit https://errors.pydantic.dev/2.12/v/missing
+E               cloud_base_ft
+E                 Field required [type=missing, input_value={}, input_type=dict]
+E                   For further information visit https://errors.pydantic.dev/2.12/v/missing
+E               visibility_m
+E                 Field required [type=missing, input_value={}, input_type=dict]
+E                   For further information visit https://errors.pydantic.dev/2.12/v/missing
+E               precipitation_rate_mm_hr
+E                 Field required [type=missing, input_value={}, input_type=dict]
+E                   For further information visit https://errors.pydantic.dev/2.12/v/missing
+
+backend\integrations\weather.py:41: ValidationError
+============================== warnings summary ===============================
+backend\main.py:41
+  C:\Users\Alastair Mackie\.gemini\antigravity\scratch\clearslot-space\backend\main.py:41: DeprecationWarning: 
+          on_event is deprecated, use lifespan event handlers instead.
+  
+          Read more about it in the
+          [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+          
+    @app.on_event("startup")
+
+..\..\..\..\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\fastapi\applications.py:4575
+  C:\Users\Alastair Mackie\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\fastapi\applications.py:4575: DeprecationWarning: 
+          on_event is deprecated, use lifespan event handlers instead.
+  
+          Read more about it in the
+          [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+          
+    return self.router.on_event(event_type)
+
+backend/tests/test_auth.py::TestVerifyToken::test_valid_token
+backend/tests/test_bookings_firestore.py::TestCreateBooking::test_create_booking_success
+backend/tests/test_bookings_firestore.py::TestCreateBooking::test_overlap_detection
+  C:\Users\Alastair Mackie\.gemini\antigravity\scratch\clearslot-space\backend\bookings.py:77: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    if booking.start_time < datetime.utcnow() - timedelta(minutes=15):
+
+backend/tests/test_bookings_firestore.py::TestCreateBooking::test_create_booking_success
+backend/tests/test_bookings_firestore.py::TestCreateBooking::test_overlap_detection
+  C:\Users\Alastair Mackie\.gemini\antigravity\scratch\clearslot-space\backend\bookings.py:96: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    .where("start_time", ">", datetime.utcnow())
+
+backend/tests/test_bookings_firestore.py::TestCreateBooking::test_create_booking_success
+backend/tests/test_bookings_firestore.py::TestCreateBooking::test_overlap_detection
+  C:\Users\Alastair Mackie\.gemini\antigravity\scratch\clearslot-space\backend\bookings.py:139: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    date_floor = datetime.utcnow() - timedelta(days=1)
+
+backend/tests/test_bookings_firestore.py::TestCreateBooking::test_create_booking_success
+backend/tests/test_bookings_firestore.py::TestCreateBooking::test_overlap_detection
+  C:\Users\Alastair Mackie\.gemini\antigravity\scratch\clearslot-space\backend\bookings.py:145: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    "created_at": datetime.utcnow(),
+
+backend/tests/test_bookings_firestore.py::TestCreateBooking::test_create_booking_success
+backend/tests/test_bookings_firestore.py::TestCreateBooking::test_overlap_detection
+  C:\Users\Alastair Mackie\.gemini\antigravity\scratch\clearslot-space\backend\bookings.py:190: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    "timestamp": datetime.utcnow()
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED backend/tests/test_auth.py::TestVerifyToken::test_valid_token - assert...
+FAILED backend/tests/test_bookings_firestore.py::TestCreateBooking::test_create_booking_success
+FAILED backend/tests/test_bookings_firestore.py::TestCreateBooking::test_overlap_detection
+FAILED backend/tests/test_weather.py::test_real_forecast_fallback_on_bad_icao
+================== 4 failed, 63 passed, 13 warnings in 4.38s ==================
