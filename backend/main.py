@@ -1,8 +1,11 @@
 # ClearSlot Backend Service
 # CI/CD Trigger v10 (Nuclear Artifact Permissions)
 
-from fastapi import FastAPI, HTTPException, Query, Depends
+from fastapi import FastAPI, HTTPException, Query, Depends, Request
 from fastapi.middleware.cors import CORSMiddleware
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.util import get_remote_address
+from slowapi.errors import RateLimitExceeded
 import httpx
 import os
 from pydantic import BaseModel
@@ -26,6 +29,21 @@ app = FastAPI(
     title="ClearSlot Backend",
     description="Proxy service for AviationWeather.gov data, designed for Cloud Run."
 )
+
+limiter = Limiter(key_func=get_remote_address)
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
+import asyncio
+from backend.integrations.weather import start_weather_updater
+from backend.integrations.calendar_sync import start_calendar_reconciliation
+
+@app.on_event("startup")
+async def startup_event():
+    # Start the background tasks
+    asyncio.create_task(start_weather_updater(app))
+    asyncio.create_task(start_calendar_reconciliation(app))
+
 
 # --- Observability ---
 from backend.logger import get_logger
@@ -95,7 +113,8 @@ async def root():
     return {"status": "ok", "service": "ClearSlot Backend"}
 
 @app.get("/api/v1/weather/metar")
-async def get_metar(ids: str, format: str = "json", hours: int = 0, taf: bool = False):
+@limiter.limit("30/minute")
+async def get_metar(request: Request, ids: str, format: str = "json", hours: int = 0, taf: bool = False):
     """
     Proxy for METARs (Current Observations).
     Example: /api/v1/weather/metar?ids=EGLL&format=json&hours=12&taf=true
@@ -119,7 +138,8 @@ async def get_metar(ids: str, format: str = "json", hours: int = 0, taf: bool = 
              raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/api/v1/weather/taf")
-async def get_taf(ids: str, format: str = "json", metar: bool = False, time: str = "valid", date: str = None):
+@limiter.limit("30/minute")
+async def get_taf(request: Request, ids: str, format: str = "json", metar: bool = False, time: str = "valid", date: str = None):
     """
     Proxy for TAFs (Forecasts).
     Example: /api/v1/weather/taf?ids=EGLL&format=json&metar=true&time=valid
@@ -306,8 +326,9 @@ app.include_router(users_router)
 # --- Club Branding (T08) ---
 
 @app.get("/api/v1/clubs/{slug}")
-async def get_club(slug: str):
-    """Get club branding and config by slug."""
+@limiter.limit("10/minute")
+async def get_club(request: Request, slug: str):
+    """Get club branding and config by slug. Public endpoint for landing pages."""
     db = get_db()
     doc = db.collection("clubs").document(slug).get()
     if not doc.exists:
@@ -315,19 +336,109 @@ async def get_club(slug: str):
     return {"slug": slug, **doc.to_dict()}
 
 @app.get("/api/v1/clubs/{slug}/fleet")
-async def get_club_fleet(slug: str):
-    """List all aircraft for a club."""
+async def get_club_fleet(slug: str, user: dict = Depends(verify_token)):
+    """List all aircraft for a club. Requires authentication + club membership."""
+    _enforce_club_membership(user, slug)
     db = get_db()
     docs = db.collection("clubs").document(slug).collection("fleet").stream()
     return [{"id": doc.id, **doc.to_dict()} for doc in docs]
 
 @app.get("/api/v1/clubs/{slug}/news")
-async def get_club_news(slug: str):
-    """List news items for a club."""
+async def get_club_news(slug: str, user: dict = Depends(verify_token)):
+    """List news items for a club. Requires authentication + club membership."""
+    _enforce_club_membership(user, slug)
     db = get_db()
     docs = db.collection("clubs").document(slug).collection("news").stream()
     return [{"id": doc.id, **doc.to_dict()} for doc in docs]
 
+
+# --- Day-Grid Proxy (Audit Fix #2) ---
+
+from datetime import datetime, timedelta
+
+def _enforce_club_membership(user: dict, club_slug: str):
+    """Verify the authenticated user belongs to the requested club."""
+    profile = get_user_profile(user["uid"])
+    user_clubs = profile.get("club_slugs", [])
+    role = profile.get("role", "pilot")
+    # Admins can access any club for super-admin scenarios
+    if role == "super_admin":
+        return
+    if club_slug not in user_clubs:
+        raise HTTPException(
+            status_code=403,
+            detail=f"You are not a member of club '{club_slug}'"
+        )
+
+
+@app.get("/api/v1/clubs/{slug}/grid")
+@limiter.limit("30/minute")
+async def get_club_grid(
+    request: Request,
+    slug: str,
+    date: str = Query(..., description="ISO date string, e.g. 2026-03-06"),
+    user: dict = Depends(verify_token)
+):
+    """
+    Secure Day-Grid proxy endpoint.
+    
+    Fetches all confirmed bookings for a club on a given date,
+    plus the fleet list, using the Firebase Admin SDK (bypasses rules).
+    Enforces multi-tenancy via JWT club membership check.
+    
+    Returns:
+        { "date": str, "fleet": [...], "bookings": [...] }
+    """
+    # 1. Enforce multi-tenancy: user must belong to this club
+    _enforce_club_membership(user, slug)
+    
+    db = get_db()
+    
+    # 2. Parse the requested date into a 24-hour window
+    try:
+        target_date = datetime.fromisoformat(date)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid date format. Use ISO format: YYYY-MM-DD")
+    
+    start_of_day = target_date.replace(hour=0, minute=0, second=0, microsecond=0)
+    end_of_day = target_date.replace(hour=23, minute=59, second=59, microsecond=999999)
+    
+    # 3. Single query: all confirmed bookings for this club on this date
+    booking_docs = (
+        db.collection("bookings")
+        .where("club_slug", "==", slug)
+        .where("status", "==", "confirmed")
+        .where("start_time", ">=", start_of_day)
+        .where("start_time", "<=", end_of_day)
+        .order_by("start_time")
+        .stream()
+    )
+    
+    bookings = []
+    for doc in booking_docs:
+        data = doc.to_dict()
+        # Normalize Firestore timestamps to ISO strings for JSON serialization
+        for field in ("start_time", "end_time", "created_at"):
+            if field in data and hasattr(data[field], "isoformat"):
+                data[field] = data[field].isoformat()
+        bookings.append({"id": doc.id, **data})
+    
+    # 4. Fetch fleet for the grid column headers
+    fleet_docs = db.collection("clubs").document(slug).collection("fleet").stream()
+    fleet = [{"id": doc.id, **doc.to_dict()} for doc in fleet_docs]
+    
+    return {
+        "date": date,
+        "club_slug": slug,
+        "fleet": fleet,
+        "bookings": bookings,
+    }
+
+
+from backend.telemetry import router as telemetry_router
+app.include_router(telemetry_router, prefix="/api/v1/telemetry")
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8080)
+

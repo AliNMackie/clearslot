@@ -6,6 +6,7 @@ dist
 
 # Secrets
 gcp-key.json
+service-account.json
 secret_b64.txt
 *.pem
 

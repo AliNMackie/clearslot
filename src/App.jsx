@@ -6,6 +6,7 @@ import OperatorView from './components/OperatorView';
 import CalendarView from './calendar/CalendarView';
 import BriefingView from './components/BriefingView';
 import MarketingSections from './components/MarketingSections';
+import ClearSlotBMC from './components/ClearSlotBMC';
 
 // Auth
 import { AuthProvider, useAuth } from './components/AuthProvider';
@@ -135,6 +136,7 @@ function App() {
                                 <ClubProvider><AdminPortal /></ClubProvider>
                             </ProtectedRoute>
                         } />
+                        <Route path="/bmc" element={<ClearSlotBMC />} />
                     </Routes>
                 </Router>
             </AuthProvider>

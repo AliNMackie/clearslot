@@ -6,6 +6,7 @@
 
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIREBASE_API_KEY || '',
@@ -19,13 +20,16 @@ const firebaseConfig = {
 
 let app;
 let auth;
+let db;
 
 try {
     app = initializeApp(firebaseConfig);
     auth = getAuth(app);
+    db = getFirestore(app);
 } catch (error) {
     console.warn("Firebase initialization failed (likely missing env vars). App will run in degraded mode.", error);
     auth = null;
+    db = null;
 }
 
-export { auth };
+export { auth, db };

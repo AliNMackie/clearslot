@@ -2,6 +2,8 @@ from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel
 from typing import List, Optional
 from datetime import datetime, timedelta
+from google.cloud import firestore
+from google.cloud.firestore import transactional
 
 from backend.auth import verify_token
 import backend.db
@@ -18,6 +20,8 @@ class BookingRequest(BaseModel):
     start_time: datetime
     end_time: datetime
     notes: Optional[str] = None
+    flyability_score: Optional[int] = None
+    raw_weather_payload: Optional[dict] = None
     # pilot_id is derived from auth token — not sent by client
 
 class BookingResponse(BaseModel):
@@ -129,46 +133,76 @@ async def create_booking(booking: BookingRequest, user: dict = Depends(verify_to
                 detail=f"Recency check failed. You haven't flown in {CLUB_RECENCY_DAYS} days. Please book with an instructor."
             )
 
-    # 1. Overlap check — same aircraft, overlapping time, confirmed
-    existing = (
-        db.collection("bookings")
-        .where("aircraft_reg", "==", booking.aircraft_reg)
-        .where("status", "==", "confirmed")
-        .where("start_time", "<", booking.end_time)
-        .stream()
-    )
-    for doc in existing:
-        data = doc.to_dict()
-        existing_end = data.get("end_time")
-        # Fix: Ensure existing_end is timezone-naive or compatible
-        if existing_end:
-            if hasattr(existing_end, 'tzinfo') and existing_end.tzinfo:
-                existing_end = existing_end.replace(tzinfo=None)
-                
-        if existing_end and existing_end > booking.start_time:
-            raise HTTPException(
-                status_code=409,
-                detail=f"Aircraft {booking.aircraft_reg} is already booked for an overlapping time slot."
-            )
+    # --- ATOMIC Overlap Check + Write (Firestore Transaction) ---
+    # Date floor: only check bookings starting from 24h ago onwards.
+    # This prevents unbounded historical reads as the collection grows.
+    date_floor = datetime.utcnow() - timedelta(days=1)
 
-    # 2. Persist to Firestore
     booking_data = {
         **booking.model_dump(),
         "pilot_uid": user["uid"],
         "status": "confirmed",
         "created_at": datetime.utcnow(),
     }
-    _, doc_ref = db.collection("bookings").add(booking_data)
 
-    # 3. Build response (exclude internal fields)
-    response_data = BookingResponse(id=doc_ref.id, **{
+    # Pre-generate document references so the transaction can write to them
+    new_booking_ref = db.collection("bookings").document()
+    new_audit_ref = db.collection("booking_audit_logs").document()
+
+    @transactional
+    def _create_booking_txn(transaction):
+        """Atomically check for overlaps and write the booking + audit log."""
+        # 1. Query for overlapping confirmed bookings (inside the transaction)
+        overlap_query = (
+            db.collection("bookings")
+            .where("aircraft_reg", "==", booking.aircraft_reg)
+            .where("status", "==", "confirmed")
+            .where("start_time", ">=", date_floor)
+            .where("start_time", "<", booking.end_time)
+        )
+        # Read inside the transaction for consistency
+        overlapping_docs = overlap_query.get(transaction=transaction)
+
+        for doc in overlapping_docs:
+            data = doc.to_dict()
+            existing_end = data.get("end_time")
+            if existing_end:
+                # Normalize timezone for comparison
+                if hasattr(existing_end, 'tzinfo') and existing_end.tzinfo:
+                    existing_end = existing_end.replace(tzinfo=None)
+                if existing_end > booking.start_time:
+                    raise HTTPException(
+                        status_code=409,
+                        detail=f"Aircraft {booking.aircraft_reg} is already booked for an overlapping time slot."
+                    )
+
+        # 2. No overlap found — write the booking atomically
+        transaction.set(new_booking_ref, booking_data)
+
+        # 3. Truth Machine Audit Log (Snapshot Pattern) — also inside the transaction
+        audit_data = {
+            "booking_id": new_booking_ref.id,
+            "user_id": user["uid"],
+            "club_slug": booking.club_slug,
+            "aircraft_reg": booking.aircraft_reg,
+            "flyability_score": booking.flyability_score,
+            "raw_weather_payload": booking.raw_weather_payload,
+            "timestamp": datetime.utcnow()
+        }
+        transaction.set(new_audit_ref, audit_data)
+
+    # Execute the transaction (retries automatically on contention)
+    _create_booking_txn(db.transaction())
+
+    # 4. Build response (exclude internal fields)
+    response_data = BookingResponse(id=new_booking_ref.id, **{
         k: v for k, v in booking_data.items() if k != "created_at"
     })
 
     # 4. Sync to Google Calendar (stub — fire-and-forget, never block booking)
     try:
         from backend.logger import log_event
-        log_event("booking_created", {"booking_id": doc_ref.id, "club": booking.club_slug, "aircraft": booking.aircraft_reg, "pilot": user["uid"]})
+        log_event("booking_created", {"booking_id": new_booking_ref.id, "club": booking.club_slug, "aircraft": booking.aircraft_reg, "pilot": user["uid"]})
         
         # Get club calendar_id
         club_doc = db.collection("clubs").document(booking.club_slug).get()

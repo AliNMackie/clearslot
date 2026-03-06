@@ -37,3 +37,14 @@ class UserProfileUpdate(BaseModel):
     weight_kg: Optional[int] = None
     medical_expiry: Optional[str] = None  # ISO Format YYYY-MM-DD
     license_expiry: Optional[str] = None  # ISO Format YYYY-MM-DD
+
+class Geofence(BaseModel):
+    latitude: float
+    longitude: float
+    radius_meters: float
+
+class TelemetryPayload(BaseModel):
+    aircraft_reg: str
+    lat: float
+    lon: float
+    timestamp: str
